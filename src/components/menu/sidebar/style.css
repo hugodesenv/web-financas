@@ -4,7 +4,7 @@
   height: 100%;
   transition: 0.3s;
   position: fixed;
-  width: 45px;
+  width: 42px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
 
@@ -36,10 +36,6 @@
   padding: 10px;
 }
 
-/*.menu li:first-child {
-  background-color: rgb(194, 23, 103);
-}*/
-
 .menu li span {
   display: none;
   font-size: 12px;
@@ -54,7 +50,21 @@
   color: white;
 }
 
-.container-menu-rodape {
+.menu .submenu {
+  text-wrap: nowrap;
+  font-size: 12px;
+  padding-left: 42px;
+}
+
+.menu .submenuShow {
+  display: block;
+}
+
+.menu .submenuHidden {
+  display: none;
+}
+
+.container-menu-footer {
   height: 50px;
   background-color: rgb(218, 218, 218);
 }

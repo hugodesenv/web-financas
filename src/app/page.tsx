@@ -1,4 +1,4 @@
-import MenuLateral from "@/components/menu/menu_lateral/MenuLateral";
+import MenuSidebar from "@/components/menu/sidebar/MenuSidebar";
 
 export default function Home() {
   const style = {
@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <main style={style.container}>
-      <MenuLateral />
+      <MenuSidebar />
       <div style={style.corpo}>
         Body da page.tsx
       </div>
