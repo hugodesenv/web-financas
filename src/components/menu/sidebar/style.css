@@ -1,8 +1,10 @@
 .menu-container {
   background-color: #fff;
   height: 100%;
+  font-size: 12px;
   transition: 0.4s;
   position: fixed;
+  text-wrap: nowrap;
   width: 42px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
 }
@@ -11,8 +13,18 @@
   width: 190px;
 }
 
-.menu-container:hover li span {
-  display: block;
+.menu-container span {
+  padding-left: 12px;
+}
+
+.menu-container:hover li {
+  display: flex;
+}
+
+.menu:hover li .container-label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .menu {
@@ -34,18 +46,12 @@
   padding: 10px;
 }
 
-.menu li span {
-  display: none;
-  font-size: 12px;
-  padding-left: 12px;
-  text-wrap: nowrap;
-}
-
 .menu li:hover {
   background-color: rgb(0, 17, 255);
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: white;
+  font-weight: 700;
 }
 
 .menu .submenu {

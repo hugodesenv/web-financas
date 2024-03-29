@@ -1,8 +1,8 @@
 "use client"
 
-import { MdExitToApp, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
+import { useState } from 'react';
+import { MdExitToApp, MdKeyboardArrowDown, MdKeyboardControlKey, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
 import './style.css';
-import { useEffect, useState } from 'react';
 
 const menus = [
   {
@@ -58,11 +58,24 @@ function MenuSidebar() {
       return (
         <ul>
           {submenus?.map((sm: any, idxsm: number) =>
-            <li key={`submenu-${idxsm}`} className='submenu'>{sm.label}</li>
+            <li key={`submenu-${idxsm}`} className='submenu'>
+              <span>{sm.label}</span>
+            </li>
           )}
           <div className='divider' />
         </ul>
       );
+    }
+  };
+
+  function GetSufixIcon(props: {
+    hasSubMenus: boolean,
+    keyOwnerMenu: string,
+  }) {
+    if (props.hasSubMenus) {
+      return subMenusOpened[props.keyOwnerMenu]
+        ? <MdKeyboardControlKey fontSize={14} />
+        : <MdKeyboardArrowDown fontSize={14} />
     }
   }
 
@@ -74,9 +87,18 @@ function MenuSidebar() {
             <ul>
               <li key={key} onClick={(e) => handleClickMenu(e, key)}>
                 <div>{icon}</div>
-                <span>{label}</span>
+                <div className='container-label'>
+                  <span>{label}</span>
+                  <GetSufixIcon
+                    keyOwnerMenu={key}
+                    hasSubMenus={(sub_menus?.length || 0) > 0}
+                  />
+                </div>
               </li>
-              <SubMenuList submenus={sub_menus} keyOwnerMenu={key} />
+              <SubMenuList
+                submenus={sub_menus}
+                keyOwnerMenu={key}
+              />
             </ul>
           )
         }
