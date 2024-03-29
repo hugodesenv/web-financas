@@ -2,12 +2,13 @@
 
 import { MdExitToApp, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
 import './style.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const menus = [
   {
     icon: <MdOutlineAccountBalanceWallet fontSize={20} />,
     label: 'Cadastro',
+    key: 'mn-add',
     sub_menus: [
       { label: 'Contas fixas' },
       { label: 'Cartões' },
@@ -16,53 +17,66 @@ const menus = [
   {
     icon: <MdPriceCheck fontSize={20} />,
     label: 'Contas a pagar',
+    key: 'mn-bills-to-pay',
+    sub_menus: [
+      { label: 'Digitação' },
+    ],
   },
   {
     icon: <MdOutlineAutoGraph fontSize={20} />,
     label: 'Relatório',
+    key: 'mn-report',
   },
   {
     icon: <MdOutlineSettings fontSize={20} />,
     label: 'Configuração',
+    key: 'mn-setting',
   },
 ];
 
-function MenuLateral() {
-  const [submenuStyle, setSubmenuStyle] = useState('submenuHidden');
+interface ISubMenuStyle {
+  [key: string]: boolean;
+};
 
-  function handleClickMenu(e: any) {
-    e.preventDefault();
-    const style = submenuStyle === 'submenuHidden' ? 'submenuShow' : 'submenuHidden';
-    setSubmenuStyle(style);
+function MenuSidebar() {
+  const [subMenusOpened, setSubMenusOpened] = useState({} as ISubMenuStyle);
+
+  function handleClickMenu(event: any, ownerMenuSelected: string) {
+    event.preventDefault();
+    setSubMenusOpened(prevState => ({
+      ...prevState,
+      [ownerMenuSelected]: !prevState[ownerMenuSelected],
+    }));
   }
 
-  function handleMenuMouseLeave(e: any) {
-    e.preventDefault();
-    setSubmenuStyle('submenuHidden');
+  function handleMenuMouseLeave() {
+    setSubMenusOpened({});
+  }
+
+  function SubMenuList({ submenus, keyOwnerMenu }: any) {
+    if (subMenusOpened[keyOwnerMenu]) {
+      return (
+        <ul>
+          {submenus?.map((sm: any, idxsm: number) =>
+            <li key={`submenu-${idxsm}`} className='submenu'>{sm.label}</li>
+          )}
+          <div className='divider' />
+        </ul>
+      );
+    }
   }
 
   return (
     <div className='menu-container' onMouseLeave={handleMenuMouseLeave}>
       <div className='menu'>
         {
-          menus.map((el, idx) =>
+          menus.map(({ key, icon, label, sub_menus }) =>
             <ul>
-              <li key={`mn-${idx}`} onClick={handleClickMenu}>
-                <div>
-                  {el.icon}
-                </div>
-                <span>{el.label}</span>
+              <li key={key} onClick={(e) => handleClickMenu(e, key)}>
+                <div>{icon}</div>
+                <span>{label}</span>
               </li>
-              {
-                el?.sub_menus?.map((sm, idxSm) => (
-                  <li
-                    className={`submenu ${submenuStyle}`}
-                    key={`mn-sm-${idx}-${idxSm}`}
-                  >
-                    {sm.label}
-                  </li>
-                ))
-              }
+              <SubMenuList submenus={sub_menus} keyOwnerMenu={key} />
             </ul>
           )
         }
@@ -79,4 +93,4 @@ function MenuLateral() {
   )
 }
 
-export default MenuLateral;
+export default MenuSidebar;

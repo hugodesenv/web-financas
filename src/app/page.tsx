@@ -1,14 +1,17 @@
 import MenuSidebar from "@/components/menu/sidebar/MenuSidebar";
+import TopBar from "@/components/menu/topBar/TopBar";
 
 export default function Home() {
   const style = {
     container: {
-      backgroundColor: '#F6F6F6',
+      backgroundColor: '#F5F5F5',
       display: 'flex',
       height: '100%',
     },
     corpo: {
-      paddingLeft: '50px',
+      width: 'calc(100% - 42px)',
+      marginLeft: '42px',
+      height: '100%',
     },
   };
 
@@ -16,7 +19,7 @@ export default function Home() {
     <main style={style.container}>
       <MenuSidebar />
       <div style={style.corpo}>
-        Body da page.tsx
+        <TopBar />
       </div>
     </main>
   );
