@@ -1,0 +1,30 @@
+.wrapper-my-input-text {
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-input-text-title {
+  margin-bottom: 4px;
+}
+
+.container-my-input-text {
+  border: 1px solid #cacaca;
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 6px;
+  background-color: #fff;
+  outline-style: none;
+}
+
+.container-my-input-text:hover,
+.container-my-input-text:focus {
+  color: blue;
+  box-shadow: rgba(0, 0, 255, 0.3) 0px 1px 1px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.wrapper-my-input-text:hover .my-input-text-title {
+  font-weight: 600;
+  transition: 0.5s;
+  font-size: 12px;
+}

@@ -2,36 +2,42 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { MdExitToApp, MdKeyboardArrowDown, MdKeyboardControlKey, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
+import { MdExitToApp, MdKeyboardArrowDown, MdKeyboardControlKey, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineHome, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
 import './style.css';
-import Link from 'next/link';
 
 interface ISubMenuStyle {
   [key: string]: boolean;
 };
 
-function MenuSidebar() {
+interface IMenuStructure {
+  icon?: any;
+  label: string;
+  key: string;
+  onClick?: any,
+  sub_menus?: IMenuStructure[]
+};
+
+function MyMenuSidebar() {
   const [subMenusOpened, setSubMenusOpened] = useState({} as ISubMenuStyle);
   const router = useRouter();
 
-  const menus = [
+  const menus: IMenuStructure[] = [
+    {
+      icon: <MdOutlineHome fontSize={20} />,
+      label: 'Home',
+      key: 'mn-home',
+      onClick: () => router.push('/'),
+    },
     {
       icon: <MdOutlineAccountBalanceWallet fontSize={20} />,
       label: 'Cadastro',
       key: 'mn-add',
       sub_menus: [
         {
-          key: 'fixed-account',
-          label: 'Contas fixas',
+          key: 'fixed-release',
+          label: 'Lançamentos fixos',
           onClick: () => {
-            router.push('/pages/card');
-          },
-        },
-        {
-          key: 'mn-card',
-          label: 'Cartões',
-          onClick: () => {
-            console.log('cliquei auqui nos cartões');
+            router.push('/pages/register/fixed-release/');
           },
         },
       ],
@@ -131,9 +137,6 @@ function MenuSidebar() {
       <ul className='menu container-menu-footer'>
         <li key={'mn-logout'}>
           <div>
-            <Link href={'card'}>
-              <button>teste</button>
-            </Link>
             <MdExitToApp fontSize={20} />
           </div>
           <span>Sair</span>
@@ -143,4 +146,4 @@ function MenuSidebar() {
   )
 }
 
-export default MenuSidebar;
+export default MyMenuSidebar;

@@ -1,0 +1,16 @@
+.container-my-button {
+  border: 0px;
+  border-radius: 6px;
+  background-color: rgb(49, 49, 255);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  outline: none;
+  padding: 6px;
+  width: 100px;
+}
+
+.container-my-button:hover {
+  background-color: rgba(49, 49, 255, 0.772);
+  transition: 0.3s;
+}

@@ -1,4 +1,4 @@
-function TopBar() {
+function MyTopBar() {
   return (
     <div style={style.container}>
       <h4 style={style.title}>
@@ -22,4 +22,4 @@ const style = {
   }
 };
 
-export default TopBar;
+export default MyTopBar;
