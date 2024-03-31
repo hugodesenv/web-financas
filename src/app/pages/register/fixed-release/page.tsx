@@ -4,14 +4,24 @@
  * Página para cadastro dos lançamentos fixos.
  */
 
+'use client';
 import MyButton from "@/components/button/MyButton";
 import MyInputText from "@/components/text/MyInputText";
+import { CSSProperties } from "react";
+
+const style = {
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 10,
+  } as CSSProperties,
+}
 
 export default function FixedRelease() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+    <div style={style.main}>
       <MyInputText title="Descrição" />
-      <MyButton>Gravar</MyButton>
-    </div>
+      <MyButton onClick={() => { }}>Gravar</MyButton>
+    </div >
   )
 }

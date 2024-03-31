@@ -6,7 +6,7 @@ interface IMyCircularProgress {
 }
 
 export default function MyCircularProgress(props: IMyCircularProgress) {
-  const size = props?.size || 20;
+  const size = props?.size || 16;
   return <div className='my-circular-progress-container'
     style={{
       borderColor: props?.color || 'white',

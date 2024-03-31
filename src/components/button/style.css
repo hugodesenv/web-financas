@@ -1,13 +1,15 @@
 .container-my-button {
+  align-items: center;
   border: 0px;
   border-radius: 6px;
   background-color: rgb(49, 49, 255);
   color: #fff;
   cursor: pointer;
+  display: flex;
   font-size: 12px;
+  height: 28px;
+  justify-content: center;
   outline: none;
-  padding: 6px;
-  width: 100px;
 }
 
 .container-my-button:hover {
