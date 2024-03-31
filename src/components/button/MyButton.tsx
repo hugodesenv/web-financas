@@ -4,7 +4,7 @@ import './style.css';
 interface IMyButton {
   children: string;
   isLoading?: boolean;
-  onClick: (event: any) => void;
+  onClick?: (event: any) => void;
   width?: number;
 }
 
@@ -18,6 +18,7 @@ export default function MyButton(props: IMyButton) {
       {...props}
       className='container-my-button'
       disabled={props.isLoading}
+      onClick={() => console.log('oi')}
       style={style}
     >
       {

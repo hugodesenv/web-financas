@@ -1,15 +1,20 @@
-function MyTopBar() {
+function MyTopBar({ title, children }: any) {
   return (
-    <div style={style.container}>
-      <h4 style={style.title}>
-        Home
-      </h4>
-    </div>
+    <>
+      <div style={style.title_container}>
+        <h4 style={style.title}>
+          {title}
+        </h4>
+      </div>
+      <div style={style.children}>
+        {children}
+      </div>
+    </>
   )
 };
 
 const style = {
-  container: {
+  title_container: {
     alignItems: 'center',
     backgroundColor: '#fff',
     borderBottom: '2px solid #EFEFEF',
@@ -19,6 +24,9 @@ const style = {
   },
   title: {
     paddingLeft: '14px',
+  },
+  children: {
+    padding: '14px',
   }
 };
 

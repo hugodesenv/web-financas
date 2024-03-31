@@ -1,27 +1,16 @@
-/** 
- * Data: 30/03/2024 16h32
- * Autor: Hugo Souza
- * Página para cadastro dos lançamentos fixos.
- */
+import MyTopBar from "@/components/menu/topBar/MyTopBar";
+import { Metadata } from "next";
+import FixedReleaseFormRegister from "./components/FixedReleaseFormRegister";
 
-'use client';
-import MyButton from "@/components/button/MyButton";
-import MyInputText from "@/components/text/MyInputText";
-import { CSSProperties } from "react";
-
-const style = {
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  } as CSSProperties,
-}
+export const metadata: Metadata = {
+  title: 'Skedol Lançamentos Fixos',
+  description: 'Skedol - Controle suas dívidas',
+};
 
 export default function FixedRelease() {
   return (
-    <div style={style.main}>
-      <MyInputText title="Descrição" />
-      <MyButton onClick={() => { }}>Gravar</MyButton>
-    </div >
+    <MyTopBar title='Lançamentos fixos'>
+      <FixedReleaseFormRegister />
+    </MyTopBar>
   )
 }
