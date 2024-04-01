@@ -1,19 +1,28 @@
+/**
+ * Notas:
+ * 1. Foi utilizado a função "forwardRef" em volta do componente para passarmos a propriedade
+ * "ref", na qual utilizamos no ...register do React Hook Form. // Hugo 01-04-2024
+ */
+
+import { ForwardedRef, forwardRef } from 'react';
 import './style.css';
 
-interface IMyInputText {
+interface IMyInputText extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  type?: 'text' | 'date';
-  value?: string;
 };
 
-export default function MyInputText(props: IMyInputText) {
+const MyInputText = forwardRef((props: IMyInputText, ref: ForwardedRef<HTMLInputElement>) => {
+  const { title, ...inputProps } = props;
   return (
     <div className='wrapper-my-input-text'>
-      <span className='my-input-text-title'>{props.title}</span>
+      <label className='my-input-text-title'>{title}</label>
       <input
-        {...props}
+        {...inputProps}
+        ref={ref}
         className='container-my-input-text'
       />
     </div>
   )
-}
+});
+
+export default MyInputText;

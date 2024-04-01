@@ -3,26 +3,32 @@
 import MyButton from "@/components/button/MyButton";
 import MyInputText from "@/components/text/MyInputText";
 import { CSSProperties } from "react";
+import { useForm } from "react-hook-form";
 
 const style = {
-  main: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  } as CSSProperties,
+  main: { display: 'flex', flexDirection: 'column', gap: 10 } as CSSProperties,
 }
 
 export default function FixedReleaseFormRegister() {
-  function handleSave(event: any) {
+  const { handleSubmit, register } = useForm();
+
+  function onSubmit(data: any) {
     // Lógica para salvar os dados
-    console.log('Dados salvos!');
+    console.log('Dados', data);
   }
 
   return (
-    <div style={style.main}>
-      <MyInputText title="Descrição" />
-      <MyInputText title="Data de previsão" type="date" />
-      <MyButton onClick={handleSave}>Gravar</MyButton>
-    </div >
+    <form onSubmit={handleSubmit(onSubmit)} style={style.main}>
+      <MyInputText
+        title="Descrição"
+        {...register('description')}
+      />
+      <MyInputText
+        title="Data de previsão"
+        type="date"
+        {...register('expected_date')}
+      />
+      <MyButton type="submit">Gravar</MyButton>
+    </form>
   );
 }

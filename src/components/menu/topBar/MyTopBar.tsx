@@ -1,15 +1,10 @@
 function MyTopBar({ title, children }: any) {
   return (
-    <>
-      <div style={style.title_container}>
-        <h4 style={style.title}>
-          {title}
-        </h4>
-      </div>
-      <div style={style.children}>
-        {children}
-      </div>
-    </>
+    <div style={style.title_container}>
+      <h4 style={style.title}>
+        {title}
+      </h4>
+    </div>
   )
 };
 
@@ -25,9 +20,6 @@ const style = {
   title: {
     paddingLeft: '14px',
   },
-  children: {
-    padding: '14px',
-  }
 };
 
 export default MyTopBar;

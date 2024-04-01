@@ -1,5 +1,4 @@
 import MyMenuSidebar from "@/components/menu/sidebar/MyMenuSidebar";
-import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { CSSProperties } from "react";

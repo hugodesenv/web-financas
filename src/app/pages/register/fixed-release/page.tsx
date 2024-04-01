@@ -1,6 +1,7 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { Metadata } from "next";
 import FixedReleaseFormRegister from "./components/FixedReleaseFormRegister";
+import LayoutRegister from "@/components/utils/layout/layout_register";
 
 export const metadata: Metadata = {
   title: 'Skedol Lançamentos Fixos',
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function FixedRelease() {
   return (
-    <MyTopBar title='Lançamentos fixos'>
+    <LayoutRegister title="Lançamentos fixos">
       <FixedReleaseFormRegister />
-    </MyTopBar>
+    </LayoutRegister>
   )
 }

@@ -1,9 +1,10 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 
 export default function Home() {
-  return (
-    <MyTopBar title='Home'>
-      Conteúdo dahome
-    </MyTopBar>
-  );
+  return <div>
+    <MyTopBar title='Home' />
+    <div>
+      Conteudo
+    </div>
+  </div>
 }

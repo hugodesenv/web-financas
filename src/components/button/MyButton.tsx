@@ -5,8 +5,9 @@ interface IMyButton {
   children: string;
   isLoading?: boolean;
   onClick?: (event: any) => void;
+  type?: "submit" | "reset" | "button",
   width?: number;
-}
+};
 
 export default function MyButton(props: IMyButton) {
   const style = {
@@ -16,6 +17,7 @@ export default function MyButton(props: IMyButton) {
   return (
     <button
       {...props}
+      id=''
       className='container-my-button'
       disabled={props.isLoading}
       onClick={() => console.log('oi')}
