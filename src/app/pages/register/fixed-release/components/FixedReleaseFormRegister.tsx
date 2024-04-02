@@ -2,6 +2,7 @@
 
 import MyButton from "@/components/button/MyButton";
 import MyInputText from "@/components/text/MyInputText";
+import { MyTabView } from "@/components/utils/tabview/MyTabView";
 import { CSSProperties } from "react";
 import { useForm } from "react-hook-form";
 
@@ -28,6 +29,7 @@ export default function FixedReleaseFormRegister() {
         type="date"
         {...register('expected_date')}
       />
+      <MyTabView />
       <MyButton type="submit">Gravar</MyButton>
     </form>
   );

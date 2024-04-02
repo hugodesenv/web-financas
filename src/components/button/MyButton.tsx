@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import MyCircularProgress from '../utils/progress/my_circular_progress/MyCircularProgress';
 import './style.css';
 
@@ -11,13 +12,12 @@ interface IMyButton {
 
 export default function MyButton(props: IMyButton) {
   const style = {
-    width: props?.width ?? 100
-  };
+    width: props?.width ?? 100,
+  } as CSSProperties;
 
   return (
     <button
       {...props}
-      id=''
       className='container-my-button'
       disabled={props.isLoading}
       onClick={() => console.log('oi')}
