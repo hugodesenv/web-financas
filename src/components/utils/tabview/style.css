@@ -1,0 +1,34 @@
+.mtv-title {
+  display: flex;
+  border-bottom: 1px solid rgb(228, 228, 228);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.mtv-title li {
+  align-items: center;
+  border-radius: 4px;
+  display: flex;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.mtv-title li:hover {
+  color: blue;
+  transition: 0.2s;
+}
+
+.mtv-title-selected {
+  background-color: rgb(240, 240, 240);
+  color: blue;
+  font-weight: 600;
+  transition: 0.5s;
+}
+
+.mtv-container {
+  padding: 10px;
+  border-bottom: 1px solid rgb(228, 228, 228);
+}
