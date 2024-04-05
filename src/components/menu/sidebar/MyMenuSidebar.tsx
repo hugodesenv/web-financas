@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { MdExitToApp, MdKeyboardArrowDown, MdKeyboardControlKey, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineHome, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
 import './style.css';
+import MyDrawer from '@/components/drawer/MyDrawer';
 
 interface ISubMenuStyle {
   [key: string]: boolean;
@@ -19,6 +20,7 @@ interface IMenuStructure {
 
 function MyMenuSidebar() {
   const [subMenusOpened, setSubMenusOpened] = useState({} as ISubMenuStyle);
+  const [openSettings, setOpenSettings] = useState(false);
   const router = useRouter();
 
   const menus: IMenuStructure[] = [
@@ -59,9 +61,7 @@ function MyMenuSidebar() {
       icon: <MdOutlineSettings fontSize={20} />,
       label: 'Configuração',
       key: 'mn-setting',
-      onClick: () => {
-        console.log('cliquei nas configurações');
-      },
+      onClick: () => setOpenSettings(true),
     },
   ];
 
@@ -112,7 +112,6 @@ function MyMenuSidebar() {
           menus.map(({ key, icon, label, sub_menus, onClick }) => {
             const hasSubMenus = (sub_menus?.length || 0) > 0;
             const onClickMenu = (e: any) => hasSubMenus ? handleClickMenu(e, key) : onClick?.();
-
             return (
               <ul>
                 <li key={key} onClick={onClickMenu}>
@@ -142,6 +141,9 @@ function MyMenuSidebar() {
           <span>Sair</span>
         </li>
       </ul>
+      <MyDrawer
+        isOpen={openSettings}
+      />
     </div>
   )
 }

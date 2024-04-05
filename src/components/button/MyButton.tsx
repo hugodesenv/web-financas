@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
-import MyCircularProgress from '../utils/progress/my_circular_progress/MyCircularProgress';
 import './style.css';
+import MyCircularProgress from '../progress/my_circular_progress/MyCircularProgress';
 
 interface IMyButton {
   children: string;

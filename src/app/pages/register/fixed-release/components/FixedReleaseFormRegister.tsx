@@ -1,8 +1,8 @@
 'use client';
 
 import MyButton from "@/components/button/MyButton";
+import { MyTabView } from "@/components/tabview/MyTabView";
 import MyInputText from "@/components/text/MyInputText";
-import { MyTabView } from "@/components/utils/tabview/MyTabView";
 import { CSSProperties } from "react";
 import { useForm } from "react-hook-form";
 
@@ -18,8 +18,14 @@ export default function FixedReleaseFormRegister() {
     console.log('Dados', data);
   }
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} style={style.main}>
+  function SearchTab() {
+    return <>
+      Tela de consulta aqui
+    </>
+  }
+
+  function RegisterTab() {
+    return <form onSubmit={handleSubmit(onSubmit)} style={style.main}>
       <MyInputText
         title="Descrição"
         {...register('description')}
@@ -29,8 +35,18 @@ export default function FixedReleaseFormRegister() {
         type="date"
         {...register('expected_date')}
       />
-      <MyTabView />
+
       <MyButton type="submit">Gravar</MyButton>
     </form>
+  }
+
+  return (
+    <MyTabView
+      titles={['Consulta', 'Digitação']}
+      children={[
+        <SearchTab />,
+        <RegisterTab />,
+      ]}
+    />
   );
 }
