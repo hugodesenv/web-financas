@@ -67,6 +67,7 @@ export default function FixedReleaseFormRegister() {
         <LayoutButtonsRegister
           formName="fixed_release_register"
           typesAccept={[OptionType.SAVE, OptionType.DELETE, OptionType.CANCEL]}
+          onClick={(type: OptionType) => console.log("clicou no botao " + type)}
         />
       </form>
     );

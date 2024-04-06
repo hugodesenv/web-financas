@@ -2,16 +2,17 @@ import { CSSProperties } from "react";
 import MyButton from "../button/MyButton";
 
 export enum OptionType {
-  SAVE,
-  DELETE,
-  CANCEL,
-  BACK,
+  SAVE = "save",
+  DELETE = "delete",
+  CANCEL = "cancel",
+  BACK = "back",
 }
 
 interface IProps {
   formName: string;
   typesAccept: OptionType[];
   isLoading?: boolean;
+  onClick: (type: OptionType) => void;
 }
 
 interface IInternalSettings {
@@ -49,6 +50,10 @@ const optionsAvailable: IInternalSettings[] = [
 ];
 
 function LayoutButtonsRegister(props: IProps) {
+  function handleClickButton(option: OptionType) {
+    props.onClick(option);
+  }
+
   function ButtonsList() {
     /**
      * Verifico se o botão de excluir está disponibilizado para uso.
@@ -67,7 +72,12 @@ function LayoutButtonsRegister(props: IProps) {
     if (config) {
       const element = (
         <li key={`${props.formName}_layoutbuttons_${0}`}>
-          <MyButton isLoading={props.isLoading}>Excluir</MyButton>
+          <MyButton
+            onClick={() => handleClickButton(OptionType.DELETE)}
+            isLoading={props.isLoading}
+          >
+            Excluir
+          </MyButton>
         </li>
       );
 
@@ -85,6 +95,7 @@ function LayoutButtonsRegister(props: IProps) {
             <MyButton
               isLoading={props.isLoading}
               key={`${props.formName}_btn_${config.type.toString()}`}
+              onClick={() => handleClickButton(config.type)}
             >
               {config.label}
             </MyButton>

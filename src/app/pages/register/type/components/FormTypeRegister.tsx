@@ -17,6 +17,7 @@ function FormTypeRegister() {
       <LayoutButtonsRegister
         formName="type_register"
         typesAccept={[OptionType.SAVE, OptionType.DELETE, OptionType.CANCEL]}
+        onClick={(type: OptionType) => console.log(type)}
       />
     </form>
   );
