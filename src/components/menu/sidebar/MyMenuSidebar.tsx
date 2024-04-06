@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { MdExitToApp, MdKeyboardArrowDown, MdKeyboardControlKey, MdOutlineAccountBalanceWallet, MdOutlineAutoGraph, MdOutlineHome, MdOutlineSettings, MdPriceCheck } from 'react-icons/md';
 import './style.css';
 import MyDrawer from '@/components/drawer/MyDrawer';
+import { MyTabView } from '@/components/tabview/MyTabView';
 
 interface ISubMenuStyle {
   [key: string]: boolean;
@@ -142,8 +143,12 @@ function MyMenuSidebar() {
         </li>
       </ul>
       <MyDrawer
+        title='Configurações'
         isOpen={openSettings}
-      />
+        onClose={() => setOpenSettings(false)}
+      >
+        <MyTabView titles={['Batata', 'Cenora']} children={[<>Batatera</>, <>Cenorera</>]} />
+      </MyDrawer>
     </div>
   )
 }

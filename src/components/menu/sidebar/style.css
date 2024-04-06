@@ -19,6 +19,7 @@
 
 .menu-container:hover li {
   display: flex;
+  user-select: none;
 }
 
 .menu:hover li .container-label {
@@ -53,7 +54,6 @@
   color: white;
   font-weight: 700;
 }
-
 
 .menu .submenu {
   text-wrap: nowrap;
