@@ -1,18 +1,20 @@
 .container-my-button {
   align-items: center;
-  border: 0px;
+  background-color: #fff;
+  border: 1px solid rgb(49, 49, 255);
   border-radius: 6px;
-  background-color: rgb(49, 49, 255);
-  color: #fff;
+  color: rgb(49, 49, 255);
   cursor: pointer;
   display: flex;
   font-size: 12px;
   height: 28px;
   justify-content: center;
   outline: none;
+  user-select: none;
 }
 
 .container-my-button:hover {
-  background-color: rgba(49, 49, 255, 0.772);
+  background-color: rgb(49, 49, 255);
+  color: #fff;
   transition: 0.3s;
 }

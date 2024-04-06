@@ -1,9 +1,9 @@
-import MyMenuSidebar from "@/components/menu/sidebar/MyMenuSidebar";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { CSSProperties } from "react";
 //import 'rsuite/dist/rsuite.min.css';
 import "./globals.css";
+import PageMenu from "./components/PageMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,14 +14,14 @@ export const metadata: Metadata = {
 
 const style = {
   main: {
-    backgroundColor: '#F5F5F5',
-    display: 'flex',
-    height: '100%',
+    backgroundColor: "#F5F5F5",
+    display: "flex",
+    height: "100%",
   } as CSSProperties,
   container: {
-    width: 'calc(100% - 42px)',
-    marginLeft: '42px',
-    height: '100%',
+    width: "calc(100% - 42px)",
+    marginLeft: "42px",
+    height: "100%",
   } as CSSProperties,
 };
 
@@ -33,10 +33,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <MyMenuSidebar />
-        <div style={style.container}>
-          {children}
-        </div>
+        <PageMenu />
+        <div style={style.container}>{children}</div>
       </body>
     </html>
   );

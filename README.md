@@ -1,6 +1,2 @@
-# Escopo do projeto
-- Criar cadastro das contas banc·rias.
-- Criar cadastro das movimentaÁıes fixas (ID, descriÁ„o, tipo (receita ou despesa) e data de vencimento).
-
--> Futuramente:
-Criar grupo de usu·rios, na qual pode convidar um outro usu·rio a fazer parte do mesmo.
+- "use client"
+Definir quando h√° a√ß√µes do usu√°rio ou estiver utilizando o Hook Form.

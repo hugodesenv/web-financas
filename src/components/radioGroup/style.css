@@ -1,0 +1,32 @@
+.mrg-ul {
+  display: flex;
+  gap: 16px;
+}
+
+.mrg-title {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.mrg-ul input {
+  width: 12px;
+  height: 12px;
+  cursor: pointer;
+}
+
+.mrg-ul li {
+  display: flex;
+  align-items: center;
+}
+
+.mrg-ul li:hover {
+  color: rgb(64, 64, 210);
+  font-weight: 600;
+  transition: 0.6s;
+}
+
+.mrg-ul label {
+  cursor: pointer;
+  padding-left: 6px;
+  user-select: none;
+}

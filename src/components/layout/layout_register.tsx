@@ -1,5 +1,6 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { CSSProperties } from "react";
+import MyCard from "../card/MyCard";
 
 interface IPropsLayoutRegister {
   title: string;
@@ -8,17 +9,19 @@ interface IPropsLayoutRegister {
 
 const style = {
   children: {
-    padding: '8px',
-    background: '#FFFFFF',
-    height: 'calc(100vh - 72px)'
+    padding: "8px",
+    background: "#FFFFFF",
+    height: "calc(100vh - 72px)",
   } as CSSProperties,
-}
+};
 
 export default function LayoutRegister(props: IPropsLayoutRegister) {
-  return <div>
-    <MyTopBar title={props.title} />
-    <div style={style.children}>
-      {props.children}
+  return (
+    <div>
+      <MyTopBar title={props.title} />
+      <div style={style.children}>
+        <MyCard>{props.children}</MyCard>
+      </div>
     </div>
-  </div>
+  );
 }
