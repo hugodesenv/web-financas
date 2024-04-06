@@ -55,6 +55,10 @@ function LayoutButtonsRegister(props: IProps) {
   }
 
   function ButtonsList() {
+    const comumnButtonAttributes = {
+      isLoading: props.isLoading,
+    };
+
     /**
      * Verifico se o botão de excluir está disponibilizado para uso.
      * Caso esteja, eu adiciono ele em "rightSide" para posicionar ao lado direito da tela,
@@ -74,7 +78,7 @@ function LayoutButtonsRegister(props: IProps) {
         <li key={`${props.formName}_layoutbuttons_${0}`}>
           <MyButton
             onClick={() => handleClickButton(OptionType.DELETE)}
-            isLoading={props.isLoading}
+            {...comumnButtonAttributes}
           >
             Excluir
           </MyButton>
@@ -93,8 +97,7 @@ function LayoutButtonsRegister(props: IProps) {
         return (
           <li key={`${props.formName}_layoutbuttons_${config.type.toString()}`}>
             <MyButton
-              isLoading={props.isLoading}
-              key={`${props.formName}_btn_${config.type.toString()}`}
+              {...comumnButtonAttributes}
               onClick={() => handleClickButton(config.type)}
             >
               {config.label}
