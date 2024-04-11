@@ -1,17 +1,11 @@
 "use client";
 
-import { DateUtils } from "../../lib/dateUtils";
+import { useState } from 'react';
+import { IElements, MyCalendarUtils, monthsFromYear } from './myCalendarUtils';
+import './style.css';
 
 interface IDayOfWeek {
   label: string;
-}
-
-interface IElements {
-  day: number;
-  month: number;
-  year: number;
-  outOfMonth: boolean;
-  children: any[];
 }
 
 const columns: IDayOfWeek[] = [
@@ -27,60 +21,85 @@ const columns: IDayOfWeek[] = [
 const MAX_SIZE = 7 * 6;
 
 /**
- * Nessa função, eu preciso saber qual é o dia que estamos, e iniciamos
- * no dia 1. Com isso, obtemos em qual dia da semana o numero 1 se refere,
- * segunda, terça, quarta etc. Com esse indice, eu subtraio do primeiro dia
- * do mês, para obter os dias anteriores a ser mostrado no calendario.
- * A partir daí, eu monto meu objeto resultado, informando o dia.
- * Eu terei 42 espaço (7 dias X 6 semanas).
+ * Retorna a listagem de TRs e TDs.
+ * Se a divisão por 7 não houver resto, quer dizer que deve quebrar a linha, pois já chegou
+ * no ultimo dia da semana (sabádo).
+ * @returns 
  */
-function getCalendarDays() {
-  let dataResult = [] as IElements[];
+function DaysComponent({ onChange, monthSelected, yearSelected }: {
+  onChange: (dayObject: IElements) => void,
+  monthSelected: number,
+  yearSelected: number,
+}) {
+  const daysObject = MyCalendarUtils.getCalendarDays({
+    dateSelected: { month: monthSelected, year: yearSelected },
+    maxSize: MAX_SIZE
+  });
 
-  let startDate = new Date();
-  startDate.setDate(1);
+  console.log("**********");
+  console.log(daysObject);
 
-  const currentMonth = startDate.getMonth();
-  const indexFirstDayOfMonth = DateUtils.getWeekIndex(
-    startDate.getFullYear(),
-    startDate.getMonth() + 1,
-    startDate.getDate()
-  );
+  const groups = {
+    rows: [] as any,
+    coll: [] as any
+  };
 
-  startDate.setDate(startDate.getDate() - indexFirstDayOfMonth);
+  for (let i = 1; i <= MAX_SIZE; i++) {
+    const dayObject = daysObject[i - 1];
+    const day = parseInt(dayObject?.date?.split('-')[2]);
 
-  for (let i = 0; i < MAX_SIZE; i++) {
-    const dayObject: IElements = {
-      children: [],
-      day: startDate.getDate(),
-      month: startDate.getMonth() + 1,
-      year: startDate.getFullYear(),
-      outOfMonth: startDate.getMonth() !== currentMonth,
-    };
+    groups.rows.push(
+      <td
+        className={`calendar-day ${dayObject.outOfMonth && ' calendar-day-outmonth'}`}
+        onClick={() => { onChange(dayObject) }}>
+        {day}
+      </td>
+    );
 
-    dataResult.push(dayObject);
-    startDate.setDate(startDate.getDate() + 1);
+    if (i % 7 === 0) {
+      const componentRow = <tr>{...groups.rows}</tr>;
+      groups.coll.push(componentRow);
+      groups.rows = [];
+    }
   }
 
-  return dataResult;
-}
-
-function DaysComponent() {
-  const daysObject = getCalendarDays();
-  return <td>daysObject</td>
+  return groups.coll;
 }
 
 export default function MyCalendar() {
+  const [monthSelected, setMonthSelected] = useState(1);
+
+  function handleMonthChange(event: any) {
+    setMonthSelected(event.target.value);
+  }
+
   return (
-    <table border={1}>
-      <thead>
-        <tr>
-          {columns.map(({ label }) => (
-            <th>{label}</th>
-          ))}
-        </tr>
-      </thead>
-      <DaysComponent />
-    </table>
+    <div>
+      <select onChange={handleMonthChange}>
+        {
+          monthsFromYear.map((month: string, index: number) => {
+            return <option value={index + 1}>{month}</option>;
+          })
+        }
+      </select>
+      <table className="calendar-table">
+        <thead className="calendar-thead">
+          <tr>
+            {
+              columns.map(({ label }) => (
+                <th>{label}</th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody className="calendar-tbody">
+          <DaysComponent
+            onChange={(dayObject: IElements) => console.log({ 'objectDay': dayObject })}
+            monthSelected={monthSelected}
+            yearSelected={2024}
+          />
+        </tbody>
+      </table>
+    </div>
   );
 }

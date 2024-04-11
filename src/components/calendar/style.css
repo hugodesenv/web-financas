@@ -1,0 +1,20 @@
+.calendar-table,
+.calendar-thead th,
+.calendar-tbody tr td {
+  border: 1px solid black;
+}
+
+.calendar-day {
+  padding: 14px;
+}
+
+.calendar-day:hover {
+  background-color: rgb(219, 219, 219);
+  cursor: pointer;
+  color: rgb(99, 99, 99);
+  transition: 0.6s;
+}
+
+.calendar-day-outmonth {
+  color: rgb(199, 199, 199);
+}
