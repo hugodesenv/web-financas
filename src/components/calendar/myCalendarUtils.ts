@@ -32,30 +32,36 @@ export class MyCalendarUtils {
  * Eu defino na propriedade "outOfMonth" se o dia que está mostrando é do mês que o usuario selecionou,
  * as vezes ele quer Abril de 2024 e o primeiro dia é dia 31 de Março... Daí com esses dias foras,
  * eu consigo colorir com outra cor, outra fazer alguma outra regra.
+ * Com isso, eu retorno um array de indices, e cada indice, os dias daquela semana.
  * @param param0 
  * @returns 
  */
   static getCalendarDays({ dateSelected, maxSize }: {
-    dateSelected: {
-      month: number;
-      year: number
-    },
+    dateSelected: { month: number; year: number },
     maxSize: number,
   }) {
-    let response = [] as IElements[];
+    let dayOfWeek = [] as IElements[];
+    let weeksWithDay = [];
 
-    let startDay = moment([dateSelected.year, dateSelected.month - 1, 1]);
-    startDay.subtract(startDay.day(), 'd');
+    let firstDayOfCalendar = moment([dateSelected.year, dateSelected.month - 1, 1]);
+    firstDayOfCalendar.subtract(firstDayOfCalendar.day(), 'd');
 
-    for (let i = 0; i < maxSize; i++) {
-      response.push({
-        date: startDay.toISOString().split('T')[0],
-        outOfMonth: (startDay.month() + 1) !== dateSelected.month,
+    for (let i = 1; i <= maxSize; i++) {
+      const dayOutTheCurrentMonth = (firstDayOfCalendar.month() + 1) != dateSelected.month;
+      dayOfWeek.push({
+        date: firstDayOfCalendar.toISOString().split('T')[0],
+        outOfMonth: dayOutTheCurrentMonth,
         children: [],
       });
 
-      startDay.add(1, 'd');
+      if (i % 7 == 0) {
+        weeksWithDay.push(dayOfWeek);
+        dayOfWeek = [];
+      }
+
+      firstDayOfCalendar.add(1, 'd');
     }
-    return response;
+
+    return weeksWithDay;
   }
 }
