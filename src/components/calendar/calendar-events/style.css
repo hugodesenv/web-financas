@@ -1,0 +1,65 @@
+/** escopo geral */
+.calendar-table {
+  border-bottom: 1px solid rgb(218, 218, 218);
+  height: 100%;
+  width: 100%;
+  table-layout: fixed; /** pros tds ficarem do mesmo tamanho. */
+}
+
+/** titulo dos dias da semana */
+.calendar-table thead tr th {
+  font-weight: normal;
+  text-align: right;
+  padding-bottom: 5px;
+  padding-right: 6px;
+}
+
+/** quadradinhos dos dias da semana */
+.calendar-table tr td {
+  border-top: 1px solid rgb(218, 218, 218);
+  border-right: 1px solid rgb(218, 218, 218);
+  cursor: pointer;
+  padding: 6px;
+  user-select: none;
+  vertical-align: top; /** alinhando elemento TD verticalmente no topo */
+}
+
+.calendar-table tr td:first-child {
+  border-left: 1px solid rgb(218, 218, 218);
+}
+
+/** eventos de cada dia da semana */
+.calendar-events {
+  color: white;
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.calendar-events li:first-child {
+  margin-top: 6px;
+}
+
+.calendar-events li {
+  margin-bottom: 4px;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.calendar-events li:hover {
+  filter: brightness(150%);
+  transition: 0.4s;
+}
+
+.calendar-events li:last-child {
+  margin-bottom: 0px;
+}
+
+/** estilizaçao do dia atual */
+.calendar-current-day {
+  background-color: blue;
+}
+
+/** controle da celula de cada dia do calendario */
+.calendar-day-outmonth {
+  color: rgb(199, 199, 199);
+}
