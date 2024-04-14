@@ -1,5 +1,7 @@
+import moment from "moment";
 import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
+const currentDate = moment().toISOString().split("T")[0];
 
 export default function DaysComponent({
   monthSelected,
@@ -10,7 +12,7 @@ export default function DaysComponent({
   yearSelected: number;
   events: IEventsDay[];
 }) {
-  const maxSize = 7 * 5; // 7 dias por 5 semanas.
+  const maxSize = 7 * 6; // 7 dias por 6 semanas.
   const weeks = MyCalendarUtils.getCalendarDays({
     dateSelected: { month: monthSelected, year: yearSelected },
     maxSize: maxSize,
@@ -19,10 +21,13 @@ export default function DaysComponent({
   return weeks.map((weeks: IElements[]) => {
     const days = weeks.map((day: IElements, idx: number) => {
       const lookupDay = parseInt(day.date.split("-")[2]);
-      const dayStyle = day.outOfMonth ? `calendar-day-outmonth` : "";
+      const style = {
+        outMonth: day.outOfMonth ? "calendar-day-outmonth" : "",
+        currDay: day.date == currentDate ? "calendar-curr-day" : "",
+      };
       return (
-        <td className={dayStyle} key={idx}>
-          <span>{lookupDay}</span>
+        <td className={style.outMonth} key={idx}>
+          <span className={style.currDay}>{lookupDay}</span>
           <ul className="calendar-events">
             <MyCalendarEventsDay
               date={day.date}

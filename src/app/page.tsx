@@ -13,6 +13,16 @@ export default function Home() {
         <MyCalendar
           events={[
             {
+              date: "2024-03-31",
+              title: "Dia 5 textin",
+              backgroundColor: "#288334",
+            },
+            {
+              date: "2024-01-22",
+              title: "Dia 5 textin",
+              backgroundColor: "#288334",
+            },
+            {
               date: "2024-04-05",
               title: "Dia 5 textin",
               backgroundColor: "#288334",
@@ -21,7 +31,9 @@ export default function Home() {
               date: "2024-04-05",
               title: "Dia 5 textin",
               backgroundColor: "#393939",
-              data: "eai porra",
+              data: {
+                description: "testing",
+              },
             },
             {
               date: "2024-04-05",
@@ -46,6 +58,9 @@ export default function Home() {
             {
               date: "2024-04-10",
               title: "Dia 10 textin",
+              data: {
+                description: "testing",
+              },
             },
           ]}
         />

@@ -24,15 +24,15 @@
   vertical-align: top; /** alinhando elemento TD verticalmente no topo */
 }
 
-.calendar-table tr td:first-child {
-  border-left: 1px solid rgb(218, 218, 218);
+.calendar-table tr td:last-child {
+  border-right: 0px;
 }
 
 /** eventos de cada dia da semana */
 .calendar-events {
   color: white;
   height: 100px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .calendar-events li:first-child {
@@ -54,12 +54,23 @@
   margin-bottom: 0px;
 }
 
-/** estilizaçao do dia atual */
-.calendar-current-day {
-  background-color: blue;
+/** estilo do dia atual */
+.calendar-curr-day {
+  color: blue;
+  font-weight: 600;
+  font-style: italic;
 }
 
 /** controle da celula de cada dia do calendario */
 .calendar-day-outmonth {
-  color: rgb(199, 199, 199);
+  color: rgb(197, 197, 197);
+}
+
+.calendar-day-outmonth .calendar-events li {
+  background-color: rgb(235, 235, 235) !important;
+  color: rgb(194, 194, 194);
+}
+
+.calendar-day-outmonth .calendar-events li:hover {
+  filter: opacity(80%);
 }
