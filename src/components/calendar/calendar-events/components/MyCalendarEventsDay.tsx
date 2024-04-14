@@ -1,3 +1,4 @@
+import { CSSProperties } from "react";
 import { IEventsDay } from "../myCalendarUtils";
 
 /**
@@ -19,13 +20,11 @@ export default function MyCalendarEventsDay({
   const eventsOfTheDay = events.filter((ev: IEventsDay) => ev.date == date);
   return eventsOfTheDay.map((eventDay: IEventsDay) => {
     const objectWhenClicked = { date, data: eventDay.data };
+    const style = {
+      background: eventDay.backgroundColor ?? "blue",
+    } as CSSProperties;
     return (
-      <li
-        style={{
-          backgroundColor: eventDay.backgroundColor ?? "blue",
-        }}
-        onClick={() => onClick(objectWhenClicked)}
-      >
+      <li style={style} onClick={() => onClick(objectWhenClicked)}>
         {eventDay.title}
       </li>
     );
