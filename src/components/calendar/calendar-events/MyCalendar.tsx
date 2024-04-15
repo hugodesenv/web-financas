@@ -16,7 +16,10 @@ const WeekTitle = () => (
   </tr>
 );
 
-export default function MyCalendar({ events }: { events: IEventsDay[] }) {
+export default function MyCalendar({ events, onItemClick }: {
+  events: IEventsDay[],
+  onItemClick: (data: any) => void
+}) {
   const currentDate = {
     month: moment.month() + 1,
     year: moment.year()
@@ -70,6 +73,7 @@ export default function MyCalendar({ events }: { events: IEventsDay[] }) {
             monthSelected={monthYearSelected.month}
             yearSelected={monthYearSelected.year}
             events={events}
+            onItemClick={onItemClick}
           />
         </tbody>
       </table>

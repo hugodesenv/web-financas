@@ -9,7 +9,7 @@
 
 /** titulo dos dias da semana */
 .calendar-table thead tr th {
-  font-weight: normal;
+  font-weight: 600;
   text-align: right;
   padding-bottom: 5px;
   padding-right: 6px;

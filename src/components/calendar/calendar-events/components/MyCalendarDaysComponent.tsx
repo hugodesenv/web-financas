@@ -7,16 +7,22 @@ export default function DaysComponent({
   monthSelected,
   yearSelected,
   events,
+  onItemClick,
 }: {
   monthSelected: number;
   yearSelected: number;
   events: IEventsDay[];
+  onItemClick: (data: any) => void;
 }) {
   const maxSize = 7 * 6; // 7 dias por 6 semanas.
   const weeks = MyCalendarUtils.getCalendarDays({
     dateSelected: { month: monthSelected, year: yearSelected },
     maxSize: maxSize,
   });
+
+  function handleItemClick(data: any) {
+    onItemClick(data);
+  }
 
   return weeks.map((weeks: IElements[]) => {
     const days = weeks.map((day: IElements, idx: number) => {
@@ -32,7 +38,7 @@ export default function DaysComponent({
             <MyCalendarEventsDay
               date={day.date}
               events={events}
-              onClick={(data: any) => console.log("clicou no item", data)}
+              onClick={handleItemClick}
             />
           </ul>
         </td>

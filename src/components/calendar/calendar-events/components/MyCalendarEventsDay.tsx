@@ -19,7 +19,7 @@ export default function MyCalendarEventsDay({
 }) {
   const eventsOfTheDay = events.filter((ev: IEventsDay) => ev.date == date);
   return eventsOfTheDay.map((eventDay: IEventsDay) => {
-    const objectWhenClicked = { date, data: eventDay.data };
+    const objectWhenClicked = { date, title: eventDay.title, data: eventDay.data };
     const style = {
       background: eventDay.backgroundColor ?? "blue",
     } as CSSProperties;
