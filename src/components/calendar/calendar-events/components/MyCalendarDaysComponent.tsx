@@ -1,7 +1,7 @@
-import moment from "moment";
+import { DateUtils } from "@/lib/dateUtils";
 import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
-const currentDate = moment().toISOString().split("T")[0];
+const currentDate = DateUtils.momentBR().format('YYYY-MM-DD');
 
 export default function DaysComponent({
   monthSelected,

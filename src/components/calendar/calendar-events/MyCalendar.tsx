@@ -1,11 +1,12 @@
 "use client";
 
-import moment from "moment";
 import { useState } from "react";
 import DaysComponent from "./components/MyCalendarDaysComponent";
 import MyCalendarSelectYears from "./components/MyCalendarSelectYears";
 import { IEventsDay, dayOfWeekTitle, monthsFromYear } from "./myCalendarUtils";
 import "./style.css";
+import { DateUtils } from "@/lib/dateUtils";
+const moment = DateUtils.momentBR();
 
 const WeekTitle = () => (
   <tr>
@@ -16,7 +17,10 @@ const WeekTitle = () => (
 );
 
 export default function MyCalendar({ events }: { events: IEventsDay[] }) {
-  const currentDate = { month: moment().month() + 1, year: moment().year() };
+  const currentDate = {
+    month: moment.month() + 1,
+    year: moment.year()
+  };
   const [monthYearSelected, setMonthYearSelected] = useState({
     month: currentDate.month,
     year: currentDate.year,

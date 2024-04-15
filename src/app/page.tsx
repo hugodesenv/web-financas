@@ -1,7 +1,6 @@
 "use client";
 
 import MyCalendar from "@/components/calendar/calendar-events/MyCalendar";
-import { IElements } from "@/components/calendar/calendar-events/myCalendarUtils";
 import MyCard from "@/components/card/MyCard";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 
