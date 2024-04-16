@@ -1,20 +1,22 @@
+import MySelect from "@/components/select/MySelect";
+import { DateUtils } from "@/lib/dateUtils";
+const yearBase = parseInt(DateUtils.momentBR().format('YYYY')) - 100;
+
 /**
  * Componente Select, -100 + 50 anos.
  */
-export default function MyCalendarSelectYears({
-  onChange,
-  yearSelected,
-}: {
+export default function MyCalendarSelectYears({ onChange, yearSelected }: {
   onChange: (event: any) => void;
   yearSelected: number;
 }) {
-  const fistYear = yearSelected - 100;
-  const months = Array.from({ length: 150 }, (_, i) => fistYear + i);
+  const months = Array.from({ length: 150 }, (_, i) => yearBase + i);
   return (
-    <select value={yearSelected} onChange={onChange}>
-      {months.map((year: number) => (
-        <option key={year}>{year}</option>
-      ))}
-    </select>
+    <MySelect value={yearSelected} onChange={onChange}>
+      {
+        months.map((year: number) => (
+          <option key={year}>{year}</option>
+        ))
+      }
+    </MySelect>
   );
 }

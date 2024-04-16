@@ -6,6 +6,8 @@ import MyCalendarSelectYears from "./components/MyCalendarSelectYears";
 import { IEventsDay, dayOfWeekTitle, monthsFromYear } from "./myCalendarUtils";
 import "./style.css";
 import { DateUtils } from "@/lib/dateUtils";
+import MySelect from "@/components/select/MySelect";
+import MyButton from "@/components/button/MyButton";
 const moment = DateUtils.momentBR();
 
 const WeekTitle = () => (
@@ -48,22 +50,31 @@ export default function MyCalendar({ events, onItemClick }: {
 
   function MonthSelect() {
     return (
-      <select value={monthYearSelected.month} onChange={handleMonthChange}>
-        {monthsFromYear.map((month: string, index: number) => {
-          return <option value={index + 1}>{month}</option>;
-        })}
-      </select>
-    );
+      <MySelect
+        onChange={handleMonthChange}
+        value={monthYearSelected.month}
+      >
+        {
+          monthsFromYear.map((month: string, index: number) => {
+            return <option value={index + 1}>{month}</option>;
+          })
+        }
+      </MySelect>
+    )
   }
 
   return (
     <div>
-      <MonthSelect />
-      <MyCalendarSelectYears
-        onChange={handleYearChange}
-        yearSelected={monthYearSelected.year}
-      />
-      <button onClick={onClickGoToCurrentDate}>Ir para o dia atual</button>
+      <div id="calendar-table-box-options">
+        <div>
+          <MonthSelect />
+          <MyCalendarSelectYears
+            onChange={handleYearChange}
+            yearSelected={monthYearSelected.year}
+          />
+        </div>
+        <MyButton onClick={onClickGoToCurrentDate}>Hoje</MyButton>
+      </div>
       <table className="calendar-table">
         <thead>
           <WeekTitle />

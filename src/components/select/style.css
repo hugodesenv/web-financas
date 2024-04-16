@@ -1,0 +1,14 @@
+.my-select {
+  border: 1px solid rgb(193, 193, 193);
+  border-radius: 4px;
+  color: rgb(87, 87, 87);
+  font-size: 12px;
+  outline: none;
+  padding: 4px;
+}
+
+.my-select:hover {
+  border-color: blue;
+  cursor: pointer;
+  transition: 0.8s;
+}

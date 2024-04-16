@@ -7,6 +7,17 @@
   /** pros tds ficarem do mesmo tamanho. */
 }
 
+#calendar-table-box-options {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#calendar-table-box-options div {
+  display: flex;
+  gap: 10px;
+}
+
 /** titulo dos dias da semana */
 .calendar-table thead tr th {
   font-weight: 600;

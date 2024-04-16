@@ -69,21 +69,34 @@ export default function Home() {
   return (
     <div>
       <MyTopBar title="Home" />
+      {/** 
+      <input list="browsers" name="browser" />
+      <datalist id="browsers">
+        <option value="Internet Explorer" />
+        <option value="Firefox" />
+        <option value="Chrome" />
+        <option value="Opera" />
+        <option value="Safari" />
+      </datalist>
+*/}
+
       <MyCard>
-        {/** calendário contendo os agendamentos do dia */}
-        <MyCalendar
-          onItemClick={handleEventCalendarClick}
-          events={schedulesTest}
-        />
-        {/** drawer quando clicamos no evento do dia do calendário */}
-        <MyDrawer
-          title={detailtEvent.data?.title}
-          isOpen={detailtEvent.isOpen}
-          onClose={() => setDetailtEvent({ isOpen: false, data: {} })}
-        >
-          {console.log(detailtEvent?.data)};
-          <div>{detailtEvent?.data?.date}</div>
-        </MyDrawer>
+        <MyCard>
+          {/** calendário contendo os agendamentos do dia */}
+          <MyCalendar
+            onItemClick={handleEventCalendarClick}
+            events={schedulesTest}
+          />
+          {/** drawer quando clicamos no evento do dia do calendário */}
+          <MyDrawer
+            title={detailtEvent.data?.title}
+            isOpen={detailtEvent.isOpen}
+            onClose={() => setDetailtEvent({ isOpen: false, data: {} })}
+          >
+            {console.log(detailtEvent?.data)};
+            <div>{detailtEvent?.data?.date}</div>
+          </MyDrawer>
+        </MyCard>
       </MyCard>
     </div>
   );
