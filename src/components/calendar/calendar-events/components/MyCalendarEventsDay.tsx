@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { LiHTMLAttributes } from "react";
 import { IEventsDay } from "../myCalendarUtils";
 
 /**
@@ -8,23 +8,22 @@ import { IEventsDay } from "../myCalendarUtils";
  * @param param0
  * @returns
  */
-export default function MyCalendarEventsDay({
-  date,
-  events,
-  onClick,
-}: {
+
+interface IProps extends LiHTMLAttributes<HTMLLIElement> {
   date: string;
   events: IEventsDay[];
   onClick: (data: any) => void;
-}) {
+}
+
+export default function MyCalendarEventsDay(props: IProps) {
+  const { date, events, onClick, ...rest } = props;
   const eventsOfTheDay = events.filter((ev: IEventsDay) => ev.date == date);
+
   return eventsOfTheDay.map((eventDay: IEventsDay) => {
     const objectWhenClicked = { date, title: eventDay.title, data: eventDay.data };
-    const style = {
-      background: eventDay.backgroundColor ?? "blue",
-    } as CSSProperties;
+    const style = { background: eventDay.backgroundColor ?? "blue", };
     return (
-      <li style={style} onClick={() => onClick(objectWhenClicked)}>
+      <li {...rest} style={style} onClick={() => onClick(objectWhenClicked)} >
         {eventDay.title}
       </li>
     );
