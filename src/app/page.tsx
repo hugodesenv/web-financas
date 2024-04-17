@@ -8,21 +8,25 @@ import { useState } from "react";
 
 const schedulesTest = [
   {
+    id: "1",
     date: "2024-03-31",
     title: "Dia 31 de março textin",
     backgroundColor: "#288334",
   },
   {
+    id: "2",
     date: "2024-01-22",
     title: "Dia 22 de janeiro textin",
     backgroundColor: "#288334",
   },
   {
+    id: "3",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#288334",
   },
   {
+    id: "4",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#393939",
@@ -31,26 +35,31 @@ const schedulesTest = [
     },
   },
   {
+    id: "5",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#223333",
   },
   {
+    id: "6",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#667755",
   },
   {
+    id: "7",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#A8A8A8",
   },
   {
+    id: "8",
     date: "2024-04-05",
     title: "Dia 5 textin",
     backgroundColor: "#223333",
   },
   {
+    id: "9",
     date: "2024-04-10",
     title: "Dia 10 textin",
     data: {
@@ -60,7 +69,10 @@ const schedulesTest = [
 ];
 
 export default function Home() {
-  const [detailtEvent, setDetailtEvent] = useState({ isOpen: false, data: {} as any });
+  const [detailtEvent, setDetailtEvent] = useState({
+    isOpen: false,
+    data: {} as any,
+  });
 
   function handleEventCalendarClick(data: any) {
     setDetailtEvent({ data, isOpen: true });

@@ -1,7 +1,7 @@
 import { DateUtils } from "@/lib/dateUtils";
 import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
-const currentDate = DateUtils.momentBR().format('YYYY-MM-DD');
+const currentDate = DateUtils.momentBR().format("YYYY-MM-DD");
 
 export default function DaysComponent({
   monthSelected,
@@ -14,61 +14,60 @@ export default function DaysComponent({
   events: IEventsDay[];
   onItemClick: (data: any) => void;
 }) {
-  const weeks = MyCalendarUtils.getCalendarDays({
+  // Quando o usuario move o compromisso para outro dia, guardamos seu ID.
+  function handleEventStart(event: any, oldColumnID: string) {
+    const target = event.target as HTMLDivElement;
+    const objectTransfer = {
+      elementID: target.id,
+      oldColumnID,
+    };
+    event.dataTransfer.setData("eventMoved", JSON.stringify(objectTransfer));
+  }
+
+  // Estilização dos componentes
+  function handleDayStyle(day: IElements) {
+    return {
+      classNameOutOfMonth: day.outOfMonth ? "calendar-day-outmonth" : "",
+      classNameCurrentDay: day.date == currentDate ? "calendar-curr-day" : "",
+      lookupDay: parseInt(day.date.split("-")[2]),
+    };
+  }
+
+  // Obtemos a matriz de semanas com seus respecitivos dias.
+  const weeksMonth = MyCalendarUtils.getCalendarDays({
     dateSelected: {
       month: monthSelected,
-      year: yearSelected
+      year: yearSelected,
     },
     maxSize: 7 * 6,
   });
 
-  function handleItemClick(data: any) {
-    onItemClick(data);
-  }
+  // Rederizamos os dias da semana em forma de componente TD.
+  // Passamos o ID para a <ul> por causa do controle do "Drag and Drop", assim,
+  // conseguimos identificar para onde foi arrastado e mudar o posicionamento.
+  const renderDays = (weeks: IElements[]) =>
+    weeks.map((elementDay: IElements, idx: number) => {
+      const style = handleDayStyle(elementDay);
+      return (
+        <td className={style.classNameOutOfMonth} key={idx}>
+          <span className={style.classNameCurrentDay}>{style.lookupDay}</span>
+          <ul id={elementDay.date} className="calendar-events">
+            <MyCalendarEventsDay
+              date={elementDay.date}
+              draggable
+              onDragStart={(ev) => handleEventStart(ev, elementDay.date)}
+              events={events}
+              onClick={(data) => onItemClick(data)}
+            />
+          </ul>
+        </td>
+      );
+    });
 
-  function onDragAllowItem(event: any) {
-    event.preventDefault();
-  }
-
-  function onDragStartItem(event: any) {
-    event.dataTransfer.setData('text', event.target.id);
-  }
-
-  const onDragDropItem = (event: any) => {
-    event.preventDefault();
-    console.log('on dropp', event);
-  }
-
-  const days = (weeks: IElements[]) => weeks.map((day: IElements, idx: number) => {
-    const outMonth = day.outOfMonth ? "calendar-day-outmonth" : "";
-    const currDay = day.date == currentDate ? "calendar-curr-day" : "";
-    return (
-      <td className={outMonth} key={idx}>
-        <span className={currDay}>
-          {
-            parseInt(day.date.split("-")[2])
-          }
-        </span>
-        <ul className="calendar-events">
-          <MyCalendarEventsDay
-            date={day.date}
-            draggable
-            onDragStart={onDragStartItem}
-            events={events}
-            onClick={handleItemClick}
-          />
-        </ul>
-      </td>
-    );
+  // Para cada semana rederizada, inputamos em um Tr.
+  const renderWeeks = weeksMonth.map((weeks: IElements[]) => {
+    return <tr>{renderDays(weeks)}</tr>;
   });
 
-  return weeks.map((weeks: IElements[]) => {
-    return (
-      <tr onDragOver={onDragAllowItem} onDrop={onDragDropItem}>
-        {
-          days(weeks)
-        }
-      </tr>
-    );
-  });
+  return renderWeeks;
 }

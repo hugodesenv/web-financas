@@ -17,15 +17,27 @@ interface IProps extends LiHTMLAttributes<HTMLLIElement> {
 
 export default function MyCalendarEventsDay(props: IProps) {
   const { date, events, onClick, ...rest } = props;
-  const eventsOfTheDay = events.filter((ev: IEventsDay) => ev.date == date);
+  
+  const daysOfMonth = events.filter((ev: IEventsDay) => ev.date == date);
+  const renderEvents = daysOfMonth.map((eventDay: IEventsDay) => {
+    const onItemClick = () =>
+      onClick({
+        date,
+        title: eventDay.title,
+        data: eventDay.data,
+      });
 
-  return eventsOfTheDay.map((eventDay: IEventsDay) => {
-    const objectWhenClicked = { date, title: eventDay.title, data: eventDay.data };
-    const style = { background: eventDay.backgroundColor ?? "blue", };
     return (
-      <li {...rest} style={style} onClick={() => onClick(objectWhenClicked)} >
+      <li
+        {...rest}
+        id={eventDay.id}
+        onClick={onItemClick}
+        style={{ background: eventDay.backgroundColor ?? "blue" }}
+      >
         {eventDay.title}
       </li>
     );
   });
+
+  return renderEvents;
 }

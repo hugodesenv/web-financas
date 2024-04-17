@@ -21,6 +21,7 @@ export const dayOfWeekTitle: IDayOfWeek[] = [
 ];
 
 export interface IEventsDay {
+  id: string;
   title: string;
   backgroundColor?: string;
   date: string;
