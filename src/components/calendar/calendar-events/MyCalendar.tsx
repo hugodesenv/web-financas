@@ -29,9 +29,11 @@ function OptionsMonth({ onChange, value }: any) {
 export default function MyCalendar({
   events,
   onItemClick,
+  onEventMoved,
 }: {
   events: IEventsDay[];
   onItemClick: (data: any) => void;
+  onEventMoved: (object: any) => void;
 }) {
   const [monthYearSelected, setMonthYearSelected] = useState({
     month: moment.month() + 1,
@@ -50,7 +52,7 @@ export default function MyCalendar({
     setMonthYearSelected((prev) => ({ ...prev, year: event.target.value }));
   }
 
-  // Movendo o calendário pro dia atual
+  // Movendo o calendario pro dia atual
   function onMoveToCurrentDate() {
     setMonthYearSelected({
       month: moment.month() + 1,
@@ -58,14 +60,26 @@ export default function MyCalendar({
     });
   }
 
-  // Evento ao soltar o compromisso no dia
+  /**
+   * Evento de arraste e solte dos eventos do dia.
+   * Só é permitido soltar o item se estiver dentro da <ul>, ou seja,
+   * se for em outra <li>, ou fora da <ul>, nada ocorre.
+   * @param event 
+   * @returns 
+   */
   const handleDrop = (event: any) => {
     event.preventDefault();
-    let objectEventMoved = {
+
+    if (event.target.className !== 'calendar-events') {
+      return;
+    }
+
+    const objToReturn = {
       ...JSON.parse(event.dataTransfer.getData("eventMoved")),
       newColumnID: event.target.id,
     };
-    console.log(objectEventMoved);
+
+    onEventMoved(objToReturn);
   };
 
   function handleDragOver(event: any) {

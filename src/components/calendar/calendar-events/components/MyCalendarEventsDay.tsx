@@ -17,7 +17,7 @@ interface IProps extends LiHTMLAttributes<HTMLLIElement> {
 
 export default function MyCalendarEventsDay(props: IProps) {
   const { date, events, onClick, ...rest } = props;
-  
+
   const daysOfMonth = events.filter((ev: IEventsDay) => ev.date == date);
   const renderEvents = daysOfMonth.map((eventDay: IEventsDay) => {
     const onItemClick = () =>
