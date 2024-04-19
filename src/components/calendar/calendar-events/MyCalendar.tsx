@@ -4,7 +4,7 @@ import MyButton from "@/components/button/MyButton";
 import MySelect from "@/components/select/MySelect";
 import { DateUtils } from "@/lib/dateUtils";
 import { useState } from "react";
-import DaysComponent from "./components/MyCalendarDaysComponent";
+import ListDays from "./components/MyCalendarDaysComponent";
 import MyCalendarSelectYears from "./components/MyCalendarSelectYears";
 import { IEventsDay, dayOfWeekTitle, monthsFromYear } from "./myCalendarUtils";
 import "./style.css";
@@ -40,7 +40,7 @@ export default function MyCalendar({
     year: moment.year(),
   });
 
-  // Alterou o select do mês
+  // Alterou o select do mÃªs
   function handleMonthChange(event: any) {
     event.preventDefault();
     setMonthYearSelected((prev) => ({ ...prev, month: event.target.value }));
@@ -62,24 +62,22 @@ export default function MyCalendar({
 
   /**
    * Evento de arraste e solte dos eventos do dia.
-   * Só é permitido soltar o item se estiver dentro da <ul>, ou seja,
+   * São pemitidos soltar o item se estiver dentro da <ul>, ou seja,
    * se for em outra <li>, ou fora da <ul>, nada ocorre.
    * @param event 
    * @returns 
    */
   const handleDrop = (event: any) => {
     event.preventDefault();
-
-    if (event.target.className !== 'calendar-events') {
+    const newColumnID = event.target.parentElement.id || event.target.id;
+    if (!newColumnID) {
       return;
     }
 
-    const objToReturn = {
+    onEventMoved({
       ...JSON.parse(event.dataTransfer.getData("eventMoved")),
-      newColumnID: event.target.id,
-    };
-
-    onEventMoved(objToReturn);
+      newColumnID
+    });
   };
 
   function handleDragOver(event: any) {
@@ -106,7 +104,7 @@ export default function MyCalendar({
           <TitleColumns />
         </thead>
         <tbody onDragOver={handleDragOver} onDrop={handleDrop}>
-          <DaysComponent
+          <ListDays
             monthSelected={monthYearSelected.month}
             yearSelected={monthYearSelected.year}
             events={events}

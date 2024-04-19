@@ -10,9 +10,10 @@ import { useState } from "react";
 import {
   MdOutlineAccountBalanceWallet,
   MdOutlineAutoGraph,
+  MdOutlineEvent,
   MdOutlineHome,
   MdOutlineSettings,
-  MdPriceCheck,
+  MdPriceCheck
 } from "react-icons/md";
 
 function PageMenu() {
@@ -27,6 +28,12 @@ function PageMenu() {
       onClick: () => router.push("/"),
     },
     {
+      icon: <MdOutlineEvent fontSize={20} />,
+      label: 'Agenda',
+      key: 'mn-schedule',
+      onClick: () => router.push('/pages/schedule/')
+    },
+    {
       icon: <MdOutlineAccountBalanceWallet fontSize={20} />,
       label: "Cadastro",
       key: "mn-add",
@@ -37,6 +44,11 @@ function PageMenu() {
           onClick: () => {
             router.push("/pages/register/fixed-release/");
           },
+        },
+        {
+          key: 'person',
+          label: 'Pessoas',
+          onClick: () => { }
         },
         {
           key: "type-entry",

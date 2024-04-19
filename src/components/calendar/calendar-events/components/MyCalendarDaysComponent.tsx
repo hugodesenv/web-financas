@@ -3,7 +3,7 @@ import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
 const currentDate = DateUtils.momentBR().format("YYYY-MM-DD");
 
-export default function DaysComponent({
+export default function ListDays({
   monthSelected,
   yearSelected,
   events,
