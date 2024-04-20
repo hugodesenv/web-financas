@@ -3,7 +3,7 @@
 import MyCalendar from "@/components/calendar/calendar-events/MyCalendar";
 import { IEventsDay } from "@/components/calendar/calendar-events/myCalendarUtils";
 import MyDrawer from "@/components/drawer/MyDrawer";
-import LayoutRegister from "@/components/layout/layout_register";
+import LayoutRegister from "@/components/layout/layout_topbar";
 import { useState } from "react";
 
 export default function Schedule() {

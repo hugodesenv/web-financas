@@ -15,7 +15,7 @@ const style = {
   } as CSSProperties,
 };
 
-export default function LayoutRegister(props: IPropsLayoutRegister) {
+export default function LayoutTopBar(props: IPropsLayoutRegister) {
   return (
     <div>
       <MyTopBar title={props.title} />

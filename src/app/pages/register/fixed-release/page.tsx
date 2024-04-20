@@ -1,5 +1,5 @@
 import MyCard from "@/components/card/MyCard";
-import LayoutRegister from "@/components/layout/layout_register";
+import LayoutRegister from "@/components/layout/layout_topbar";
 import { Metadata } from "next";
 import FixedReleaseFormRegister from "./components/FixedReleaseFormRegister";
 

@@ -1,18 +1,15 @@
 "use client";
 
 import MyCard from "@/components/card/MyCard";
+import MyForm from "@/components/form/MyForm";
 import LayoutButtonsRegister, {
   OptionType,
 } from "@/components/layout/layout_buttons_register";
 import MyRadioGroup from "@/components/radioGroup/MyRadioGroup";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyInputText from "@/components/text/MyInputText";
-import { CSSProperties, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-
-const style = {
-  main: { display: "flex", flexDirection: "column", gap: 10 } as CSSProperties,
-};
 
 export default function FixedReleaseFormRegister() {
   const { handleSubmit, register, setValue } = useForm();
@@ -38,11 +35,7 @@ export default function FixedReleaseFormRegister() {
 
   function RegisterTab() {
     return (
-      <form
-        name="fixed_release_register"
-        onSubmit={handleSubmit(onSubmit)}
-        style={style.main}
-      >
+      <MyForm name="fixed_release_register" onSubmit={handleSubmit(onSubmit)}>
         <MyInputText title="Descrição" autoFocus {...register("description")} />
         <MyInputText
           title="Data de previsão"
@@ -69,12 +62,12 @@ export default function FixedReleaseFormRegister() {
           typesAccept={[OptionType.SAVE, OptionType.DELETE, OptionType.CANCEL]}
           onClick={(type: OptionType) => console.log("clicou no botao " + type)}
         />
-      </form>
+      </MyForm>
     );
   }
 
   return (
-    <MyTabView titles={["Consulta", "Digitação"]}>
+    <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
       <SearchTab />
       <RegisterTab />
     </MyTabView>

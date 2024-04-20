@@ -1,17 +1,17 @@
 import { CSSProperties } from "react";
-import "./style.css";
 import MyCircularProgress from "../progress/my_circular_progress/MyCircularProgress";
+import "./style.css";
 
 interface IMyButton {
   children: string;
   isLoading?: boolean;
-  onClick?: (event: any) => void;
+  onClick: (event: any) => void;
   type?: "submit" | "reset" | "button";
-  width?: number;
+  style?: CSSProperties;
 }
 
 export default function MyButton(props: IMyButton) {
-  const style = {
+  const fixedStyle = {
     minWidth: "90px",
     paddingLeft: "10px",
     paddingRight: "10px",
@@ -20,7 +20,7 @@ export default function MyButton(props: IMyButton) {
   return (
     <button
       {...props}
-      style={style}
+      style={{ ...fixedStyle, ...props?.style }}
       className="container-my-button"
       disabled={props.isLoading}
     >

@@ -8,12 +8,12 @@ const styleDefault = {
 } as CSSProperties;
 
 interface IProps {
-  children: any;
+  children?: any;
   style?: CSSProperties;
 }
 
 export default function MyCard(props: IProps) {
   return (
-    <div style={{ ...styleDefault, ...props.style }}>{props.children}</div>
+    <div style={{ ...styleDefault, ...props.style }}>{props?.children}</div>
   );
 }

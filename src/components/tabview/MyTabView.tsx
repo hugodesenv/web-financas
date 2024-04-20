@@ -3,8 +3,12 @@
 import { useState } from "react";
 import "./style.css";
 
+interface ITitle {
+  caption: string;
+}
+
 interface IProps {
-  titles: string[];
+  titles: ITitle[];
   children: any[];
 }
 
@@ -19,17 +23,17 @@ export function MyTabView(props: IProps) {
   return (
     <div>
       <ul className="mtv-title">
-        {props.titles?.map((caption, idx: number) => (
+        {props.titles?.map((title, idx: number) => (
           <li
             className={currentIndex === idx ? "mtv-title-selected" : ""}
             onClick={(e) => onTitleClick(e, idx)}
           >
-            {caption}
+            {title.caption}
           </li>
         ))}
       </ul>
       <ul className="mtv-container">
-        <li>{props.children[currentIndex] || <>Undefined</>}</li>
+        <li>{props?.children[currentIndex]}</li>
       </ul>
     </div>
   );

@@ -1,43 +1,46 @@
-import './style.css';
-
-interface IColumn {
-  key: string;
-  label: string;
-}
+import { CSSProperties } from "react";
+import "./style.css";
 
 interface IProps {
-  columns: IColumn[],
-  datasource: any[]
+  columns: {
+    key: string;
+    label: string;
+    style?: CSSProperties;
+  }[];
+  datasource: { text: string }[][];
 }
 
 export default function MyTable(props: IProps) {
+  function _TableTitle() {
+    return (
+      <tr>
+        {props.columns.map((column) => (
+          <th style={column.style} key={column.key}>
+            <span>{column.label}</span>
+          </th>
+        ))}
+      </tr>
+    );
+  }
+
+  function _TableItems() {
+    return props.datasource.map((rowData) => {
+      return (
+        <tr>
+          {rowData.map(({ text }) => (
+            <td>
+              <span>{text}</span>
+            </td>
+          ))}
+        </tr>
+      );
+    });
+  }
+
   return (
-    <table cellSpacing={0} width='100%'>
-      <thead className='mytable-thead'>
-        <tr>
-          {
-            props.columns.map(({ key, label }) => (
-              <th key={key}>
-                <span>{label}</span>
-              </th>
-            ))
-          }
-        </tr>
-      </thead>
-      <tbody className='mytable-tbody'>
-        <tr>
-          <td>oi</td>
-          <td>oi</td>
-        </tr>
-        <tr>
-          <td>oi</td>
-          <td>oi</td>
-        </tr>
-        <tr>
-          <td>oi</td>
-          <td>oi</td>
-        </tr>
-      </tbody>
+    <table cellSpacing={0} width="100%">
+      <thead className="mytable-thead">{_TableTitle()}</thead>
+      <tbody className="mytable-tbody">{_TableItems()}</tbody>
     </table>
-  )
+  );
 }

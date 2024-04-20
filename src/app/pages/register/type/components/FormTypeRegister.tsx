@@ -1,5 +1,6 @@
 "use client";
 
+import MyForm from "@/components/form/MyForm";
 import LayoutButtonsRegister, {
   OptionType,
 } from "@/components/layout/layout_buttons_register";
@@ -12,14 +13,14 @@ function FormTypeRegister() {
   function onSubmit(data: any) {}
 
   return (
-    <form name="type_register" onSubmit={handleSubmit(onSubmit)}>
+    <MyForm name="type_register" onSubmit={handleSubmit(onSubmit)}>
       <MyInputText autoFocus title="Descrição" {...register("description")} />
       <LayoutButtonsRegister
         formName="type_register"
         typesAccept={[OptionType.SAVE, OptionType.DELETE, OptionType.CANCEL]}
         onClick={(type: OptionType) => console.log(type)}
       />
-    </form>
+    </MyForm>
   );
 }
 

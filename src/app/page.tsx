@@ -18,9 +18,7 @@ export default function Home() {
       </datalist>
 */}
       <MyCard>
-        <MyCard>
-          oi
-        </MyCard>
+        <MyCard>oi</MyCard>
       </MyCard>
     </div>
   );

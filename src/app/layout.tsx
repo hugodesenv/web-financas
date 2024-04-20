@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { CSSProperties } from "react";
 //import 'rsuite/dist/rsuite.min.css';
 import "./globals.css";
-import PageMenu from "./components/PageMenu";
+import PageMenu from "./PageMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 

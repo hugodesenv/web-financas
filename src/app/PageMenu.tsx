@@ -13,7 +13,7 @@ import {
   MdOutlineEvent,
   MdOutlineHome,
   MdOutlineSettings,
-  MdPriceCheck
+  MdPriceCheck,
 } from "react-icons/md";
 
 function PageMenu() {
@@ -29,9 +29,9 @@ function PageMenu() {
     },
     {
       icon: <MdOutlineEvent fontSize={20} />,
-      label: 'Agenda',
-      key: 'mn-schedule',
-      onClick: () => router.push('/pages/schedule/')
+      label: "Agenda",
+      key: "mn-schedule",
+      onClick: () => router.push("/pages/schedule/"),
     },
     {
       icon: <MdOutlineAccountBalanceWallet fontSize={20} />,
@@ -46,9 +46,9 @@ function PageMenu() {
           },
         },
         {
-          key: 'person',
-          label: 'Pessoas',
-          onClick: () => { }
+          key: "person",
+          label: "Pessoas",
+          onClick: () => router.push("/pages/register/person"),
         },
         {
           key: "type-entry",
@@ -87,7 +87,7 @@ function PageMenu() {
         onClose={() => setOpenSettings(false)}
       >
         <MyTabView
-          titles={["Batata", "Cenora"]}
+          titles={[{ caption: "Teste 1" }, { caption: "Teste 2" }]}
           children={[<>Batatera</>, <>Cenorera</>]}
         />
       </MyDrawer>
