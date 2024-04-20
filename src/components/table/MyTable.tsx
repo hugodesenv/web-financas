@@ -7,7 +7,7 @@ interface IProps {
     label: string;
     style?: CSSProperties;
   }[];
-  datasource: { text: string }[][];
+  datasource: { text: any; style?: CSSProperties }[][];
 }
 
 export default function MyTable(props: IProps) {
@@ -27,9 +27,9 @@ export default function MyTable(props: IProps) {
     return props.datasource.map((rowData) => {
       return (
         <tr>
-          {rowData.map(({ text }) => (
-            <td>
-              <span>{text}</span>
+          {rowData.map((data) => (
+            <td style={data.style}>
+              <span>{data.text}</span>
             </td>
           ))}
         </tr>
@@ -38,9 +38,11 @@ export default function MyTable(props: IProps) {
   }
 
   return (
-    <table cellSpacing={0} width="100%">
-      <thead className="mytable-thead">{_TableTitle()}</thead>
-      <tbody className="mytable-tbody">{_TableItems()}</tbody>
-    </table>
+    <div className="mytable-skedol">
+      <table cellSpacing={0} width="100%">
+        <thead className="mytable-thead">{_TableTitle()}</thead>
+        <tbody className="mytable-tbody">{_TableItems()}</tbody>
+      </table>
+    </div>
   );
 }

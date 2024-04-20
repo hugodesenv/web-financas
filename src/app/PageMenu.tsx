@@ -63,7 +63,13 @@ function PageMenu() {
       icon: <MdPriceCheck fontSize={20} />,
       label: "Contas a pagar",
       key: "mn-bills-to-pay",
-      sub_menus: [{ key: "mn-entry", label: "Digitação" }],
+      sub_menus: [
+        {
+          key: "mn-entry",
+          label: "Digitação",
+          onClick: () => router.push("/pages/register/bills-to-pay"),
+        },
+      ],
     },
     {
       icon: <MdOutlineAutoGraph fontSize={20} />,

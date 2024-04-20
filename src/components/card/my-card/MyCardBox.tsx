@@ -12,7 +12,7 @@ interface IProps {
   style?: CSSProperties;
 }
 
-export default function MyCard(props: IProps) {
+export default function MyCardBox(props: IProps) {
   return (
     <div style={{ ...styleDefault, ...props.style }}>{props?.children}</div>
   );

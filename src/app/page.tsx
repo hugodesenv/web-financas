@@ -1,6 +1,6 @@
 "use client";
 
-import MyCard from "@/components/card/MyCard";
+import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 
 export default function Home() {

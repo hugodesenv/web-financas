@@ -1,5 +1,11 @@
+.mytable-skedol {
+  width: 100%;
+  overflow: auto;
+}
+
 .mytable-thead {
   background-color: rgb(246, 246, 246);
+  text-wrap: nowrap;
 }
 
 .mytable-thead tr th {
@@ -22,9 +28,25 @@
 
 .mytable-thead tr th,
 .mytable-tbody tr td {
+  overflow: auto;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-right: 25px;
   padding-left: 10px;
   border-bottom: 1px solid rgb(222, 222, 222);
+}
+
+.mytable-tbody tr:hover {
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.mytable-tbody td {
+  border-right: 1px solid rgb(235, 235, 235);
+  text-wrap: nowrap;
+}
+
+.mytable-tbody td:last-child {
+  border-right: 0px;
 }

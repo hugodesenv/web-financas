@@ -1,6 +1,6 @@
 "use client";
 
-import MyCard from "@/components/card/MyCard";
+import MyCard from "@/components/card/my-card/MyCardBox";
 import MyForm from "@/components/form/MyForm";
 import LayoutButtonsRegister, {
   OptionType,

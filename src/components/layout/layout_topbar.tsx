@@ -1,6 +1,6 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { CSSProperties } from "react";
-import MyCard from "../card/MyCard";
+import MyCard from "../card/my-card/MyCardBox";
 
 interface IPropsLayoutRegister {
   title: string;
