@@ -10,7 +10,6 @@ interface IPropsLayoutRegister {
 const style = {
   children: {
     padding: "8px",
-    background: "#FFFFFF",
     height: "calc(100vh - 72px)",
   } as CSSProperties,
 };

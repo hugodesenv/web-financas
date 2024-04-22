@@ -49,10 +49,10 @@
 }
 
 .menu li:hover {
-  background-color: rgb(0, 17, 255);
+  background-image: linear-gradient(to left, rgb(233, 233, 233), rgb(219, 219, 219));
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  color: white;
+  color: gray;
   font-weight: 700;
 }
 

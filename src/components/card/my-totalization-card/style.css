@@ -1,0 +1,21 @@
+.my-totalization-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 30px;
+  width: 130px;
+}
+
+.my-totalization-card:last-child {
+  margin-right: 0px;
+}
+
+.my-totalization-title {
+  font-size: 12px;
+}
+
+.my-totalization-content {
+  font-size: 18px;
+  font-weight: 600;
+}
