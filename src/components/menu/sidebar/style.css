@@ -52,7 +52,7 @@
   background-image: linear-gradient(to left, rgb(233, 233, 233), rgb(219, 219, 219));
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  color: gray;
+  color: rgb(34, 34, 34);
   font-weight: 700;
 }
 

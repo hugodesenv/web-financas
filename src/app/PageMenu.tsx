@@ -12,8 +12,9 @@ import {
   MdOutlineAutoGraph,
   MdOutlineEvent,
   MdOutlineHome,
-  MdOutlineSettings,
-  MdPriceCheck,
+  MdOutlineNoteAlt,
+  MdOutlineReceiptLong,
+  MdOutlineSettings
 } from "react-icons/md";
 
 function PageMenu() {
@@ -60,7 +61,7 @@ function PageMenu() {
       ],
     },
     {
-      icon: <MdPriceCheck fontSize={20} />,
+      icon: <MdOutlineReceiptLong fontSize={20} />,
       label: "Contas a pagar",
       key: "mn-bills-to-pay",
       sub_menus: [
@@ -70,6 +71,18 @@ function PageMenu() {
           onClick: () => router.push("/pages/register/bills-to-pay"),
         },
       ],
+    },
+    {
+      icon: <MdOutlineNoteAlt fontSize={20} />,
+      label: "Contas a receber",
+      key: 'mn-bills-to-receive',
+      sub_menus: [
+        {
+          key: 'mn-entry-bills-receive',
+          label: 'Digitação',
+          onClick: () => router.push('/pages/register/bills-to-receive'),
+        }
+      ]
     },
     {
       icon: <MdOutlineAutoGraph fontSize={20} />,

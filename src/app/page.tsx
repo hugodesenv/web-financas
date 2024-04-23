@@ -4,6 +4,7 @@ import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotalizationCard";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { CSSProperties } from "react";
+import PageAccountBalance from "./PageAccountBalance";
 
 const staticStyle = {
   bodyContent: {
@@ -63,7 +64,7 @@ export default function Home() {
           </div>
         </MyCard>
         <MyCard title="Saldo em conta">
-          Coisas aqui
+          <PageAccountBalance />
         </MyCard>
       </div>
     </div>
