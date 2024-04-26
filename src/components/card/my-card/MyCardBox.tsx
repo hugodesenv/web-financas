@@ -18,11 +18,12 @@ interface IProps {
   children?: any;
   style?: CSSProperties;
   title?: string;
+  className?: any;
 }
 
 export default function MyCardBox(props: IProps) {
   return (
-    <div style={{ ...staticStyle.styleDefault, ...props.style }}>
+    <div className={props.className} style={{ ...staticStyle.styleDefault, ...props.style }}>
       {
         props.title && <div style={staticStyle.titleStyle}>{props.title}</div>
       }

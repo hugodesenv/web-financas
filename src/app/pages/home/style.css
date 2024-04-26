@@ -1,0 +1,36 @@
+.page-display-gap {
+  display: flex;
+  gap: 10px;
+}
+
+.page-content-body {
+  flex-direction: column;
+  padding: 10px;
+}
+
+/** totalizador */
+.page-totalization-content {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/** linha dos grids após os cards de totalizaçao */
+.page-card-balance {
+  width: 60%;
+}
+
+.page-card-bills-by-type {
+  width: 40%;
+}
+
+@media (max-width: 750px) {
+  .page-wrapper-balance {
+    flex-direction: column;
+  }
+
+  .page-card-balance,
+  .page-card-bills-by-type {
+    width: auto;
+  }
+}
