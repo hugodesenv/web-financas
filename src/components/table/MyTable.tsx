@@ -6,8 +6,13 @@ interface IProps {
     key: string;
     label: string;
     style?: CSSProperties;
+    className?: any;
   }[];
-  datasource: { text: any; style?: CSSProperties }[][];
+  datasource: {
+    text: any;
+    style?: CSSProperties,
+    className?: any;
+  }[][];
 }
 
 export default function MyTable(props: IProps) {
@@ -15,7 +20,7 @@ export default function MyTable(props: IProps) {
     return (
       <tr>
         {props.columns.map((column) => (
-          <th style={column.style} key={column.key}>
+          <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
             <span>{column.label}</span>
           </th>
         ))}

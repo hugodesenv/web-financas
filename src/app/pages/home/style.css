@@ -17,11 +17,11 @@
 
 /** linha dos grids após os cards de totalizaçao */
 .page-card-balance {
-  width: 60%;
+  width: 40%;
 }
 
 .page-card-bills-by-type {
-  width: 40%;
+  width: 60%;
 }
 
 @media (max-width: 750px) {

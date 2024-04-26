@@ -4,6 +4,7 @@ import { CSSProperties } from "react";
 //import 'rsuite/dist/rsuite.min.css';
 import "./globals.css";
 import PageMenu from "./PageMenu";
+import "../components/utils/myGlobalStyle.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
