@@ -1,6 +1,12 @@
 import { CSSProperties } from "react";
 import "./style.css";
 
+export interface IMyTableDataSource {
+  text: any;
+  style?: CSSProperties,
+  className?: any;
+}
+
 interface IProps {
   columns: {
     key: string;
@@ -8,11 +14,7 @@ interface IProps {
     style?: CSSProperties;
     className?: any;
   }[];
-  datasource: {
-    text: any;
-    style?: CSSProperties,
-    className?: any;
-  }[][];
+  datasource: IMyTableDataSource[][];
 }
 
 export default function MyTable(props: IProps) {

@@ -1,6 +1,6 @@
 import "./style.css";
 
-interface IProps {
+export interface IPropsMyDrawer {
   children?: any;
   isOpen: boolean;
   onClose: () => void;
@@ -8,7 +8,7 @@ interface IProps {
   width?: any;
 }
 
-export default function MyDrawer(this: any, props: IProps) {
+export default function MyDrawer(props: IPropsMyDrawer) {
   function onClickClose(e: any) {
     e.preventDefault();
     if (
