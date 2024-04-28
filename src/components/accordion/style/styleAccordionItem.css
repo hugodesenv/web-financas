@@ -1,0 +1,15 @@
+.acci-title {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  gap: 10px;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  user-select: none;
+}
+
+.acci-title:hover {
+  border-radius: 6px;
+  transition: 0.2s;
+  font-weight: bold;
+}

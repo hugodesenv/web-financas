@@ -14,3 +14,11 @@ html {
 ul {
   list-style: none;
 }
+
+.my-display-none {
+  display: none;
+}
+
+.my-display-block {
+  display: block;
+}
