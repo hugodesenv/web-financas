@@ -3,5 +3,5 @@ interface IProps {
 }
 
 export default function MyAccordionPanel(props: IProps) {
-  return <ul>{props.children}</ul>;
+  return <div>{props.children}</div>;
 }

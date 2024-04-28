@@ -5,7 +5,7 @@ import MyTable from "@/components/table/MyTable";
 
 export default function HomeAccountBalance() {
   return (
-    <div>
+    <div style={{ display: "flex", gap: "10px", flexDirection: "column" }}>
       <MyTable
         columns={[
           {
@@ -30,42 +30,14 @@ export default function HomeAccountBalance() {
         ]}
       />
       <MyAccordion>
-        <MyAccordionItem title="Filtragem" defaultOpen={true}>
+        <MyAccordionItem title="Parâmetros">
           <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
           <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
           <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
           <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-          <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-          <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-          <MyAccordionPanel>Conteudinho aqui33</MyAccordionPanel>
-        </MyAccordionItem>
-        <MyAccordionItem title="Filtragem 2" defaultOpen={false}>
-          <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-        </MyAccordionItem>
-        <MyAccordionItem title="Filtragem" defaultOpen>
           <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
         </MyAccordionItem>
       </MyAccordion>
-      <div style={{ color: "red", marginTop: "20px", fontStyle: "italic" }}>
-        Incluir menu de opções aqui para desconsiderar previsões (Ou seja, que
-        estão com data futura de pagamento) <br />
-        <br />
-        Incluir transferência entre contas. Verificar qual módulo incluir essa
-        opção. <br /> <br />
-        Mostrar um totalizador de contas a pagar e a receber do mês pelo tipo.
-        Utilizar os mesmos objetos que serão mostrados nas totalizações de
-        receitas, despesas e diferença.
-        <br />
-        Verificar uma melhor forma para mostrar a receita livre, ou seja, o que
-        eu posso gastar (Trabalhar com filtros). <br />
-        <br />
-        Criar o componente que quando clica, mostra mais... Por os filtros
-        dentro dele!
-        <br />
-        <br />
-        Ao clicar no totalizador, listrar os itens cadastrados que geraram o tal
-        valor.
-      </div>
     </div>
   );
 }

@@ -1,5 +1,21 @@
 .my-accordion {
   border: 1px solid rgb(222, 222, 222);
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: 6px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.acci-title {
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  gap: 10px;
+  user-select: none;
+}
+
+.acci-title:hover {
+  border-radius: 6px;
+  transition: 0.2s;
+  font-weight: bold;
 }

@@ -5,5 +5,5 @@ interface IProps {
 }
 
 export default function MyAccordion(props: IProps) {
-  return <ul className="my-accordion">{props.children}</ul>;
+  return <div className="my-accordion">{props.children}</div>;
 }

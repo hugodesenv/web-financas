@@ -1,26 +1,25 @@
-import { CSSProperties, useEffect, useId, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import MyDivider from "../utils/MyDivider";
-import "./style/styleAccordionItem.css";
 
 interface IProps {
   title: string;
   children: any;
-  defaultOpen: boolean;
+  defaultOpen?: boolean;
 }
 
 export default function MyAccordionItem(props: IProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => setIsOpen(props.defaultOpen), []);
+  useEffect(() => setIsOpen(props.defaultOpen || false), []);
 
-  const handleClose = (event: any) => setIsOpen(!isOpen);
-
-  const customStyle = {
+  const style = {
     content: {
       display: isOpen ? "block" : "none",
-      paddingBottom: "10px",
+      marginTop: isOpen ? "10px" : "0px",
     } as CSSProperties,
+    titleClassName: `my-mt-10px acci-title ${
+      isOpen ? "my-fw-600" : "my-fw-normal"
+    }`,
   };
 
   const ButtonIcon = () => {
@@ -32,13 +31,12 @@ export default function MyAccordionItem(props: IProps) {
   };
 
   return (
-    <li id={useId()}>
-      <div className="acci-title" onClick={handleClose}>
+    <div>
+      <div className={style.titleClassName} onClick={() => setIsOpen(!isOpen)}>
         <ButtonIcon />
         <span>{props.title}</span>
       </div>
-      <div style={customStyle.content}>{props.children}</div>
-      <MyDivider />
-    </li>
+      <div style={style.content}>{props.children}</div>
+    </div>
   );
 }

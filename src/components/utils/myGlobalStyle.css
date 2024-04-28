@@ -1,11 +1,27 @@
 .my-color-blue {
-  color: #00198A;
+  color: #00198a;
 }
 
 .my-color-red {
-  color: #FC003F;
+  color: #fc003f;
 }
 
 .my-color-gray {
   color: #424242;
+}
+
+.my-fw-600 {
+  font-weight: 600;
+}
+
+.my-fw-normal {
+  font-weight: normal;
+}
+
+.my-mb-10px {
+  margin-bottom: 10px;
+}
+
+.my-mt-10px {
+  margin-top: 10px;
 }
