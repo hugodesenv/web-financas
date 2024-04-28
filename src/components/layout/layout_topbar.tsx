@@ -1,6 +1,6 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { CSSProperties } from "react";
-import MyCard from "../card/my-card/MyCardBox";
+import MyCardBox from "../card/my-card/MyCardBox";
 
 interface IPropsLayoutRegister {
   title: string;
@@ -19,7 +19,7 @@ export default function LayoutTopBar(props: IPropsLayoutRegister) {
     <div>
       <MyTopBar title={props.title} />
       <div style={style.children}>
-        <MyCard>{props.children}</MyCard>
+        <MyCardBox>{props.children}</MyCardBox>
       </div>
     </div>
   );

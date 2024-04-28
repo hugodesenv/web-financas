@@ -1,33 +1,81 @@
-import { CSSProperties } from "react";
+"use client";
 
-const staticStyle = {
-  styleDefault: {
-    borderRadius: "6px",
-    boxShadow: "rgba(0, 0, 0, 0.1) 0px 1px 2px 0px",
-    padding: "12px",
-    backgroundColor: "white",
-  } as CSSProperties,
-  titleStyle: {
-    fontWeight: 600,
-    fontSize: '11px',
-    marginBottom: '12px',
-  } as CSSProperties,
-}
+import { MdDehaze } from "react-icons/md";
+import "./style.css";
+import MyDrawer from "@/components/drawer/MyDrawer";
+import { useState } from "react";
 
 interface IProps {
   children?: any;
-  style?: CSSProperties;
-  title?: string;
-  className?: any;
+  title?: {
+    caption: string;
+    options?: {
+      caption: string;
+      children: any;
+    };
+  };
 }
 
 export default function MyCardBox(props: IProps) {
+  const [isOptionOpen, setIsOptionOpen] = useState(false);
+
+  /**
+   * Componente do hamburger que fica ao lado do titulo
+   * @returns
+   */
+  const OptionsTitle = () => {
+    const _onOptionsClick = (event: any) => setIsOptionOpen(true);
+    let buttonOptions = null;
+
+    if (props?.title?.options) {
+      buttonOptions = (
+        <button onClick={_onOptionsClick}>
+          <MdDehaze size={16} />
+        </button>
+      );
+    }
+    return buttonOptions;
+  };
+
+  /**
+   * Componente do titulo,
+   * contendo a descriçao e o botao de opçoes (Se tiver)
+   * @returns
+   */
+  const TitleBox = () => {
+    if (props.title) {
+      return (
+        <div className="mycard-boxtitle">
+          <span className="mycard-title">{props.title.caption}</span>
+          <OptionsTitle />
+        </div>
+      );
+    }
+    return null;
+  };
+
+  /**
+   * Drawer que é aberto quando clicamos no botao do hamburger
+   * dentro do titulo
+   * @returns
+   */
+  const DrawerOptions = () => {
+    return (
+      <MyDrawer
+        title={props.title?.options?.caption ?? ""}
+        isOpen={isOptionOpen}
+        onClose={() => setIsOptionOpen(!isOptionOpen)}
+      >
+        {props.title?.options?.children}
+      </MyDrawer>
+    );
+  };
+
   return (
-    <div className={props.className} style={{ ...staticStyle.styleDefault, ...props.style }}>
-      {
-        props.title && <div style={staticStyle.titleStyle}>{props.title}</div>
-      }
+    <div className="mycard-default">
+      <TitleBox />
       <div>{props?.children}</div>
+      <DrawerOptions />
     </div>
   );
 }

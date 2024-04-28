@@ -17,5 +17,5 @@
 .acci-title:hover {
   border-radius: 6px;
   transition: 0.2s;
-  font-weight: bold;
+  font-weight: 600;
 }

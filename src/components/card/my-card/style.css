@@ -1,0 +1,28 @@
+.mycard-default {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  padding: 12px;
+}
+
+.mycard-title {
+  font-weight: 600;
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.mycard-boxtitle {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mycard-boxtitle button {
+  background-color: transparent;
+  border: none;
+}
+
+.mycard-boxtitle button:hover {
+  cursor: pointer;
+  color: gray;
+  transition: 0.4s;
+}
