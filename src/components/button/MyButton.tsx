@@ -3,7 +3,7 @@ import MyCircularProgress from "../progress/my_circular_progress/MyCircularProgr
 import "./style.css";
 
 interface IMyButton {
-  children: string;
+  children: any;
   isLoading?: boolean;
   onClick: (event: any) => void;
   type?: "submit" | "reset" | "button";

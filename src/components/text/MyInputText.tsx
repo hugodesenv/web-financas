@@ -16,7 +16,7 @@ const MyInputText = forwardRef(
     const { title, ...inputProps } = props;
     return (
       <div className="wrapper-my-input-text">
-        <label className="my-input-text-title">{title}</label>
+        {title && <label className="my-input-text-title">{title}</label>}
         <input className="container-my-input-text" {...inputProps} ref={ref} />
       </div>
     );

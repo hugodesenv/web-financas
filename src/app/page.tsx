@@ -1,9 +1,12 @@
 "use client";
 
+import MyButton from "@/components/button/MyButton";
 import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotalizationCard";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
+import MyInputText from "@/components/text/MyInputText";
 import { useState } from "react";
+import { MdOutlineSearch } from "react-icons/md";
 import PageAccountBalance from "./pages/home/HomeAccountBalance";
 import HomeDrawerTotalizations, {
   ITableData,
@@ -116,7 +119,12 @@ export default function Home() {
 
   return (
     <div>
-      <MyTopBar title="Home" />
+      <MyTopBar title="Home">
+        <MyInputText title="" type="date" />
+        <MyButton onClick={() => { }} style={{ minWidth: 'min-content' }}>
+          <MdOutlineSearch />
+        </MyButton>
+      </MyTopBar>
       {/** 
       <input list="browsers" name="browser" />
       <datalist id="browsers">
@@ -147,6 +155,11 @@ export default function Home() {
               content={1300.33}
               className="my-color-gray"
             />
+          </div>
+        </MyCard>
+        <MyCard title={{ caption: 'Estatísticas' }}>
+          <div>
+            olá
           </div>
         </MyCard>
         <div className="page-display-gap page-wrapper-balance">
