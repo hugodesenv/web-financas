@@ -121,7 +121,11 @@ export default function Home() {
     <div>
       <MyTopBar title="Home">
         <MyInputText title="" type="date" />
-        <MyButton onClick={() => { }} style={{ minWidth: 'min-content' }}>
+        <MyButton
+          theme="dark"
+          onClick={() => {}}
+          style={{ minWidth: "min-content" }}
+        >
           <MdOutlineSearch />
         </MyButton>
       </MyTopBar>
@@ -157,10 +161,8 @@ export default function Home() {
             />
           </div>
         </MyCard>
-        <MyCard title={{ caption: 'Estatísticas' }}>
-          <div>
-            olá
-          </div>
+        <MyCard title={{ caption: "Estatísticas" }}>
+          <div>olá</div>
         </MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">

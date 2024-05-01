@@ -1,9 +1,7 @@
 .container-my-button {
   align-items: center;
-  background-color: #fff;
-  border: 1px solid rgb(49, 49, 255);
   border-radius: 6px;
-  color: rgb(49, 49, 255);
+  border: 1px solid rgb(49, 49, 255);
   cursor: pointer;
   display: flex;
   font-size: 12px;
@@ -13,8 +11,18 @@
   user-select: none;
 }
 
-.container-my-button:hover {
+.my-button-light {
+  background-color: #fff;
+  color: rgb(49, 49, 255);
+}
+
+.my-button-light:hover {
   background-color: rgb(49, 49, 255);
   color: #fff;
   transition: 0.3s;
+}
+
+.my-button-dark {
+  background-color: rgb(49, 49, 255);
+  color: #fff;
 }

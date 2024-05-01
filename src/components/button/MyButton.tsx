@@ -8,20 +8,26 @@ interface IMyButton {
   onClick: (event: any) => void;
   type?: "submit" | "reset" | "button";
   style?: CSSProperties;
+  theme?: "light" | "dark";
 }
 
 export default function MyButton(props: IMyButton) {
-  const fixedStyle = {
-    minWidth: "90px",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-  } as CSSProperties;
+  const btnStyle = {
+    static: {
+      minWidth: "90px",
+      paddingLeft: "10px",
+      paddingRight: "10px",
+    },
+    className: `container-my-button ${
+      props.theme == "dark" ? "my-button-dark" : "my-button-light"
+    }`,
+  };
 
   return (
     <button
       {...props}
-      style={{ ...fixedStyle, ...props?.style }}
-      className="container-my-button"
+      style={{ ...btnStyle.static, ...props?.style }}
+      className={btnStyle.className}
       disabled={props.isLoading}
     >
       {props.isLoading ? <MyCircularProgress /> : props.children}
