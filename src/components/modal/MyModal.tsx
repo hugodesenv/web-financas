@@ -7,10 +7,6 @@ interface IPropsModal {
 }
 
 export default function MyModal(props: IPropsModal) {
-  const style = {
-    myModalClassName: `my-modal ${props.isOpen ? 'my-visibility-visible' : 'my-visibility-hidden'}`,
-  };
-
   // teste do lorem ipsum... remover dps! By Hugo Souza
   const lorem = new LoremIpsum({
     sentencesPerParagraph: {
@@ -34,7 +30,7 @@ export default function MyModal(props: IPropsModal) {
   const onStopPropagation = (e: any) => e.stopPropagation();
 
   return props.isOpen &&
-    <div className={style.myModalClassName} onClick={onClose}>
+    <div className='my-modal' onClick={onClose}>
       <div className='my-modal-body' onClick={onStopPropagation}>
         <div className='my-modal-title'>
           <h4>Título aqui</h4>
