@@ -13,8 +13,11 @@ import HomeDrawerTotalizations, {
 } from "./pages/home/HomeDrawerTotalizations";
 import HomeGroupExpenses from "./pages/home/HomeGroupExpenses";
 import "./pages/home/style.css";
+import MyModal from "@/components/modal/MyModal";
 
 export default function Home() {
+  const [modalTest, setModalTest] = useState(false);
+
   const [drawerTotalization, setDrawerTotalization] = useState({
     data: [] as ITableData[][],
     isOpen: false,
@@ -123,7 +126,7 @@ export default function Home() {
         <MyInputText title="" type="date" />
         <MyButton
           theme="dark"
-          onClick={() => {}}
+          onClick={() => { }}
           style={{ minWidth: "min-content" }}
         >
           <MdOutlineSearch />
@@ -162,7 +165,9 @@ export default function Home() {
           </div>
         </MyCard>
         <MyCard title={{ caption: "Estatísticas" }}>
-          <div>olá</div>
+          <div>
+            <button onClick={() => setModalTest(!modalTest)}>Teste</button>
+          </div>
         </MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">
@@ -183,6 +188,10 @@ export default function Home() {
           isOpen: drawerTotalization.isOpen,
           onClose: _onCloseTotalization,
         }}
+      />
+      <MyModal
+        isOpen={modalTest}
+        onClose={() => setModalTest(false)}
       />
     </div>
   );

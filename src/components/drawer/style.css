@@ -61,7 +61,16 @@
 }
 
 .mydrawer-content-open {
-  animation: mydrawer-growing 0.3s forwards;
+  animation: mydrawer-growing;
+  animation-duration: 0.4s;
+  animation-timing-function: ease;
+  /** 
+    Esse propriedade abaixo significa que:
+    - Quando a animação chegar em 100%, é para reter os estilos finais de animação.
+      Ou seja, no meu exemplo, quando a animação chegar ao final, permanecerá em 90% de width
+      que é o que foi definido na mydrawer-growing.
+  */
+  animation-fill-mode: forwards;
   background-color: white;
 }
 

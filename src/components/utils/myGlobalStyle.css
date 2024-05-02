@@ -1,3 +1,4 @@
+/** cores */
 .my-color-blue {
   color: #00198a;
 }
@@ -10,6 +11,7 @@
   color: #424242;
 }
 
+/** estilo da fonte */
 .my-fw-600 {
   font-weight: 600;
 }
@@ -18,10 +20,20 @@
   font-weight: normal;
 }
 
+/** margens */
 .my-mb-10px {
   margin-bottom: 10px;
 }
 
 .my-mt-10px {
   margin-top: 10px;
+}
+
+/** visibilidade */
+.my-visibility-visible {
+  visibility: visible;
+}
+
+.my-visibility-hidden {
+  visibility: hidden;
 }
