@@ -1,10 +1,13 @@
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import { CSSProperties } from "react";
 import MyCardBox from "../card/my-card/MyCardBox";
+import MyFloattingButton from "../button/myFloattingButton/MyFloattingButton";
+import { MdLineWeight } from "react-icons/md";
 
 interface IPropsLayoutRegister {
   title: string;
   children: any;
+  optionsFloatting?: any[];
 }
 
 const style = {
@@ -21,6 +24,7 @@ export default function LayoutTopBar(props: IPropsLayoutRegister) {
       <div style={style.children}>
         <MyCardBox>{props.children}</MyCardBox>
       </div>
+      {props.optionsFloatting && <MyFloattingButton icon={MdLineWeight} options={props.optionsFloatting || []} />}
     </div>
   );
 }

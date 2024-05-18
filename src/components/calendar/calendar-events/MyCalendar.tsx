@@ -1,6 +1,6 @@
 "use client";
 
-import MyButton from "@/components/button/MyButton";
+import MyButton from "@/components/button/myButton/MyButton";
 import MySelect from "@/components/select/MySelect";
 import { DateUtils } from "@/lib/date.utils";
 import { useState } from "react";

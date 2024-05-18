@@ -1,6 +1,6 @@
 "use client";
 
-import MyButton from "@/components/button/MyButton";
+import MyButton from "@/components/button/myButton/MyButton";
 import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotalizationCard";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";

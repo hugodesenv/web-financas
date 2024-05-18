@@ -2,9 +2,6 @@
 
 import MyCard from "@/components/card/my-card/MyCardBox";
 import MyForm from "@/components/form/MyForm";
-import LayoutButtonsRegister, {
-  OptionType,
-} from "@/components/layout/layout_buttons_register";
 import MyRadioGroup from "@/components/radioGroup/MyRadioGroup";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyInputText from "@/components/text/MyInputText";
@@ -57,11 +54,6 @@ export default function FixedReleaseFormRegister() {
             onChange={handleChangeType}
           />
         </MyCard>
-        <LayoutButtonsRegister
-          formName="fixed_release_register"
-          typesAccept={[OptionType.SAVE, OptionType.DELETE, OptionType.CANCEL]}
-          onClick={(type: OptionType) => console.log("clicou no botao " + type)}
-        />
       </MyForm>
     );
   }

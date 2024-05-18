@@ -1,9 +1,6 @@
 "use client";
 
 import MyForm from "@/components/form/MyForm";
-import LayoutButtonsRegister, {
-  OptionType,
-} from "@/components/layout/layout_buttons_register";
 import MyInputText from "@/components/text/MyInputText";
 import axiosInstance from "@/config/axios.config";
 import { useState } from "react";
@@ -12,7 +9,6 @@ import { useForm } from "react-hook-form";
 async function uploadData(pData: any) {
   try {
     const res = await axiosInstance.post('/type', pData);
-    console.log(res);
     return {
       error: false,
       message: 'Registro incluso com sucesso!',
@@ -24,10 +20,12 @@ async function uploadData(pData: any) {
 
 function FormTypeRegister() {
   const { handleSubmit, register } = useForm();
-  const [isLoading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [disableFields, setDisableFields] = useState(true);
 
   async function onSubmit(data: any) {
     setLoading(true);
+    setDisableFields(true);
     try {
       const uploaded = await uploadData(data);
       console.log(uploaded);
@@ -38,16 +36,10 @@ function FormTypeRegister() {
 
   return (
     <MyForm name="type_register" onSubmit={handleSubmit(onSubmit)}>
-      <MyInputText autoFocus title="Descrição" {...register("description")} />
-      <LayoutButtonsRegister
-        isLoading={isLoading}
-        formName="type_register"
-        typesAccept={[
-          OptionType.SAVE,
-          OptionType.DELETE,
-          OptionType.CANCEL
-        ]}
-        onClick={(type: OptionType) => console.log(type)}
+      <MyInputText
+        disabled={disableFields}
+        autoFocus
+        title="Descrição" {...register("description")}
       />
     </MyForm>
   );

@@ -1,11 +1,13 @@
 import { CSSProperties } from "react";
-import MyCircularProgress from "../progress/my_circular_progress/MyCircularProgress";
+import MyCircularProgress from "../../progress/my_circular_progress/MyCircularProgress";
 import "./style.css";
 
 interface IMyButton {
   children: any;
   isLoading?: boolean;
-  onClick: (event: any) => void;
+  onClick?: (event: any) => void;
+  onMouseEnter?: (event: any) => void;
+  onMouseLeave?: (event: any) => void;
   type?: "submit" | "reset" | "button";
   style?: CSSProperties;
   theme?: "light" | "dark";
