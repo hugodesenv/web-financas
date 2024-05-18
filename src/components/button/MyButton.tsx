@@ -18,9 +18,8 @@ export default function MyButton(props: IMyButton) {
       paddingLeft: "10px",
       paddingRight: "10px",
     },
-    className: `container-my-button ${
-      props.theme == "dark" ? "my-button-dark" : "my-button-light"
-    }`,
+    className: `container-my-button ${props.theme == "dark" ? "my-button-dark" : "my-button-light"
+      }`,
   };
 
   return (
@@ -30,7 +29,7 @@ export default function MyButton(props: IMyButton) {
       className={btnStyle.className}
       disabled={props.isLoading}
     >
-      {props.isLoading ? <MyCircularProgress /> : props.children}
+      {props.isLoading ? <MyCircularProgress color="blue" /> : props.children}
     </button>
   );
 }

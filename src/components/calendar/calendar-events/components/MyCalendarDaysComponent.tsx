@@ -1,4 +1,4 @@
-import { DateUtils } from "@/lib/dateUtils";
+import { DateUtils } from "@/lib/date.utils";
 import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
 const currentDate = DateUtils.momentBR().format("YYYY-MM-DD");

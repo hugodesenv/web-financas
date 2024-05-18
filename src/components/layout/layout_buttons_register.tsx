@@ -64,14 +64,9 @@ function LayoutButtonsRegister(props: IProps) {
      * Caso esteja, eu adiciono ele em "rightSide" para posicionar ao lado direito da tela,
      * longe dos outros botões.
      */
-    let buttonPositions = {
-      left: [] as any[],
-      right: [] as any[],
-    };
-
-    let [config] = props.typesAccept.filter(
-      (option) => option === OptionType.DELETE
-    );
+    let buttonPositions = { left: [] as any[], right: [] as any[] };
+    
+    let [config] = props.typesAccept.filter((option) => option === OptionType.DELETE);
 
     if (config) {
       const element = (
