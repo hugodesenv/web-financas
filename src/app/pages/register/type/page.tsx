@@ -1,13 +1,11 @@
 "use client";
 
 import MyButton from "@/components/button/myButton/MyButton";
-import MyFloattingButton from "@/components/button/myFloattingButton/MyFloattingButton";
 import LayoutRegister from "@/components/layout/layout_topbar";
 import MyTable, { IMyTableDataSource } from "@/components/table/MyTable";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import axiosInstance from "@/config/axios.config";
 import { useState } from "react";
-import { MdLineWeight } from "react-icons/md";
 import FormTypeRegister from "./components/FormTypeRegister";
 
 /**
