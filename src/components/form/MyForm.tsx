@@ -1,7 +1,9 @@
+import { FormHTMLAttributes, MutableRefObject } from "react";
 import "./style.css";
-import { FormHTMLAttributes } from "react";
 
-export default function MyForm(props: FormHTMLAttributes<HTMLFormElement>) {
+interface IProps extends FormHTMLAttributes<HTMLFormElement> { }
+
+export default function MyForm(props: IProps) {
   return (
     <form id="skedol-form" {...props}>
       {props?.children}

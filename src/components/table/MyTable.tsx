@@ -7,6 +7,11 @@ export interface IMyTableDataSource {
   className?: any;
 }
 
+export interface IMyTableWrapper {
+  object: any;
+  dataSource: IMyTableDataSource[]
+}
+
 interface IProps {
   columns: {
     key: string;
@@ -14,31 +19,41 @@ interface IProps {
     style?: CSSProperties;
     className?: any;
   }[];
-  datasource: IMyTableDataSource[][];
+  datasource: IMyTableWrapper[];
+  onRowClick?: (data: any) => void;
 }
 
 export default function MyTable(props: IProps) {
   function _TableTitle() {
     return (
       <tr>
-        {props.columns.map((column) => (
-          <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
-            <span>{column.label}</span>
-          </th>
-        ))}
+        {
+          props.columns.map((column) => (
+            <th
+              style={{ textAlign: 'left', ...column.style }}
+              className={column.className}
+              key={column.key}
+            >
+              <span>{column.label}</span>
+            </th>
+          ))
+        }
       </tr>
     );
   }
 
   function _TableItems() {
+    const onRowClick = (rowData: any) => props.onRowClick && props.onRowClick(rowData.object);
     return props.datasource.map((rowData) => {
       return (
-        <tr>
-          {rowData.map((data) => (
-            <td style={data.style}>
-              <span>{data.text}</span>
-            </td>
-          ))}
+        <tr onClick={() => onRowClick(rowData)}>
+          {
+            rowData.dataSource?.map((table: IMyTableDataSource) => {
+              return <td style={table.style}>
+                <span>{table.text}</span>
+              </td>
+            })
+          }
         </tr>
       );
     });

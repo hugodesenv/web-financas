@@ -1,7 +1,3 @@
-interface IProps {
-  children: any;
-}
-
-export default function MyAccordionPanel(props: IProps) {
-  return <div>{props.children}</div>;
+export default function MyAccordionPanel({ children }: any) {
+  return <div>{children}</div>;
 }

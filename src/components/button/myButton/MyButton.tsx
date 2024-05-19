@@ -1,14 +1,9 @@
-import { CSSProperties } from "react";
+import { ButtonHTMLAttributes, CSSProperties } from "react";
 import MyCircularProgress from "../../progress/my_circular_progress/MyCircularProgress";
 import "./style.css";
 
-interface IMyButton {
-  children: any;
+interface IMyButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
-  onClick?: (event: any) => void;
-  onMouseEnter?: (event: any) => void;
-  onMouseLeave?: (event: any) => void;
-  type?: "submit" | "reset" | "button";
   style?: CSSProperties;
   theme?: "light" | "dark";
 }
@@ -20,8 +15,7 @@ export default function MyButton(props: IMyButton) {
       paddingLeft: "10px",
       paddingRight: "10px",
     },
-    className: `container-my-button ${props.theme == "dark" ? "my-button-dark" : "my-button-light"
-      }`,
+    className: `container-my-button ${props.theme == "dark" ? "my-button-dark" : "my-button-light"}`,
   };
 
   return (

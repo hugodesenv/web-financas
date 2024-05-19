@@ -54,8 +54,12 @@ export default function HomeAccountBalance() {
             },
           ]}
           datasource={[
-            [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }],
-            [{ text: "2" }, { text: "Gabriella Itaú" }, { text: "50.339,92" }],
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
           ]}
         />
       </div>

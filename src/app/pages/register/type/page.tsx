@@ -1,73 +1,118 @@
 "use client";
 
-import MyButton from "@/components/button/myButton/MyButton";
+import MyIconButton, { EnIconButtonType } from "@/components/button/myIconButton/MyIconButton";
 import LayoutRegister from "@/components/layout/layout_topbar";
-import MyTable, { IMyTableDataSource } from "@/components/table/MyTable";
+import MyTable, { IMyTableDataSource, IMyTableWrapper } from "@/components/table/MyTable";
 import { MyTabView } from "@/components/tabview/MyTabView";
+import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
 import axiosInstance from "@/config/axios.config";
 import { useState } from "react";
-import FormTypeRegister from "./components/FormTypeRegister";
+import FormTypeRegister, { defaultCurrentType } from "./components/FormTypeRegister";
 
-/**
- * Buscamos os tipos na API, e com o resultado, tratamos ele para ficar no formato suportado
- * pelo grid.
- * @returns 
- */
+//==> Busca os cadastros dos tipos.
 async function fetch() {
   try {
     const query = await axiosInstance.get('/type');
     const { data } = query;
-
-    const objectType = data.map((typeObject: any) => {
-      return [
-        { text: typeObject.id },
-        { text: typeObject.description }
-      ] as IMyTableDataSource[];
-    });
-
-    return objectType;
+    return data;
   } catch (e) {
     return [];
   }
 }
 
-export default function TypeRegister() {
-  const [queryRecord, setQueryRecord] = useState([] as IMyTableDataSource[][]);
-  const [loading, setLoading] = useState(false);
+//==> Busca o cadastro do tipo pelo ID.
+async function fetchByID(typeObject: any) {
+  try {
+    const { data } = await axiosInstance.get('/type/findone', { params: { id: typeObject.id } });
+    return data;
+  } catch (e) {
+    return {};
+  }
+}
 
+export default function TypeRegister() {
+  const [queryRecord, setQueryRecord] = useState([] as IMyTableWrapper[]);
+  const [loading, setLoading] = useState(false);
+  const [currentType, setCurrentType] = useState({});
+
+  //==> Evento do botao pesquisar.
   async function handleFetch() {
     setLoading(true);
     try {
       const types = await fetch();
-      setQueryRecord(types);
+      const objectType = types.map((typeObject: any) => {
+        return {
+          object: typeObject,
+          dataSource: [
+            { text: typeObject.id },
+            { text: typeObject.description }
+          ] as IMyTableDataSource[]
+        } as IMyTableWrapper;
+      });
+
+      setQueryRecord(objectType);
     } finally {
       setLoading(false);
     }
-  }
-
-  function TabSearch() {
-    return <MyTable
-      columns={[
-        { key: "ID", label: "Código", style: { width: "10%" } },
-        { key: "description", label: "Descrição" },
-      ]}
-      datasource={queryRecord}
-    />;
   };
 
-  // Lista de botõe que passamos pro nosso LayoutRegister, responsável por redenrizar o floatting action button.
-  const optionsFloatting = [
-    <MyButton>Incluir</MyButton>,
-    <MyButton>Alterar</MyButton>,
-    <MyButton>Excluir</MyButton>,
-    <MyButton onClick={handleFetch} isLoading={loading}>Pesquisar</MyButton>,
-  ];
+  //==> Evento de inclusao.
+  async function handleNewType() {
+    setCurrentType(defaultCurrentType);
+  }
+
+  //==> Evento quando clica no grid de consulta
+  async function handleRowClick(typeObject: any) {
+    setLoading(true);
+    try {
+      const objectSelected = await fetchByID(typeObject);
+      setCurrentType(objectSelected);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  //==> Aba de consulta.
+  function TabSearch() {
+    return (
+      <MyTable
+        columns={[
+          { key: "ID", label: "Código", style: { width: "10%" } },
+          { key: "description", label: "Descrição" },
+        ]}
+        datasource={queryRecord}
+        onRowClick={handleRowClick}
+      />
+    );
+  };
+
+  //==> Botoes do formulario de cadastro.
+  const ActionsButtons = (
+    <MyHorizontalStack>
+      <MyIconButton
+        onClick={() => handleFetch()}
+        iconType={EnIconButtonType.SEARCH}
+        isLoading={loading}
+      />
+      <MyIconButton
+        onClick={() => handleNewType()}
+        iconType={EnIconButtonType.NEW}
+      />
+      <MyIconButton
+        form="type_register"
+        onClick={() => { }}
+        iconType={EnIconButtonType.SAVE}
+      />
+    </MyHorizontalStack>
+  );
 
   return (
-    <LayoutRegister title="Tipos" optionsFloatting={optionsFloatting}>
+    <LayoutRegister
+      title="Tipos"
+      childrenBefore={ActionsButtons}>
       <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
         <TabSearch />
-        <FormTypeRegister />
+        <FormTypeRegister data={currentType} />
       </MyTabView>
     </LayoutRegister>
   );

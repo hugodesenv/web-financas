@@ -4,6 +4,7 @@ import MyButton from "@/components/button/myButton/MyButton";
 import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotalizationCard";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
+import MyModal from "@/components/modal/MyModal";
 import MyInputText from "@/components/text/MyInputText";
 import { useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
@@ -13,7 +14,6 @@ import HomeDrawerTotalizations, {
 } from "./pages/home/HomeDrawerTotalizations";
 import HomeGroupExpenses from "./pages/home/HomeGroupExpenses";
 import "./pages/home/style.css";
-import MyModal from "@/components/modal/MyModal";
 
 export default function Home() {
   const [modalTest, setModalTest] = useState(false);

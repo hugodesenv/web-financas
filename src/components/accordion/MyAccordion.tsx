@@ -1,9 +1,5 @@
 import "./style/styleAccordion.css";
 
-interface IProps {
-  children: any;
-}
-
-export default function MyAccordion(props: IProps) {
-  return <div className="my-accordion">{props.children}</div>;
+export default function MyAccordion({ children }: any) {
+  return <div className="my-accordion">{children}</div>;
 }

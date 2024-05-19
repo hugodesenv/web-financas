@@ -3,9 +3,21 @@
 import MyForm from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import axiosInstance from "@/config/axios.config";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
+interface IProps { data: any };
+
+export const defaultCurrentType = {
+  description: '',
+  id: 0,
+};
+
+/**
+ * Enviamos os dados do tipo paa gravar no banco de dados.
+ * @param pData 
+ * @returns 
+ */
 async function uploadData(pData: any) {
   try {
     const res = await axiosInstance.post('/type', pData);
@@ -18,26 +30,26 @@ async function uploadData(pData: any) {
   }
 }
 
-function FormTypeRegister() {
-  const { handleSubmit, register } = useForm();
+function FormTypeRegister(props: IProps) {
+  const { handleSubmit, register, reset } = useForm();
+  const formRegisterRef = useRef<HTMLFormElement>();
   const [loading, setLoading] = useState(false);
-  const [disableFields, setDisableFields] = useState(true);
 
+  useEffect(() => reset(props.data), [props.data]);
+
+  //==> Tratamos a gravação do registro.
   async function onSubmit(data: any) {
     setLoading(true);
-    setDisableFields(true);
     try {
       const uploaded = await uploadData(data);
-      console.log(uploaded);
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <MyForm name="type_register" onSubmit={handleSubmit(onSubmit)}>
+    <MyForm onSubmit={handleSubmit(onSubmit)}>
       <MyInputText
-        disabled={disableFields}
         autoFocus
         title="Descrição" {...register("description")}
       />
