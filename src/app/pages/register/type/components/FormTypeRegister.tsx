@@ -1,12 +1,20 @@
 "use client";
-
-import MyForm from "@/components/form/MyForm";
+import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import axiosInstance from "@/config/axios.config";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
-interface IProps { data: any };
+// Tipagem das propriedades do componente
+interface IProps {
+  data: any;
+  state: (isLoading: boolean) => void;
+}
+
+// Tipagem das funções que serão exportadas para o pai com base no Ref.
+export interface IExposeTypeFunctions {
+  requestSubmit: () => void;
+};
 
 export const defaultCurrentType = {
   description: '',
@@ -14,11 +22,11 @@ export const defaultCurrentType = {
 };
 
 /**
- * Enviamos os dados do tipo paa gravar no banco de dados.
- * @param pData 
- * @returns 
+ * Transmite os dados do tipo para a api
+ * @param pData objeto do tipo
+ * @returns se deu certo ou não a transmissão
  */
-async function uploadData(pData: any) {
+async function uploadDataToAPI(pData: any) {
   try {
     const res = await axiosInstance.post('/type', pData);
     return {
@@ -30,31 +38,43 @@ async function uploadData(pData: any) {
   }
 }
 
-function FormTypeRegister(props: IProps) {
+// Função que será exportada
+const FormTypeRegister = React.forwardRef((props: IProps, ref: any) => {
   const { handleSubmit, register, reset } = useForm();
-  const formRegisterRef = useRef<HTMLFormElement>();
-  const [loading, setLoading] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
-  useEffect(() => reset(props.data), [props.data]);
+  // hook do react para exportar as funções pro componente pai
+  useImperativeHandle(ref, () => ({
+    requestSubmit: () => {
+      formRef?.current?.requestSubmit();
+    }
+  }));
 
-  //==> Tratamos a gravação do registro.
-  async function onSubmit(data: any) {
-    setLoading(true);
+  // hook do react para setar os dados do tipo
+  useEffect(() => { reset(props.data) }, [props.data]);
+
+  /**
+   * Evento de submissão do formulário de cadastro
+   * @param data objeto de tipos
+   */
+  async function onSubmitted(data: any) {
+    props.state(true);
     try {
-      const uploaded = await uploadData(data);
+      await uploadDataToAPI(data);
     } finally {
-      setLoading(false);
+      props.state(false);
     }
   }
 
   return (
-    <MyForm onSubmit={handleSubmit(onSubmit)}>
+    <MyForm ref={formRef} onSubmit={handleSubmit(onSubmitted)} >
       <MyInputText
         autoFocus
-        title="Descrição" {...register("description")}
+        title="Descrição"
+        {...register("description")}
       />
     </MyForm>
   );
-}
+});
 
 export default FormTypeRegister;

@@ -1,12 +1,12 @@
-import { FormHTMLAttributes, MutableRefObject } from "react";
+import React from "react";
 import "./style.css";
 
-interface IProps extends FormHTMLAttributes<HTMLFormElement> { }
+interface IProps extends React.FormHTMLAttributes<HTMLFormElement> { }
 
-export default function MyForm(props: IProps) {
+export const MyForm = React.forwardRef((props: IProps, ref: React.ForwardedRef<HTMLFormElement>) => {
   return (
-    <form id="skedol-form" {...props}>
+    <form ref={ref} className="skedol-form" {...props}>
       {props?.children}
     </form>
-  );
-}
+  )
+})

@@ -20,20 +20,30 @@ export function MyTabView(props: IProps) {
     setCurrentIndex(idx);
   }
 
+  function Items() {
+    const items = props?.children.map((value: any, index: number) => {
+      const item_display = index == currentIndex ? 'block' : 'none';
+      return <li style={{ display: item_display }}>{value}</li>
+    });
+
+    return items;
+  }
+
   return (
     <div>
       <ul className="mtv-title">
-        {props.titles?.map((title, idx: number) => (
-          <li
-            className={currentIndex === idx ? "mtv-title-selected" : ""}
-            onClick={(e) => onTitleClick(e, idx)}
-          >
-            {title.caption}
-          </li>
-        ))}
+        {
+          props.titles?.map((title, idx: number) => (
+            <li
+              className={currentIndex === idx ? "mtv-title-selected" : ""}
+              onClick={(e) => onTitleClick(e, idx)}>
+              {title.caption}
+            </li>
+          ))
+        }
       </ul>
       <ul className="mtv-container">
-        <li>{props?.children[currentIndex]}</li>
+        <Items />
       </ul>
     </div>
   );

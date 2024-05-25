@@ -6,10 +6,14 @@ import MyTable, { IMyTableDataSource, IMyTableWrapper } from "@/components/table
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
 import axiosInstance from "@/config/axios.config";
-import { useState } from "react";
-import FormTypeRegister, { defaultCurrentType } from "./components/FormTypeRegister";
+import { useRef, useState } from "react";
+import FormTypeRegister, { IExposeTypeFunctions, defaultCurrentType } from "./components/FormTypeRegister";
+import MyAlert, { IMyAlertState } from "@/components/alert/MyAlert";
 
-//==> Busca os cadastros dos tipos.
+/**
+ * Busca todos os registros na api
+ * @returns uma lista de objetos de "tipos"
+ */
 async function fetch() {
   try {
     const query = await axiosInstance.get('/type');
@@ -20,7 +24,11 @@ async function fetch() {
   }
 }
 
-//==> Busca o cadastro do tipo pelo ID.
+/**
+ * Busca os dados na API 
+ * @param typeObject objeto do tipo selecionado
+ * @returns um unico objeto de tipo contendo todas as suas caracteristicas
+ */
 async function fetchByID(typeObject: any) {
   try {
     const { data } = await axiosInstance.get('/type/findone', { params: { id: typeObject.id } });
@@ -30,13 +38,19 @@ async function fetchByID(typeObject: any) {
   }
 }
 
+// Componente de tela
 export default function TypeRegister() {
-  const [queryRecord, setQueryRecord] = useState([] as IMyTableWrapper[]);
-  const [loading, setLoading] = useState(false);
   const [currentType, setCurrentType] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [queryRecord, setQueryRecord] = useState([] as IMyTableWrapper[]);
+  const formRegisterRef = useRef<IExposeTypeFunctions>();
 
-  //==> Evento do botao pesquisar.
-  async function handleFetch() {
+  /**
+   * Ação do botão "Pesuisar"
+   * @param event evento do padrao botao
+   */
+  async function handleFetch(event: any) {
+    event.preventDefault();
     setLoading(true);
     try {
       const types = await fetch();
@@ -56,12 +70,15 @@ export default function TypeRegister() {
     }
   };
 
-  //==> Evento de inclusao.
+  // Ação ao clicar em "Novo"
   async function handleNewType() {
     setCurrentType(defaultCurrentType);
   }
 
-  //==> Evento quando clica no grid de consulta
+  /**
+   * Evento ao clicar na linha do grid de consulta
+   * @param typeObject objeto do tipo selecionado
+   */
   async function handleRowClick(typeObject: any) {
     setLoading(true);
     try {
@@ -72,7 +89,7 @@ export default function TypeRegister() {
     }
   };
 
-  //==> Aba de consulta.
+  // Componente da aba consulta.
   function TabSearch() {
     return (
       <MyTable
@@ -86,11 +103,16 @@ export default function TypeRegister() {
     );
   };
 
-  //==> Botoes do formulario de cadastro.
+  // Ação ao clicar no botão gravar
+  function handleSave(event: any) {
+    formRegisterRef.current?.requestSubmit();
+  }
+
+  // Botoes localizados no topo para manipulação da tela. (Alterar, incluir etc.)
   const ActionsButtons = (
     <MyHorizontalStack>
       <MyIconButton
-        onClick={() => handleFetch()}
+        onClick={handleFetch}
         iconType={EnIconButtonType.SEARCH}
         isLoading={loading}
       />
@@ -99,20 +121,26 @@ export default function TypeRegister() {
         iconType={EnIconButtonType.NEW}
       />
       <MyIconButton
-        form="type_register"
-        onClick={() => { }}
+        onClick={handleSave}
         iconType={EnIconButtonType.SAVE}
+        isLoading={loading}
       />
     </MyHorizontalStack>
   );
 
   return (
-    <LayoutRegister
-      title="Tipos"
-      childrenBefore={ActionsButtons}>
+    <LayoutRegister title="Tipos" childrenBefore={ActionsButtons}>
+      <MyAlert
+        message="Teste do meu layout customizado lindão"
+        visible
+      />
       <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
         <TabSearch />
-        <FormTypeRegister data={currentType} />
+        <FormTypeRegister
+          ref={formRegisterRef}
+          data={currentType}
+          state={setLoading}
+        />
       </MyTabView>
     </LayoutRegister>
   );

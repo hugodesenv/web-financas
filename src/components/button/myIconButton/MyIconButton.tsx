@@ -6,7 +6,8 @@ export enum EnIconButtonType {
   NEW,
   CLEAR,
   SEARCH,
-  SAVE
+  SAVE,
+  UNDEFINED
 };
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
