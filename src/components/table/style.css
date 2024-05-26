@@ -45,3 +45,8 @@
 .mytable-tbody td:last-child {
   border-right: 0px;
 }
+
+.mytable-totalization-body {
+  background-color: yellow;
+  margin-top: 10px;
+}

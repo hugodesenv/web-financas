@@ -18,7 +18,7 @@ async function fetch() {
   try {
     const query = await axiosInstance.get('/type');
     const { data } = query;
-    return data;
+    return data.data;
   } catch (e) {
     return [];
   }
@@ -32,7 +32,7 @@ async function fetch() {
 async function fetchByID(typeObject: any) {
   try {
     const { data } = await axiosInstance.get('/type/findone', { params: { id: typeObject.id } });
-    return data;
+    return data.data;
   } catch (e) {
     return {};
   }
@@ -54,6 +54,7 @@ export default function TypeRegister() {
     setLoading(true);
     try {
       const types = await fetch();
+      console.log(types);
       const objectType = types.map((typeObject: any) => {
         return {
           object: typeObject,
