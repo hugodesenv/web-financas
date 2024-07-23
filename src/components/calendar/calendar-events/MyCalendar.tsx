@@ -40,7 +40,7 @@ export default function MyCalendar({
     year: moment.year(),
   });
 
-  // Alterou o select do mÃªs
+  // Alterou o select do mes
   function handleMonthChange(event: any) {
     event.preventDefault();
     setMonthYearSelected((prev) => ({ ...prev, month: event.target.value }));

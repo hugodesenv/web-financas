@@ -8,12 +8,12 @@ import MyModal from "@/components/modal/MyModal";
 import MyInputText from "@/components/text/MyInputText";
 import { useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
-import PageAccountBalance from "./pages/home/HomeAccountBalance";
+import PageAccountBalance from "./pages/screen/home/HomeAccountBalance";
 import HomeDrawerTotalizations, {
   ITableData,
-} from "./pages/home/HomeDrawerTotalizations";
-import HomeGroupExpenses from "./pages/home/HomeGroupExpenses";
-import "./pages/home/style.css";
+} from "./pages/screen/home/HomeDrawerTotalizations";
+import HomeGroupExpenses from "./pages/screen/home/HomeGroupExpenses";
+import "./pages/screen/home/style.css";
 
 export default function Home() {
   const [modalTest, setModalTest] = useState(false);

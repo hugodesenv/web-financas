@@ -11,25 +11,25 @@ export default function Schedule() {
     {
       id: "1",
       date: "2024-03-31",
-      title: "Dia 31 de março textin",
+      title: "Dia 31 de março ",
       backgroundColor: "#288334",
     },
     {
       id: "2",
       date: "2024-01-22",
-      title: "Dia 22 de janeiro textin",
+      title: "Dia 22 de janeiro ",
       backgroundColor: "#288334",
     },
     {
       id: "3",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#288334",
     },
     {
       id: "4",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#393939",
       data: {
         description: "testing",
@@ -38,31 +38,31 @@ export default function Schedule() {
     {
       id: "5",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#223333",
     },
     {
       id: "6",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#667755",
     },
     {
       id: "7",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#A8A8A8",
     },
     {
       id: "8",
       date: "2024-04-05",
-      title: "Dia 5 textin",
+      title: "Dia 5 ",
       backgroundColor: "#223333",
     },
     {
       id: "9",
       date: "2024-04-10",
-      title: "Dia 10 textin",
+      title: "Dia 10 ",
       data: {
         description: "testing",
       },
