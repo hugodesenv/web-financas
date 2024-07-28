@@ -1,7 +1,7 @@
 "use client";
 
 import MyCard from "@/components/card/my-card/MyCardBox";
-import MyForm from "@/components/form/MyForm";
+import { MyForm } from "@/components/form/MyForm";
 import MyRadioGroup from "@/components/radioGroup/MyRadioGroup";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyInputText from "@/components/text/MyInputText";

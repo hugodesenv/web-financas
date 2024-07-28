@@ -1,3 +1,5 @@
+'use client';
+
 import { CSSProperties, useEffect, useState } from "react";
 import MyPagination from "./MyPagination";
 import "./style.css";
@@ -52,7 +54,11 @@ export default function MyTable(props: IProps) {
    */
   function TableColumns() {
     const ComponentColumn = ({ column }: any) => (
-      <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
+      <th
+        style={{ textAlign: 'left', ...column.style }}
+        className={column.className}
+        key={column.key}
+      >
         <span>{column.label}</span>
       </th>
     )
@@ -109,11 +115,13 @@ export default function MyTable(props: IProps) {
         </tbody>
       </table>
       {/* totalizador */}
-      <MyPagination
-        quantityItems={props.datasource?.length}
-        quantityPerPage={quantityItemsPerPage}
-        onPageSelected={(page: number) => handleDataPerPage(page)}
-      />
+      <div style={{ marginTop: '10px' }}>
+        <MyPagination
+          quantityItems={props.datasource?.length}
+          quantityPerPage={quantityItemsPerPage}
+          onPageSelected={(page: number) => handleDataPerPage(page)}
+        />
+      </div>
     </div>
   );
 }

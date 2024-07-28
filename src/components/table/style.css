@@ -47,6 +47,25 @@
 }
 
 .mytable-totalization-body {
-  background-color: yellow;
-  margin-top: 10px;
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 5px;
+}
+
+.mytable-totalization-body button {
+  border: none;
+  background-color: transparent;
+  font-size: 12px;
+  margin-left: 5px;
+  padding: 5px;
+}
+
+.mytable-totalization-body button:first-child {
+  margin-left: 0px;
+}
+
+.mytable-totalization-body button:hover {
+  background-color: blue;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px;
 }

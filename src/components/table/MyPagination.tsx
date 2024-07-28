@@ -49,9 +49,9 @@ const MyPagination = (props: {
 
   return (
     <div className="mytable-totalization-body">
-      <button onClick={() => handleInitialPageNumber('decrement')}>Previous</button>
+      <button onClick={() => handleInitialPageNumber('decrement')}>Anterior</button>
       {arrayOfButtons}
-      <button onClick={() => handleInitialPageNumber('increment')}>Next</button>
+      <button onClick={() => handleInitialPageNumber('increment')}>Próximo</button>
     </div>
   );
 };
