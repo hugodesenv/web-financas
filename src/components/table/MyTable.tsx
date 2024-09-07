@@ -11,8 +11,7 @@ export interface IMyTableDataSource {
 }
 
 export interface IMyTableWrapper {
-  object: any;
-  dataSource: IMyTableDataSource[]
+  data: IMyTableDataSource[]
 }
 
 // Tipagem das propriedades.
@@ -24,7 +23,7 @@ interface IProps {
     className?: any;
   }[];
   datasource: IMyTableWrapper[];
-  onRowClick?: (data: any) => void;
+  onSelectedRow?: (rowIndex: any) => void;
 };
 
 const quantityItemsPerPage = 2;
@@ -75,8 +74,6 @@ export default function MyTable(props: IProps) {
    * @returns uma listagem de Trs.
    */
   const TableContent = () => {
-    const onRowClick = (pdata: any) => props.onRowClick && props.onRowClick(pdata);
-
     const TableColumns = (pprops: { dataSource: IMyTableDataSource[] }) => {
       return pprops.dataSource?.map((data: IMyTableDataSource) => {
         return <td style={data.style} className={data.className}>
@@ -85,13 +82,12 @@ export default function MyTable(props: IProps) {
       });
     };
 
-    const TableRow = (ptableContent: IMyTableWrapper) => (
-      <tr onClick={() => onRowClick(ptableContent.object)}>
-        <TableColumns dataSource={ptableContent.dataSource} />
+    const rowsResult = data.map(({ data }, index: number) => (
+      <tr onClick={() => props.onSelectedRow && props.onSelectedRow(index)}>
+        <TableColumns dataSource={data} />
       </tr>
-    );
+    ));
 
-    const rowsResult = data.map((tableContent: IMyTableWrapper) => TableRow(tableContent));
     return rowsResult;
   };
 

@@ -6,14 +6,12 @@ import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotaliz
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
 import MyModal from "@/components/modal/MyModal";
 import MyInputText from "@/components/text/MyInputText";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
-import PageAccountBalance from "./pages/screen/home/HomeAccountBalance";
-import HomeDrawerTotalizations, {
-  ITableData,
-} from "./pages/screen/home/HomeDrawerTotalizations";
-import HomeGroupExpenses from "./pages/screen/home/HomeGroupExpenses";
-import "./pages/screen/home/style.css";
+import "./pages/home/style.css";
+import HomeDrawerTotalizations, { ITableData } from "./pages/home/HomeDrawerTotalizations";
+import HomeGroupExpenses from "./pages/home/HomeGroupExpenses";
+import HomeAccountBalance from "./pages/home/HomeAccountBalance";
 
 export default function Home() {
   const [modalTest, setModalTest] = useState(false);
@@ -23,6 +21,14 @@ export default function Home() {
     isOpen: false,
     title: "",
   });
+
+  useEffect(() => {
+    console.log('ola!');
+    fetch('/api/route').then(() => {
+      console.log('salve')
+
+    })
+  }, []);
 
   function _onClickTotalization(event: any, pTitle: string) {
     // fazer o filtro para setar no drawer aqui
@@ -176,7 +182,7 @@ export default function Home() {
             </MyCard>
           </div>
           <div className="page-card-balance">
-            <PageAccountBalance />
+            <HomeAccountBalance />
           </div>
         </div>
       </div>

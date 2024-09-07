@@ -3,7 +3,8 @@ import MyAccordionPanel from "@/components/accordion/MyAccordionPanel";
 import MyAccordionItem from "@/components/accordion/MyAccordtionItem";
 import MyCardBox from "@/components/card/my-card/MyCardBox";
 import MyTable from "@/components/table/MyTable";
-import { CSSProperties } from "react";
+import axios from "axios";
+import { CSSProperties, useEffect } from "react";
 
 const _style = {
   wrapper: {
@@ -54,13 +55,16 @@ export default function HomeAccountBalance() {
             },
           ]}
           datasource={[
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
-            { dataSource: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }], object: {} },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
+            { data: [{ text: "1" }, { text: "Hugo Itaú" }, { text: "10.339,92" }] },
           ]}
+          onSelectedRow={(rowIndex) => console.log(rowIndex)}
         />
       </div>
     </MyCardBox>

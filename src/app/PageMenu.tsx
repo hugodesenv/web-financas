@@ -32,7 +32,7 @@ function PageMenu() {
       icon: <MdOutlineEvent fontSize={20} />,
       label: "Agenda",
       key: "mn-schedule",
-      onClick: () => router.push("/pages/screen/schedule/"),
+      onClick: () => router.push("/pages/maintenance/schedule/"),
     },
     {
       icon: <MdOutlineAccountBalanceWallet fontSize={20} />,
@@ -43,19 +43,19 @@ function PageMenu() {
           key: "fixed-release",
           label: "Lançamentos fixos",
           onClick: () => {
-            router.push("/pages/screen/register/fixed-release/");
+            router.push("/pages/maintenance/fixed-release/");
           },
         },
         {
           key: "person",
           label: "Pessoas",
-          onClick: () => router.push("/pages/screen/register/person"),
+          onClick: () => router.push("/pages/maintenance/person"),
         },
         {
           key: "type-entry",
           label: "Tipo",
           onClick: () => {
-            router.push("/pages/screen/register/type");
+            router.push("/pages/maintenance/type");
           },
         },
       ],
@@ -68,7 +68,7 @@ function PageMenu() {
         {
           key: "mn-entry",
           label: "Digitação",
-          onClick: () => router.push("/pages/screen/register/bills-to-pay"),
+          onClick: () => router.push("/pages/maintenance/bills-to-pay"),
         },
       ],
     },
@@ -80,7 +80,7 @@ function PageMenu() {
         {
           key: 'mn-entry-bills-receive',
           label: 'Digitação',
-          onClick: () => router.push('/pages/screen/register/bills-to-receive'),
+          onClick: () => router.push('/pages/maintenance/bills-to-receive'),
         }
       ]
     },

@@ -1,5 +1,5 @@
 import MySelect from "@/components/select/MySelect";
-import { DateUtils } from "@/lib/date.utils";
+import { DateUtils } from "@/service/dateUtils";
 const yearBase = parseInt(DateUtils.momentBR().format('YYYY')) - 100;
 
 /**
