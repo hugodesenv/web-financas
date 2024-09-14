@@ -127,7 +127,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <>
       <MyTopBar title="Home">
         <MyInputText title="" type="date" />
         <MyButton
@@ -199,6 +199,6 @@ export default function Home() {
         isOpen={modalTest}
         onClose={() => setModalTest(false)}
       />
-    </div>
+    </>
   );
 }

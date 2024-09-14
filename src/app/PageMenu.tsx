@@ -98,7 +98,7 @@ function PageMenu() {
   ];
 
   return (
-    <div>
+    <>
       <MyMenuSidebar child={menus} />
       <MyDrawer
         title="Configurações"
@@ -110,7 +110,7 @@ function PageMenu() {
           children={[<>Batatera</>, <>Cenorera</>]}
         />
       </MyDrawer>
-    </div>
+    </>
   );
 }
 
