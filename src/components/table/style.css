@@ -48,15 +48,14 @@
 }
 
 .mytable-totalization-body {
-  border: 1px solid rgb(219, 219, 219);
   border-radius: 5px;
+  text-align: right;
 }
 
 .mytable-totalization-body button {
   border: none;
   background-color: transparent;
-  font-size: 12px;
-  margin-left: 5px;
+  font-size: 11px;
   padding: 5px;
 }
 
@@ -69,4 +68,5 @@
   cursor: pointer;
   color: white;
   border-radius: 4px;
+  transition: 0.2s;
 }
