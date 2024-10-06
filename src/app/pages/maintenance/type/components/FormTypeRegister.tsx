@@ -1,7 +1,7 @@
 "use client";
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
-import axiosInstance from "@/config/axiosInstance";
+import axiosInstance from "@/utils/axiosInstanceUtils";
 import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 

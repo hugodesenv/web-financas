@@ -1,18 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
+import { AuthMiddleware } from "./middleware/authMid";
 
-const authRoutes = [];
-const protectedRoutes = ['/api/fixed-release'];
-const publicRoutes = [];
+export async function middleware(ARequest: NextRequest) {
+  const { pathname } = ARequest.nextUrl;
 
-export function middleware(ARequest: NextRequest) {
-  if (protectedRoutes.includes(ARequest.nextUrl.pathname)) {
-    // TODO: Substituir por esquema de autenticação JWT.
-    const username = ARequest.headers.get('username');
-    if (username !== 'teste_hugo') {
-      return NextResponse.json({ data: "Access denied." }, { status: 401 });
-    }
-    // Fim do TODO
-  }
+  /*if (['/api/fixed-release'].includes(pathname)) {
+    return await AuthMiddleware(ARequest) || NextResponse.next();
+  }*/;
 
   return NextResponse.next();
 }
