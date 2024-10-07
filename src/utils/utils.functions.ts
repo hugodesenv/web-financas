@@ -21,7 +21,7 @@ export const executeMiddlewares = async (
   async function _execute(pindex: number): Promise<any> {
     if (pindex < pmiddlewares.length) {
       let response = await pmiddlewares[pindex](prequest);
-      let hasFailed = response.headers.get('x-middleware-next') == null;
+      let hasFailed = response.headers.get('x-middleware-next') == null; // deduzo que seja isso mesmo.
       if (hasFailed) {
         return response
       }

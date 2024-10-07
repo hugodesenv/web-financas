@@ -1,16 +1,12 @@
-/**
- * Olá, esse Middleware foi criado po Hugo Souza
- * 06/10/2024 - A ideia é: Obter o JWT e verificar se o mesmo é válido.
- */
-
 import { IHTTPResponse } from "@/interface/intf.http.response";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from 'jose';
 
-export async function AuthMiddleware(ARequest: NextRequest) {
-  let bearerToken = ARequest.headers.get('authorization')?.split(' ')[1];
-  
+export async function AuthMiddleware(request: NextRequest) {
+  let { pathname } = request.nextUrl;
+  let bearerToken = request.headers.get('authorization')?.split(' ')[1];
+
   if (!bearerToken) {
     return NextResponse.json({
       message: 'Token is required',
@@ -18,21 +14,20 @@ export async function AuthMiddleware(ARequest: NextRequest) {
     } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
   }
 
-  //--> gerando um token teste
-  /*let testToken = await new jose.SignJWT()
-    .setProtectedHeader({ alg: 'HS256' })
-    .setIssuedAt()
-    .setIssuer(process.env.JWT_ISSUER as any)
-    .setAudience(process.env.JWT_AUDIENCE as any)
-    .setExpirationTime(process.env.JWT_EXPIRATION_TIME as any)
-    .sign(secretKey as any);*/
-
   try {
     let secretKey = new TextEncoder().encode(
       process.env.SECRET_JWT
     );
 
-    const { payload } = await jose.jwtVerify(bearerToken, secretKey as any);
+    let { payload } = await jose.jwtVerify(bearerToken, secretKey as any);
+    let allowed_endpoints = payload.allowed_endpoints as string[];
+
+    if (!allowed_endpoints.includes(pathname)) {
+      return NextResponse.json({
+        success: false,
+        message: 'User does not have permission for this endpoint'
+      } as IHTTPResponse, { status: HttpStatusCode.MethodNotAllowed });
+    }
   } catch (e) {
     return NextResponse.json({
       success: false,
