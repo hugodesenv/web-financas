@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AuthMiddleware } from "./middleware/authMid";
+import { AuthMiddleware } from "./middleware/mid.auth";
 
 export async function middleware(ARequest: NextRequest) {
   const { pathname } = ARequest.nextUrl;

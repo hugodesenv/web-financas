@@ -3,16 +3,14 @@
  * 06/10/2024 - A ideia é: Obter o JWT e verificar se o mesmo é válido.
  */
 
-import { IHTTPResponse } from "@/interface/IHTTPResponse";
+import { IHTTPResponse } from "@/interface/intf.http.response";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from 'jose';
 
 export async function AuthMiddleware(ARequest: NextRequest) {
   let bearerToken = ARequest.headers.get('authorization')?.split(' ')[1];
-
-  console.log('aqui dentro');
-
+  
   if (!bearerToken) {
     return NextResponse.json({
       message: 'Token is required',
@@ -41,6 +39,6 @@ export async function AuthMiddleware(ARequest: NextRequest) {
       message: 'Invalid token'
     } as IHTTPResponse, { status: HttpStatusCode.Forbidden })
   }
-  
+
   return NextResponse.next();
 }
