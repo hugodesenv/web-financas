@@ -1,8 +1,8 @@
-import { IHTTPResponse } from "@/interface/intf.http.response";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import * as jose from 'jose';
+import { IHTTPResponse } from "@/lib/utils.interface";
 
 export async function POST(request: NextRequest) {
   const schema = z.object({

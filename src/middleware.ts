@@ -1,12 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AuthMiddleware } from "./middleware/mid.auth";
+import { AuthService } from "./service/auth-service";
+import { IHTTPResponse } from "./lib/utils.interface";
 
-export async function middleware(ARequest: NextRequest) {
-  const { pathname } = ARequest.nextUrl;
+export const config = {
+  matcher: '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+}
 
-  /*if (['/api/fixed-release'].includes(pathname)) {
-    return await AuthMiddleware(ARequest) || NextResponse.next();
-  }*/;
+const publicRoutes = [
+  '/login'
+]
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (publicRoutes.includes(pathname)) {
+    return NextResponse.next();
+  }
+
+  const session = AuthService.isSessionValid();
+  if (!session) {
+    if (pathname.startsWith('/api')) {
+      return NextResponse.json({ message: 'Token inválido!', success: false } as IHTTPResponse)
+    }
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
 
   return NextResponse.next();
-}
+} 

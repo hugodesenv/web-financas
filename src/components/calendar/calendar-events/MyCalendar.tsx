@@ -2,7 +2,7 @@
 
 import MyButton from "@/components/button/myButton/MyButton";
 import MySelect from "@/components/select/MySelect";
-import { DateUtils } from "@/utils/utils.date";
+import { DateUtils } from "@/lib/utils.date";
 import { useState } from "react";
 import ListDays from "./components/MyCalendarDaysComponent";
 import MyCalendarSelectYears from "./components/MyCalendarSelectYears";
