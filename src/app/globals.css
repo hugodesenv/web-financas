@@ -22,3 +22,7 @@ ul {
 .my-display-block {
   display: block;
 }
+
+.width-100-perc {
+  width: 100%;
+}

@@ -6,7 +6,6 @@
 
 .mytable-thead {
   text-wrap: nowrap;
-  background-color: rgb(237, 237, 237);
 }
 
 .mytable-thead tr th {
@@ -34,9 +33,7 @@
 
 .mytable-tbody tr:hover {
   cursor: pointer;
-  color: #011c3b;
-  font-weight: 600;
-  transition: 0.9s;
+  color: #6e00dc;
 }
 
 .mytable-tbody td {

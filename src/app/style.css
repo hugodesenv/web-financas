@@ -1,0 +1,78 @@
+.login-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.login-form {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 30px;
+  min-height: calc(100% - 60px);
+  width: calc(30% - 30px);
+}
+
+.login-form image {
+  text-align: center;
+  font-weight: 500;
+}
+
+.login-gap {
+  display: flex;
+  gap: 12px;
+}
+
+.login-form-fields {
+  flex-direction: column;
+}
+
+.login-information {
+  background-image: url('../../public/wallpaper-login.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(230, 230, 230);
+  width: 70%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.icon-skedol {
+  height: 25px;
+  width: 100%;
+}
+
+.login-button-wrapper {
+  flex-wrap: wrap;
+}
+
+.login-button-wrapper button {
+  flex: 1;
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-form {
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 100%;
+    width: calc(100% - 40px);
+  }
+
+  .login-information {
+    overflow: hidden;
+  }
+
+  .icon-skedol {
+    height: 50px;
+  }
+
+  .login-button {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -7,7 +7,7 @@ export const config = {
 }
 
 const publicRoutes = [
-  '/login'
+  '/'
 ]
 
 export async function middleware(request: NextRequest) {
@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
     if (pathname.startsWith('/api')) {
       return NextResponse.json({ message: 'Token inválido!', success: false } as IHTTPResponse)
     }
-    return NextResponse.redirect(new URL('/login', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
   }
 
   return NextResponse.next();
