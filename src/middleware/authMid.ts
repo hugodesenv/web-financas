@@ -1,4 +1,4 @@
-import { IHTTPResponse } from "@/lib/utils.interface";
+import { IHTTPResponse } from "@/types/httpType";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from 'jose';

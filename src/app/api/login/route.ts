@@ -2,32 +2,31 @@ import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import * as jose from 'jose';
-import { IHTTPResponse } from "@/lib/utils.interface";
+import { IHTTPResponse } from "@/types/httpType";
 
 export async function POST(request: NextRequest) {
-  const schema = z.object({
+  const body_schema = z.object({
     username: z.string({ message: 'O usuário é obrigatório' }),
     password: z.string({ message: 'A senha é obrigatória' })
   });
 
-  const json = await request.json();
-  const { error, data, success } = schema.safeParse(json);
+  const data = await body_schema.safeParseAsync(await request.json());
 
-  if (!success) {
+  if (!data.success) {
     return NextResponse.json({
       success: false,
-      message: error
+      message: data.error
     } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
   }
 
   //==> vamos fingir que aqui vamos buscar os dados lá no banco de dados e está autenticado.
-  let isAuthenticated = data.username == 'hugo' && data.password == 'silva';
+  let isAuthenticated = data.data.username == 'hugo' && data.data.password == 'silva';
 
   if (!isAuthenticated) {
     return NextResponse.json({
       success: false,
       message: 'Username or password are incorrect'
-    } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
+    } as IHTTPResponse, { status: HttpStatusCode.Forbidden })
   }
 
   // Nessa etapa, obtemos as rotas que o usuário tem acesso e armazenamos dentro do token
