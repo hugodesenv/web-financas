@@ -3,8 +3,7 @@ import MyAccordionPanel from "@/components/accordion/MyAccordionPanel";
 import MyAccordionItem from "@/components/accordion/MyAccordtionItem";
 import MyCardBox from "@/components/card/my-card/MyCardBox";
 import MyTable from "@/components/table/MyTable";
-import axios from "axios";
-import { CSSProperties, useEffect } from "react";
+import { CSSProperties } from "react";
 
 const _style = {
   wrapper: {
@@ -24,11 +23,11 @@ export default function HomeAccountBalance() {
           children: [
             <MyAccordion>
               <MyAccordionItem title="Parâmetros">
-                <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-                <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-                <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-                <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
-                <MyAccordionPanel>Conteudinho aqui</MyAccordionPanel>
+                <MyAccordionPanel key='testehugo1' >Conteudinho aqui</MyAccordionPanel>
+                <MyAccordionPanel key='testehugo2'>Conteudinho aqui</MyAccordionPanel>
+                <MyAccordionPanel key='testehugo3'>Conteudinho aqui</MyAccordionPanel>
+                <MyAccordionPanel key='testehugo4'>Conteudinho aqui</MyAccordionPanel>
+                <MyAccordionPanel key='testehugo5'>Conteudinho aqui</MyAccordionPanel>
               </MyAccordionItem>
             </MyAccordion>,
           ],

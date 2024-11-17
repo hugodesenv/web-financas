@@ -1,11 +1,8 @@
 .wrapper-my-input-text {
   color: black;
   display: flex;
+  gap: 4px;
   flex-direction: column;
-}
-
-.my-input-text-title {
-  margin-bottom: 4px;
 }
 
 .container-my-input-text {
@@ -27,4 +24,9 @@
   font-weight: 600;
   transition: 0.5s;
   font-size: 12px;
+}
+
+.my-error-label {
+  color: red;
+  font-size: 11px;
 }

@@ -5,20 +5,23 @@
  */
 
 import { ForwardedRef, forwardRef } from "react";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
 import "./style.css";
 
 interface IMyInputText extends React.InputHTMLAttributes<HTMLInputElement> {
   title: string;
+  errorText?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
 }
 
 const MyInputText = forwardRef(
   (props: IMyInputText, ref: ForwardedRef<HTMLInputElement>) => {
-    const { title, ...inputProps } = props;
+    const { title, errorText, ...inputProps } = props;
     return (
       <div className="wrapper-my-input-text">
-        {title && <label className="my-input-text-title">{title}</label>}
+        {title && <label>{title}</label>}
         <input className="container-my-input-text" {...inputProps} ref={ref} />
-      </div>
+        {errorText && <span className="my-error-label">{errorText.toString()}</span>}
+      </div >
     );
   }
 );

@@ -10,16 +10,15 @@ interface IProps {
 export default function MyAccordionItem(props: IProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => setIsOpen(props.defaultOpen || false), []);
+  useEffect(() => setIsOpen(props?.defaultOpen ?? false), []);
 
   const style = {
     content: {
       display: isOpen ? "block" : "none",
       marginTop: isOpen ? "10px" : "0px",
     } as CSSProperties,
-    titleClassName: `my-mt-10px acci-title ${
-      isOpen ? "my-fw-600" : "my-fw-normal"
-    }`,
+    titleClassName: `my-mt-10px acci-title ${isOpen ? "my-fw-600" : "my-fw-normal"
+      }`,
   };
 
   const ButtonIcon = () => {

@@ -3,24 +3,28 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import * as jose from 'jose';
 import { IHTTPResponse } from "@/types/httpType";
+import { verifyCredential } from "@/service/userSrv";
 
 export async function POST(request: NextRequest) {
+  console.log('aqui antes...');
+
   const body_schema = z.object({
-    username: z.string({ message: 'O usuário é obrigatório' }),
-    password: z.string({ message: 'A senha é obrigatória' })
+    email: z.string({ message: 'E-mail is undefined' }),
+    password: z.string({ message: 'Password is undefined' })
   });
 
-  const data = await body_schema.safeParseAsync(await request.json());
+  const { success, data, error } = await body_schema.safeParseAsync(await request.json());
 
-  if (!data.success) {
+  console.log('aqui depois...')
+
+  if (!success) {
     return NextResponse.json({
       success: false,
-      message: data.error
+      message: error
     } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
   }
 
-  //==> vamos fingir que aqui vamos buscar os dados lá no banco de dados e está autenticado.
-  let isAuthenticated = data.data.username == 'hugo' && data.data.password == 'silva';
+  let isAuthenticated = await verifyCredential(data.email, data.password);
 
   if (!isAuthenticated) {
     return NextResponse.json({

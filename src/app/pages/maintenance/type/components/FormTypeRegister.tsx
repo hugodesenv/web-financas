@@ -2,7 +2,7 @@
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import axiosInstance from "@/lib/axiosLib";
-import React, { useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { useEffect, useImperativeHandle, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 // Tipagem das propriedades do componente
@@ -51,7 +51,9 @@ const FormTypeRegister = React.forwardRef((props: IProps, ref: any) => {
   }));
 
   // hook do react para setar os dados do tipo
-  useEffect(() => { reset(props.data) }, [props.data]);
+  useEffect(() => {
+    reset(props?.data)
+  }, [props.data]);
 
   /**
    * Evento de submissão do formulário de cadastro

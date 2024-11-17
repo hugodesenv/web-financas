@@ -11,20 +11,6 @@ import FormTypeRegister, { IExposeTypeFunctions, defaultCurrentType } from "./co
 import MyAlert, { IMyAlertState } from "@/components/alert/MyAlert";
 
 /**
- * Busca todos os registros na api
- * @returns uma lista de objetos de "tipos"
- */
-async function fetch() {
-  try {
-    const query = await axiosInstance.get('/type');
-    const { data } = query;
-    return data.data;
-  } catch (e) {
-    return [];
-  }
-}
-
-/**
  * Busca os dados na API 
  * @param typeObject objeto do tipo selecionado
  * @returns um unico objeto de tipo contendo todas as suas caracteristicas
@@ -51,24 +37,6 @@ export default function TypeRegister() {
    */
   async function handleFetch(event: any) {
     event.preventDefault();
-    setLoading(true);
-    try {
-      const types = await fetch();
-      console.log(types);
-      const objectType = types.map((typeObject: any) => {
-        return {
-          object: typeObject,
-          dataSource: [
-            { text: typeObject.id },
-            { text: typeObject.description }
-          ] as IMyTableDataSource[]
-        } as IMyTableWrapper;
-      });
-
-      setQueryRecord(objectType);
-    } finally {
-      setLoading(false);
-    }
   };
 
   // Ação ao clicar em "Novo"

@@ -10,7 +10,7 @@ export enum IMyAlertState {
 // Tipagem das propriedades do componente
 interface IProps {
   visible: boolean;
-  message: string;
+  message?: string;
   seconds?: number;
   state?: IMyAlertState,
 };
@@ -36,7 +36,7 @@ const MyAlert = (props: IProps) => {
       return;
     }
 
-    let visibleSeconds = (props.seconds || 4) * 1000;;
+    let visibleSeconds = (props.seconds || 4) * 1000;
     setTimeout(() => {
       setVisible(false);
     }, visibleSeconds);
