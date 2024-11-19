@@ -6,16 +6,12 @@ import { IHTTPResponse } from "@/types/httpType";
 import { verifyCredential } from "@/service/userSrv";
 
 export async function POST(request: NextRequest) {
-  console.log('aqui antes...');
-
   const body_schema = z.object({
     email: z.string({ message: 'E-mail is undefined' }),
     password: z.string({ message: 'Password is undefined' })
   });
 
   const { success, data, error } = await body_schema.safeParseAsync(await request.json());
-
-  console.log('aqui depois...')
 
   if (!success) {
     return NextResponse.json({

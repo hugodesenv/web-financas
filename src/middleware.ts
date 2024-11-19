@@ -6,19 +6,21 @@ export const config = {
   matcher: '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
 }
 
-const publicRoutes = ['/', '/api/login'];
+const publicRoutes = [
+  '/',
+  '/api/login'
+];
 
 export async function middleware(request: NextRequest) {
-  console.log('>> teste no middleware by Hugo');
-  console.log(request.cookies.toString());
-
   const { pathname } = request.nextUrl;
 
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
-  let sessionOK = isSessionValid();
+  let tokenJWT = request.headers.get('Authorization')?.replace('Bearer ', '') ?? request?.cookies?.get('jwt')?.value ?? '';
+  let secretJWT = new TextEncoder().encode(process.env.SECRET_JWT);
+  let sessionOK = await isSessionValid(tokenJWT, secretJWT);
 
   if (!sessionOK) {
     if (pathname.startsWith('/api')) {
