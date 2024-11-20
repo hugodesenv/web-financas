@@ -10,7 +10,7 @@ import MyIconButton, { EnIconButtonType } from "@/components/button/myIconButton
 import { useRef } from "react";
 
 export default function Person() {
-  const form_register_ref = useRef(null as any); // para manipulacao do formulario de cadastro.
+  const formRef = useRef(null as any); // para manipulacao do formulario de cadastro.
 
   const action_buttons = (
     <MyHorizontalStack>
@@ -24,7 +24,7 @@ export default function Person() {
         type="button"
         iconType={EnIconButtonType.CLEAR}
         isLoading={false}
-        onClick={() => form_register_ref.current.clearForm()}
+        onClick={() => formRef.current.clearForm()}
       />
     </MyHorizontalStack>
   );
@@ -34,7 +34,7 @@ export default function Person() {
       <LayoutRegister title="Pessoas" childrenBefore={action_buttons}>
         <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
           <PersonSearch />
-          <PersonFormRegister ref={form_register_ref} />
+          <PersonFormRegister ref={formRef} />
         </MyTabView>
       </LayoutRegister>
     </MyLayout>

@@ -17,6 +17,8 @@ export type ILoginDto = {
 export type IPersonDto = {
   name: string;
   nickname: string;
+  id?: number,
+  createdAt?: Date,
 }
 
 export enum EnCookieKey {

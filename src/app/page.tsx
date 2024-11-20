@@ -6,12 +6,13 @@ import MyButton from '@/components/button/myButton/MyButton';
 import MyInputText from '@/components/text/MyInputText';
 import { saveSession } from '@/lib/libSession';
 import { tryLogin } from '@/service/srvUser';
-import { EnRoute, ILoginDto } from '@/types';
+import { EnRoute, ILoginDto } from '@/lib/libTypes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import iconSkedol from '../../public/vercel.svg';
 import './style.css';
+import { MESSAGES } from '@/lib/libConstants';
 
 export default function Login() {
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function Login() {
             <div className='login-form-fields login-gap'>
               <MyInputText
                 disabled={isSubmitting}
-                {...register('email', { required: 'O e-mail é obrigatório' })}
+                {...register('email', { required: MESSAGES.required_field })}
                 autoFocus
                 title='E-mail'
                 type='email'
@@ -55,7 +56,7 @@ export default function Login() {
               />
               <MyInputText
                 disabled={isSubmitting}
-                {...register('password', { required: 'Sua senha é obrigatória' })}
+                {...register('password', { required: MESSAGES.required_field })}
                 title='Senha'
                 type='password'
                 errorText={errors.password?.message}

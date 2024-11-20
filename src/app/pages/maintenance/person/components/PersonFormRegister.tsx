@@ -8,7 +8,8 @@
 
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
-import { IPersonDto } from "@/types";
+import { MESSAGES } from "@/lib/libConstants";
+import { IPersonDto } from "@/lib/libTypes";
 import { forwardRef, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -22,19 +23,29 @@ const PersonFormRegister = forwardRef((props, ref) => {
   const {
     handleSubmit,
     register,
-    reset
+    reset,
+    formState: {
+      errors
+    }
   } = useForm<IPersonDto>();
 
   const onSubmit: SubmitHandler<IPersonDto> = (data) => {
-    console.log('==> Hugo: Fazer o cadastro aqui.')
   }
 
   const clearForm = () => reset();
 
   return (
     <MyForm onSubmit={handleSubmit(onSubmit)} id="fixed-person-register">
-      <MyInputText title="Nome" {...register('name', { required: 'Campo obrigatório' })} />
-      <MyInputText title="Apelido" {...register('nickname')} />
+      <MyInputText
+        title="Nome"
+        {...register('name', { required: MESSAGES.required_field })}
+        errorText={errors?.name?.message}
+      />
+      <MyInputText
+        title="Apelido"
+        {...register('nickname')}
+        errorText={errors?.nickname?.message}
+      />
     </MyForm>
   );
 })

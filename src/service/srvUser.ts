@@ -1,5 +1,5 @@
 import axiosInstance from "@/lib/libAxios";
-import { IHTTPResponse, ILoginDto } from "@/types";
+import { IHTTPResponse, ILoginDto } from "@/lib/libTypes";
 import { PrismaClient } from "@prisma/client";
 
 export async function tryLogin(credentials: ILoginDto): Promise<IHTTPResponse> {
@@ -11,7 +11,7 @@ export async function tryLogin(credentials: ILoginDto): Promise<IHTTPResponse> {
   }
 }
 
-export async function verifyCredential(email: string, password: string) {
+export async function apiVerifyCredential(email: string, password: string) {
   try {
     const prisma = new PrismaClient();
 

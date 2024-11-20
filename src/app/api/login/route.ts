@@ -2,15 +2,15 @@ import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import * as jose from 'jose';
-import { verifyCredential } from "@/service/srvUser";
-import { IHTTPResponse } from "@/types";
+import { apiVerifyCredential } from "@/service/srvUser";
+import { IHTTPResponse } from "@/lib/libTypes";
+
+const body_schema = z.object({
+  email: z.string(),
+  password: z.string()
+});
 
 export async function POST(request: NextRequest) {
-  const body_schema = z.object({
-    email: z.string({ message: 'E-mail is undefined' }),
-    password: z.string({ message: 'Password is undefined' })
-  });
-
   const { success, data, error } = await body_schema.safeParseAsync(await request.json());
 
   if (!success) {
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
   }
 
-  let isAuthenticated = await verifyCredential(data.email, data.password);
+  let isAuthenticated = await apiVerifyCredential(data.email, data.password);
 
   if (!isAuthenticated) {
     return NextResponse.json({

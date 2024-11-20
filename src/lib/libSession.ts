@@ -1,4 +1,4 @@
-import { EnCookieKey } from "@/types";
+import { EnCookieKey } from "@/lib/libTypes";
 import { jwtVerify } from "jose";
 import Cookies from 'universal-cookie';
 

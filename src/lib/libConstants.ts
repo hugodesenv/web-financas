@@ -1,3 +1,6 @@
-export const urlConstants = {
-  api: 'http://127.0.0.1:3000',
-};
+export const MESSAGES = {
+  operation_successfully: "Operação realizada com sucesso",
+  required_field: "Campo obrigatório",
+  changed_record: "Registro alterado com sucessso",
+  removed_record: "Registro removido com sucesso"
+}
