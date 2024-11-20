@@ -1,12 +1,7 @@
 import { useState } from "react";
-import { IMyAlertState } from "./MyAlert";
+import { IMyAlert } from "./MyAlert";
 
 export function useMyAlert() {
-  const [alertState, setAlertState] = useState({} as {
-    message?: string;
-    state?: IMyAlertState,
-    visible: boolean
-  });
-
+  const [alertState, setAlertState] = useState({} as IMyAlert);
   return { alertState, setAlertState };
 }

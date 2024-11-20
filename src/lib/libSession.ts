@@ -1,4 +1,6 @@
+import { EnCookieKey } from "@/types";
 import { jwtVerify } from "jose";
+import Cookies from 'universal-cookie';
 
 export async function isSessionValid(jwt: string, jwtKey: Uint8Array) {
   try {
@@ -9,6 +11,7 @@ export async function isSessionValid(jwt: string, jwtKey: Uint8Array) {
   }
 }
 
-export async function saveSession(ptoken: string) {
-
+export async function saveSession(token: string) {
+  const cookies = new Cookies(null, { path: '/' });
+  cookies.set(EnCookieKey.JWT, token);
 }

@@ -2,8 +2,8 @@ import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import * as jose from 'jose';
-import { IHTTPResponse } from "@/types/httpType";
-import { verifyCredential } from "@/service/userSrv";
+import { verifyCredential } from "@/service/srvUser";
+import { IHTTPResponse } from "@/types";
 
 export async function POST(request: NextRequest) {
   const body_schema = z.object({

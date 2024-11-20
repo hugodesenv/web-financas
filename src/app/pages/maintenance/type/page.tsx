@@ -1,14 +1,14 @@
 "use client";
 
+import MyAlert from "@/components/alert/MyAlert";
 import MyIconButton, { EnIconButtonType } from "@/components/button/myIconButton/MyIconButton";
 import LayoutRegister from "@/components/layout/layout_topbar";
-import MyTable, { IMyTableDataSource, IMyTableWrapper } from "@/components/table/MyTable";
+import MyTable, { IMyTableWrapper } from "@/components/table/MyTable";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import axiosInstance from "@/lib/axiosLib";
+import axiosInstance from "@/lib/libAxios";
 import { useRef, useState } from "react";
 import FormTypeRegister, { IExposeTypeFunctions, defaultCurrentType } from "./components/FormTypeRegister";
-import MyAlert, { IMyAlertState } from "@/components/alert/MyAlert";
 
 /**
  * Busca os dados na API 

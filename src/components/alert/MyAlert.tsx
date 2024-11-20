@@ -1,52 +1,37 @@
 import { useEffect, useState } from 'react';
 import './style.css';
 
-// Enumerado de tipos
-export enum IMyAlertState {
-  LOADING,
-  NORMAL
+export interface IMyAlert {
+  message: string,
+  timeout?: number
+  disableTimeout?: boolean,
+  key?: any
 }
 
-// Tipagem das propriedades do componente
-interface IProps {
-  visible: boolean;
-  message?: string;
-  seconds?: number;
-  state?: IMyAlertState,
-};
+const MyAlert = (props: IMyAlert) => {
+  const [show, setShow] = useState(false);
 
-const MyAlert = (props: IProps) => {
-  const [visible, setVisible] = useState(false);
-
-  // controle de visibilidade do componente.
   useEffect(() => {
-    setVisible(() => props.visible);
-  }, [props.visible]);
-
-  // controle do tempo de visibilidade
-  useEffect(() => {
-    if (visible === true) {
-      handleTimeout();
-    }
-  }, [visible]);
-
-  // cronometro que aguarda X segundos e depois esconde o componente.
-  function handleTimeout() {
-    if (props.state === IMyAlertState.LOADING) {
-      return;
+    if (props.message?.length > 0) {
+      setShow(true);
     }
 
-    let visibleSeconds = (props.seconds || 4) * 1000;
-    setTimeout(() => {
-      setVisible(false);
-    }, visibleSeconds);
-  }
+    if (props.disableTimeout !== true) {
+      const timeout = setTimeout(() => {
+        setShow(false);
+      }, props.timeout ?? 4000)
 
-  return visible && <div className='ma-box'>
-    <div className='ma-body'>
-      <span>{props.message}</span>
+      return () => clearTimeout(timeout);
+    }
+  }, [props.message, props.key])
+
+  return show && (
+    <div className='ma-box'>
+      <div className='ma-body'>
+        <span>{props.message}</span>
+      </div>
     </div>
-  </div>;
+  )
 };
 
 export default MyAlert;

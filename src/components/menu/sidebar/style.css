@@ -49,7 +49,7 @@
 }
 
 .menu li:hover {
-  background-color: #6e00dc;
+  background-color: #0b00dc;
   color: rgb(255, 255, 255);
   font-weight: 600;
   transition: 0.2s;

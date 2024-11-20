@@ -1,18 +1,17 @@
 'use client';
 
-import MyAlert, { IMyAlertState } from '@/components/alert/MyAlert';
+import MyAlert from '@/components/alert/MyAlert';
 import { useMyAlert } from '@/components/alert/hook';
 import MyButton from '@/components/button/myButton/MyButton';
 import MyInputText from '@/components/text/MyInputText';
-import { saveSession } from '@/lib/sessionLib';
-import { tryLogin } from '@/service/userSrv';
-import { EnRoute } from '@/types/routeType';
-import { ILoginDto } from '@/types/userType';
+import { saveSession } from '@/lib/libSession';
+import { tryLogin } from '@/service/srvUser';
+import { EnRoute, ILoginDto } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import iconSkedol from '../../public/vercel.svg';
 import './style.css';
-import iconSkedol from '../../public/vercel.svg'
 
 export default function Login() {
   const router = useRouter();
@@ -31,12 +30,7 @@ export default function Login() {
     const { success, message } = await tryLogin(data);
 
     if (!success) {
-      setAlertState({
-        visible: true,
-        message: 'Credenciais inválidas, verifique.',
-        state: IMyAlertState.NORMAL
-      });
-
+      setAlertState({ message: 'Credenciais inválidas, verifique', key: Date.now() });
       return;
     }
 
@@ -70,13 +64,13 @@ export default function Login() {
             </div>
           </form>
           <div className='login-button-wrapper login-gap'>
-            <MyButton type='submit' form='loginform' >Acessar</MyButton>
-            <MyButton >Esqueci a senha</MyButton>
+            <MyButton type='submit' form='loginform' isLoading={isSubmitting} >Acessar</MyButton>
+            <MyButton isLoading={isSubmitting}>Esqueci a senha</MyButton>
           </div>
         </div>
         <div className='login-information' />
       </div>
-      <MyAlert message={alertState?.message} state={alertState?.state} visible={alertState?.visible} />
+      <MyAlert {...alertState} />
     </>
   )
 }
