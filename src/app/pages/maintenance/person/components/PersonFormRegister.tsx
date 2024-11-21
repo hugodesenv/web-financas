@@ -19,7 +19,10 @@ import { FaRegSave } from "react-icons/fa";
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
-    return { clearForm }
+    return {
+      clearForm,
+      fillFields
+    }
   })
 
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IPersonDto>();
@@ -38,9 +41,9 @@ const PersonFormRegister = forwardRef((_, ref) => {
 
   const clearForm = () => reset();
 
-  function loadByID(id: number) {
-
-  }
+  const fillFields = (person: IPersonDto) => {
+    console.log('aqui no componente', person)
+  };
 
   return (
     <>

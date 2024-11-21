@@ -22,7 +22,23 @@ export async function apiRemove(id: number): Promise<boolean> {
   return res.id > 0;
 }
 
-export async function apiGetAll(): Promise<IPersonDto[]> {
-  const data = await prisma.person.findMany();
+export async function apiGetAll() {
+  const data = await prisma.person.findMany({
+    select: {
+      id: true, name: true
+    }
+  });
+
+  return data;
+}
+
+export async function apiGetByID(id: number) {
+  console.log('aki')
+  const data = await prisma.person.findFirst({
+    where: { id }
+  });
+
+  console.log(data);
+
   return data;
 }

@@ -1,6 +1,6 @@
 import { MESSAGES } from "@/lib/lib.constants";
 import { IHTTPResponse, IPersonDto } from "@/lib/lib.types";
-import { apiGetAll, apiInsert, apiRemove, apiUpdate } from "@/service/api/srv.api.person";
+import { apiGetAll, apiGetByID, apiInsert, apiRemove, apiUpdate } from "@/service/api/srv.api.person";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -66,10 +66,16 @@ export async function DELETE(request: NextRequest) {
   }
 }
 
-export async function GET(_: NextRequest) {
+export async function GET(request: NextRequest) {
   try {
-    const data = await apiGetAll();
-    return NextResponse.json({ success: true, data } as IHTTPResponse, { status: HttpStatusCode.Ok })
+    let id = parseInt(request.nextUrl.searchParams.get('id') ?? '') ?? 0;
+    if (id > 0) {
+      const data = await apiGetByID(id);
+      return NextResponse.json({ success: true, data } as IHTTPResponse, { status: HttpStatusCode.Ok })
+    } else {
+      const data = await apiGetAll();
+      return NextResponse.json({ success: true, data } as IHTTPResponse, { status: HttpStatusCode.Ok })
+    }
   } catch (e) {
     return NextResponse.json({
       success: false,

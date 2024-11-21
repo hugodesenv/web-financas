@@ -8,6 +8,7 @@ import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
 import { useRef } from "react";
 import PersonFormRegister from "./components/PersonFormRegister";
 import PersonSearch from "./components/PersonSearch";
+import { fetchByID } from "@/service/client/srv.client.person";
 
 export default function Person() {
   const formRef = useRef(null as any); // para manipulacao do formulario de cadastro.
@@ -38,11 +39,17 @@ export default function Person() {
     </MyHorizontalStack>
   );
 
+  async function loadPerson(personID: number) {
+    const data = await fetchByID(personID);
+    console.log(data)
+    formRef.current.fillFields(data);
+  }
+
   return (
     <MyLayout>
       <LayoutRegister title="Pessoas" childrenBefore={MainButtons}>
         <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
-          <PersonSearch ref={buttonRef} />
+          <PersonSearch ref={buttonRef} onSelected={(id) => { id && loadPerson(id) }} />
           <PersonFormRegister ref={formRef} />
         </MyTabView>
       </LayoutRegister>

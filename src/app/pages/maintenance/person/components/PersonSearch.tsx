@@ -5,11 +5,15 @@ import { fetchAll } from "@/service/client/srv.client.person";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 const columnsGrid = [
-  { key: "id", label: "Código", style: { width: "10%" } },
-  { key: "name", label: "Nome" },
+  { key: "id-person-search", label: "Código", style: { width: "10%" } },
+  { key: "name-person-search", label: "Nome" },
 ];
 
-const PersonSearch = forwardRef((props, ref) => {
+interface IProps {
+  onSelected: (id?: number) => void,
+}
+
+const PersonSearch = forwardRef((props: IProps, ref) => {
   useImperativeHandle(ref, () => {
     return {
       onSearch
@@ -23,18 +27,30 @@ const PersonSearch = forwardRef((props, ref) => {
     setPersonData(data);
   }
 
+  function onPersonSelected(index: number) {
+    const person = personData[index];
+    props.onSelected(person.id);
+  }
+
   const datasource = [
     ...personData.map((person) => {
       return {
         data: [
           { text: person.id },
-          { text: person.nickname }
+          { text: person.name }
         ]
       } as IMyTableWrapper
     })
   ] as IMyTableWrapper[];
 
-  return <MyTable key="tb-person-search" columns={columnsGrid} datasource={datasource} />
+  return (
+    <MyTable
+      key="tb-person-search"
+      columns={columnsGrid}
+      datasource={datasource}
+      onSelectedRow={onPersonSelected}
+    />
+  )
 });
 
 export default PersonSearch;
