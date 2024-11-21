@@ -1,5 +1,5 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { MdOutlineAddCircleOutline, MdOutlineCleaningServices, MdOutlineSave, MdOutlineSearch } from "react-icons/md";
+import { ButtonHTMLAttributes } from "react";
+import { MdOutlineAddCircleOutline, MdOutlineCleaningServices, MdOutlineFilterList, MdOutlineSave, MdOutlineSearch } from "react-icons/md";
 import MyButton from "../myButton/MyButton";
 
 export enum EnIconButtonType {
@@ -7,7 +7,8 @@ export enum EnIconButtonType {
   CLEAR,
   SEARCH,
   SAVE,
-  UNDEFINED
+  UNDEFINED,
+  FILTER
 };
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -31,6 +32,10 @@ const iconConfig = [
   {
     iconType: EnIconButtonType.SAVE,
     icon: <MdOutlineSave />
+  },
+  {
+    iconType: EnIconButtonType.FILTER,
+    icon: <MdOutlineFilterList />
   }
 ] as {
   iconType: EnIconButtonType,

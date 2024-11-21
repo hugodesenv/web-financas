@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { isSessionValid } from "./lib/libSession";
-import { EnCookieKey, IHTTPResponse } from "./lib/libTypes";
+import { isSessionValid } from "./lib/lib.session";
+import { EnCookieKey, IHTTPResponse } from "./lib/lib.types";
 
 export const config = {
   matcher: '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',

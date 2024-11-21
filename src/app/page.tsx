@@ -4,15 +4,15 @@ import MyAlert from '@/components/alert/MyAlert';
 import { useMyAlert } from '@/components/alert/hook';
 import MyButton from '@/components/button/myButton/MyButton';
 import MyInputText from '@/components/text/MyInputText';
-import { saveSession } from '@/lib/libSession';
-import { tryLogin } from '@/service/srvUser';
-import { EnRoute, ILoginDto } from '@/lib/libTypes';
+import { saveSession } from '@/lib/lib.session';
+import { tryLogin } from '@/service/client/srv.client.user';
+import { EnRoute, ILoginDto } from '@/lib/lib.types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import iconSkedol from '../../public/vercel.svg';
 import './style.css';
-import { MESSAGES } from '@/lib/libConstants';
+import { MESSAGES } from '@/lib/lib.constants';
 
 export default function Login() {
   const router = useRouter();

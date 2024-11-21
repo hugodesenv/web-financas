@@ -1,6 +1,6 @@
 'use client';
 
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useEffect, useId, useState } from "react";
 import MyPagination from "./MyPagination";
 import "./style.css";
 
@@ -26,7 +26,7 @@ interface IProps {
   onSelectedRow?: (rowIndex: any) => void;
 };
 
-const quantityItemsPerPage = 2;
+const quantityItemsPerPage = 15;
 
 /**
 * Tratamos os itens que serao mostrados em tela com base na pagina 
@@ -63,7 +63,7 @@ export default function MyTable(props: IProps) {
     )
 
     return (
-      <tr>
+      <tr key={useId()}>
         {props.columns.map((column) => <ComponentColumn column={column} />)}
       </tr>
     );
@@ -83,7 +83,7 @@ export default function MyTable(props: IProps) {
     };
 
     const rowsResult = data.map(({ data }, index: number) => (
-      <tr onClick={() => props.onSelectedRow && props.onSelectedRow(index)}>
+      <tr key={useId()} onClick={() => props.onSelectedRow && props.onSelectedRow(index)}>
         <TableColumns dataSource={data} />
       </tr>
     ));

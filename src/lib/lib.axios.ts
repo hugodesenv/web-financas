@@ -9,13 +9,12 @@
  */
 
 import axios from "axios";
+import { getJWTFromCookie } from "./lib.session";
 
 const axiosInstance = axios.create({ baseURL: 'http://localhost:3000' });
 
-//==> Hugo: Apenas teste, depois quando o login estiver OK, puxar o token e code aqui.
 axiosInstance.interceptors.request.use((config: any) => {
-  config.headers.authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjAsImlhdCI6MTcxNTk5MjM0OH0.e4sgxOSon-N5KyZlV2tCxSVGQyF7YExqmmFArWDqiOo`;
-  config.headers.code = '1';
+  config.headers.authorization = `Bearer ${getJWTFromCookie()}`;
   return config;
 });
 

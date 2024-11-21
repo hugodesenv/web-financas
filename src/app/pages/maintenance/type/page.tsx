@@ -6,7 +6,7 @@ import LayoutRegister from "@/components/layout/layout_topbar";
 import MyTable, { IMyTableWrapper } from "@/components/table/MyTable";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import axiosInstance from "@/lib/libAxios";
+import axiosInstance from "@/lib/lib.axios";
 import { useRef, useState } from "react";
 import FormTypeRegister, { IExposeTypeFunctions, defaultCurrentType } from "./components/FormTypeRegister";
 

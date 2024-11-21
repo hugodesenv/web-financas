@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 
 interface ITitle {
@@ -14,23 +14,24 @@ interface IProps {
 
 export function MyTabView(props: IProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [pages, setPages] = useState([] as any[]);
+
+  useEffect(() => {
+    const pages = props?.children.map((child: any, index: number) => {
+      const item_display = index == currentIndex ? 'block' : 'none';
+      return <li style={{ display: item_display }}>{child}</li>
+    });
+
+    setPages(pages)
+  }, [currentIndex])
 
   function onTitleClick(event: any, idx: number) {
     event.preventDefault();
     setCurrentIndex(idx);
   }
 
-  function Items() {
-    const items = props?.children.map((value: any, index: number) => {
-      const item_display = index == currentIndex ? 'block' : 'none';
-      return <li style={{ display: item_display }}>{value}</li>
-    });
-
-    return items;
-  }
-
   return (
-    <div>
+    <>
       <ul className="mtv-title">
         {
           props.titles?.map((title, idx: number) => (
@@ -43,8 +44,8 @@ export function MyTabView(props: IProps) {
         }
       </ul>
       <ul className="mtv-container">
-        <Items />
+        {...pages}
       </ul>
-    </div>
+    </>
   );
 }

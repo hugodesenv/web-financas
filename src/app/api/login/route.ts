@@ -1,9 +1,9 @@
+import { IHTTPResponse } from "@/lib/lib.types";
+import { verifyCredential } from "@/service/api/srv.api.user";
 import { HttpStatusCode } from "axios";
+import * as jose from 'jose';
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import * as jose from 'jose';
-import { apiVerifyCredential } from "@/service/srvUser";
-import { IHTTPResponse } from "@/lib/libTypes";
 
 const body_schema = z.object({
   email: z.string(),
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     } as IHTTPResponse, { status: HttpStatusCode.NotAcceptable })
   }
 
-  let isAuthenticated = await apiVerifyCredential(data.email, data.password);
+  let isAuthenticated = await verifyCredential(data.email, data.password);
 
   if (!isAuthenticated) {
     return NextResponse.json({

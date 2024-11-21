@@ -1,12 +1,13 @@
-import { MESSAGES } from "@/lib/libConstants";
-import { IHTTPResponse, IPersonDto } from "@/lib/libTypes";
-import { apiGetAll, apiInsert, apiRemove, apiUpdate } from "@/service/srvPerson";
+import { MESSAGES } from "@/lib/lib.constants";
+import { IHTTPResponse, IPersonDto } from "@/lib/lib.types";
+import { apiGetAll, apiInsert, apiRemove, apiUpdate } from "@/service/api/srv.api.person";
 import { HttpStatusCode } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
+    console.log(data)
     const res = await apiInsert(data as IPersonDto);
 
     return NextResponse.json({

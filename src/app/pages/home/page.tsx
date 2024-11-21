@@ -24,11 +24,6 @@ export default function Home() {
   });
 
   useEffect(() => {
-    console.log('ola!');
-    fetch('/api/route').then(() => {
-      console.log('salve')
-
-    })
   }, []);
 
   function _onClickTotalization(event: any, pTitle: string) {

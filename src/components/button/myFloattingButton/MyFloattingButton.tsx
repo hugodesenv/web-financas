@@ -7,8 +7,8 @@ import './style.css';
 import MyCardBox from '@/components/card/my-card/MyCardBox';
 
 interface IProps {
-  icon: IconType;
-  options: any[];
+  icon: any;
+  options?: any[];
 }
 
 const mainButtonStyle = { minWidth: '100%', minHeight: '100%' };
@@ -22,7 +22,7 @@ export default function MyFloattingButton(props: IProps) {
   return (
     <div className='mfb-body' onMouseLeave={onMainButtonLeave}>
       {
-        showItems && (
+        showItems && props.options && (
           <MyCardBox>
             <ul className='mfb-items'>
               {props?.options?.map((component) => <li>{component}</li>)}
@@ -35,7 +35,7 @@ export default function MyFloattingButton(props: IProps) {
           onMouseEnter={onMainButtonEnter}
           theme='dark'
           style={mainButtonStyle}>
-          {<props.icon />}
+          {props.icon}
         </MyButton>
       </div>
     </div>

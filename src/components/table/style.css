@@ -33,7 +33,7 @@
 
 .mytable-tbody tr:hover {
   cursor: pointer;
-  color: #6e00dc;
+  color: blue;
 }
 
 .mytable-tbody td {
