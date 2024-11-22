@@ -5,17 +5,24 @@ import MyLayout from "@/components/layout/MyLayout";
 import LayoutRegister from "@/components/layout/layout_topbar";
 import { MyTabView } from "@/components/tabview/MyTabView";
 import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import PersonFormRegister from "./components/PersonFormRegister";
 import PersonSearch from "./components/PersonSearch";
-import { fetchByID } from "@/service/client/srv.client.person";
+import { fetchPersonByID } from "@/service/client/srv.client.person";
+import MyDrawer from "@/components/drawer/MyDrawer";
 
 export default function Person() {
+  const [openFilter, setOpenFilter] = useState(false);
   const formRef = useRef(null as any); // para manipulacao do formulario de cadastro.
-  const buttonRef = useRef(null as any); // para manipulação dos botoes principais da tela
+  const formSearchRef = useRef(null as any); // para manipulação dos botoes principais da tela
 
   const MainButtons = (
     <MyHorizontalStack>
+      <MyIconButton
+        iconType={EnIconButtonType.NEW}
+        isLoading={false}
+        onClick={() => formRef.current.clearForm()}
+      />
       <MyIconButton
         type="submit"
         form="fixed-person-register"
@@ -23,36 +30,33 @@ export default function Person() {
         isLoading={false}
       />
       <MyIconButton
-        type="button"
-        iconType={EnIconButtonType.CLEAR}
-        isLoading={false}
-        onClick={() => formRef.current.clearForm()}
-      />
-      <MyIconButton
         iconType={EnIconButtonType.SEARCH}
         isLoading={false}
-        onClick={() => buttonRef.current.onSearch()}
+        onClick={() => formSearchRef.current.onSearch()}
       />
       <MyIconButton
         iconType={EnIconButtonType.FILTER}
+        onClick={() => setOpenFilter(true)}
       />
     </MyHorizontalStack>
   );
 
   async function loadPerson(personID: number) {
-    const data = await fetchByID(personID);
-    console.log(data)
-    formRef.current.fillFields(data);
+    const { data } = await fetchPersonByID(personID);
+    formRef.current.populateForm(data);
   }
 
   return (
-    <MyLayout>
-      <LayoutRegister title="Pessoas" childrenBefore={MainButtons}>
-        <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
-          <PersonSearch ref={buttonRef} onSelected={(id) => { id && loadPerson(id) }} />
-          <PersonFormRegister ref={formRef} />
-        </MyTabView>
-      </LayoutRegister>
-    </MyLayout>
+    <>
+      <MyLayout>
+        <LayoutRegister title="Pessoas" childrenBefore={MainButtons}>
+          <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]}>
+            <PersonSearch ref={formSearchRef} onSelected={(id) => { id && loadPerson(id) }} />
+            <PersonFormRegister ref={formRef} />
+          </MyTabView>
+        </LayoutRegister>
+      </MyLayout>
+      <MyDrawer title="Filtro da consulta" isOpen={openFilter} onClose={() => setOpenFilter(false)} key={Date.now()} />
+    </>
   );
 }

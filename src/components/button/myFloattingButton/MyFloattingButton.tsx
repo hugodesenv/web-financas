@@ -1,17 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { IconType } from 'react-icons';
+import MyCardBox from '@/components/card/my-card/MyCardBox';
+import { ButtonHTMLAttributes, useState } from 'react';
 import MyButton from '../myButton/MyButton';
 import './style.css';
-import MyCardBox from '@/components/card/my-card/MyCardBox';
 
 interface IProps {
   icon: any;
   options?: any[];
+  attributes: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
-const mainButtonStyle = { minWidth: '100%', minHeight: '100%' };
+const mainButtonStyle = {
+  minWidth: '100%',
+  minHeight: '100%'
+};
 
 export default function MyFloattingButton(props: IProps) {
   const [showItems, setShowItems] = useState(false);
@@ -32,6 +35,7 @@ export default function MyFloattingButton(props: IProps) {
       }
       <div className='mfb-main-button'>
         <MyButton
+          {...props.attributes}
           onMouseEnter={onMainButtonEnter}
           theme='dark'
           style={mainButtonStyle}>

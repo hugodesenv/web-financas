@@ -12,24 +12,31 @@ import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import { MESSAGES } from "@/lib/lib.constants";
 import { IPersonDto } from "@/lib/lib.types";
-import { save } from "@/service/client/srv.client.person";
+import { savePerson } from "@/service/client/srv.client.person";
 import { forwardRef, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";
+
+// Campos padrão para inicialização do formulário
+const defaultFields: Partial<IPersonDto> = {
+  name: '',
+  nickname: ''
+};
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
     return {
       clearForm,
-      fillFields
+      populateForm
     }
-  })
+  });
 
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IPersonDto>();
+
   const { alertState, setAlertState } = useMyAlert();
 
   const onSubmit: SubmitHandler<IPersonDto> = async (data) => {
-    const { success } = await save(data);
+    const { success } = await savePerson(data);
 
     if (!success) {
       setAlertState({ message: MESSAGES.fail_record, key: Date.now() });
@@ -39,11 +46,9 @@ const PersonFormRegister = forwardRef((_, ref) => {
     setAlertState({ message: MESSAGES.operation_successfully, key: Date.now() });
   }
 
-  const clearForm = () => reset();
+  const clearForm = () => reset(defaultFields);
 
-  const fillFields = (person: IPersonDto) => {
-    console.log('aqui no componente', person)
-  };
+  const populateForm = (person: IPersonDto) => reset(person);
 
   return (
     <>
@@ -58,9 +63,12 @@ const PersonFormRegister = forwardRef((_, ref) => {
           {...register('nickname')}
           errorText={errors?.nickname?.message}
         />
+        <MyFloattingButton
+          attributes={{ type: 'submit' }}
+          icon={<FaRegSave size={18} />}
+        />
       </MyForm>
       <MyAlert {...alertState} />
-      <MyFloattingButton icon={<FaRegSave size={18} />} />
     </>
   );
 })

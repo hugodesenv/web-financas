@@ -1,7 +1,7 @@
 'use client'
 import MyTable, { IMyTableWrapper } from "@/components/table/MyTable";
 import { IPersonDto } from "@/lib/lib.types";
-import { fetchAll } from "@/service/client/srv.client.person";
+import { fetchPersonAll } from "@/service/client/srv.client.person";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 const columnsGrid = [
@@ -23,7 +23,7 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
   const [personData, setPersonData] = useState<IPersonDto[]>([]);
 
   async function onSearch() {
-    const { data } = await fetchAll();
+    const { data } = await fetchPersonAll();
     setPersonData(data);
   }
 
