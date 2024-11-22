@@ -9,7 +9,6 @@ export async function apiInsert(data: IPersonDto): Promise<boolean> {
 }
 
 export async function apiUpdate(data: IPersonDto): Promise<boolean> {
-  console.log('aki')
   const res = await prisma.person.update({
     data,
     where: { id: data.id }

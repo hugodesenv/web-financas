@@ -12,7 +12,7 @@ import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import { MESSAGES } from "@/lib/lib.constants";
 import { IPersonDto } from "@/lib/lib.types";
-import { savePerson } from "@/service/client/srv.client.person";
+import { savePerson, updatePerson } from "@/service/client/srv.client.person";
 import { forwardRef, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";
@@ -36,7 +36,9 @@ const PersonFormRegister = forwardRef((_, ref) => {
   const { alertState, setAlertState } = useMyAlert();
 
   const onSubmit: SubmitHandler<IPersonDto> = async (data) => {
-    const { success } = await savePerson(data);
+    const { success } = (data.id ?? 0) > 0
+      ? await updatePerson(data)
+      : await savePerson(data);
 
     if (!success) {
       setAlertState({ message: MESSAGES.fail_record, key: Date.now() });
