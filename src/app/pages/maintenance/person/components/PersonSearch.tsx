@@ -4,11 +4,6 @@ import { IPersonDto } from "@/lib/lib.types";
 import { fetchPersonAll } from "@/service/client/srv.client.person";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
-const columnsGrid = [
-  { key: "id-person-search", label: "Código", style: { width: "10%" } },
-  { key: "name-person-search", label: "Nome" },
-];
-
 interface IProps {
   onSelected: (id?: number) => void,
 }
@@ -46,9 +41,16 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
   return (
     <MyTable
       key="tb-person-search"
-      columns={columnsGrid}
+      columns={[
+        { key: "id-person-search", label: "Código", style: { width: "10%" } },
+        { key: "name-person-search", label: "Nome" },
+      ]}
       datasource={datasource}
       onSelectedRow={onPersonSelected}
+      columnAction={[
+        { title: 'Alterar', onClick: () => { console.log('clicou no alterar') } },
+        { title: 'Excluir', onClick: () => { console.log('clicou no excluir') } }
+      ]}
     />
   )
 });

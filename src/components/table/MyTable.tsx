@@ -14,19 +14,36 @@ export interface IMyTableWrapper {
   data: IMyTableDataSource[]
 }
 
+export interface IMyTableAction {
+  title: string;
+  onClick: () => void;
+}
+
+export interface IMyTableColumn {
+  key: string;
+  label: string;
+  style?: CSSProperties;
+  className?: any;
+}
+
 // Tipagem das propriedades.
 interface IProps {
-  columns: {
-    key: string;
-    label: string;
-    style?: CSSProperties;
-    className?: any;
-  }[];
+  columns: IMyTableColumn[];
+  columnAction?: IMyTableAction[]
   datasource: IMyTableWrapper[];
   onSelectedRow?: (rowIndex: any) => void;
 };
 
-const quantityItemsPerPage = 15;
+const quantityItemsPerPage = 12;
+
+// Estilo da coluna "ação". Forçando ficar por cima de todas as outras colunas.
+const styleColumnAction = {
+  position: 'sticky',
+  zIndex: 1,
+  right: 0,
+  backgroundColor: '#fff',
+  width: '40px'
+} as CSSProperties;
 
 /**
 * Tratamos os itens que serao mostrados em tela com base na pagina 
@@ -42,6 +59,7 @@ function getDataPerPage(pageNumber: number, dataSource: IMyTableWrapper[]) {
 
 export default function MyTable(props: IProps) {
   const [data, setData] = useState([] as IMyTableWrapper[]);
+  const [selectedValue, setSelectedValue] = useState('option-default');
 
   useEffect(() => {
     handleDataPerPage(1);
@@ -52,43 +70,84 @@ export default function MyTable(props: IProps) {
    * @returns uma listagem de Ths do grid.
    */
   function TableColumns() {
-    const ComponentColumn = ({ column }: any) => (
-      <th
-        style={{ textAlign: 'left', ...column.style }}
-        className={column.className}
-        key={column.key}
-      >
-        <span>{column.label}</span>
-      </th>
-    )
-
     return (
+      // preparando as colunas padroes
       <tr key={useId()}>
-        {props.columns.map((column) => <ComponentColumn column={column} />)}
+        {
+          props.columns.map((column) => {
+            return (
+              <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
+                <span>{column.label}</span>
+              </th>
+            )
+          })
+        }
+        {
+          // preparando a coluna de "ação"
+          props.columnAction && <th style={styleColumnAction}><span>Ações</span></th>
+        }
       </tr>
     );
   }
 
   /**
-   * Componente contendo o conteudo da tabela
-   * @returns uma listagem de Trs.
+   * Evento ao trocar a opção da coluna "ação".
+   * Basicamente eu busco no meu objeto um cara que possui o mesmo nome do campo clicado.
+   * Com o primeiro campo encontrado, eu invoco a sua propriedade onClick.
+   * By Hugo Souza 23/11/2024
+   * @param event 
    */
-  const TableContent = () => {
-    const TableColumns = (pprops: { dataSource: IMyTableDataSource[] }) => {
-      return pprops.dataSource?.map((data: IMyTableDataSource) => {
-        return <td style={data.style} className={data.className}>
-          {data.text}
-        </td>
-      });
-    };
+  function onActionChange(event: any) {
+    const lAction = props.columnAction?.filter(({ title }) => title == event.target.value)[0];
+    lAction && lAction.onClick();
+    setSelectedValue('option-default');
+  }
 
-    const rowsResult = data.map(({ data }, index: number) => (
-      <tr key={useId()} onClick={() => props.onSelectedRow && props.onSelectedRow(index)}>
-        <TableColumns dataSource={data} />
-      </tr>
+  /**
+   * Função quando clicar sob o conteudo da linha
+   * @param index 
+   */
+  function onRowClick(index: number) {
+    console.log('on row click')
+    props.onSelectedRow && props.onSelectedRow(index);
+  }
+
+  /**
+   * Componente que retorna os conteúdos de cada linha em coluna
+   * @returns 
+   */
+  const TableBody = () => {
+    return data.map(({ data }, index: number) => (
+      /** preparando as colunas padrões */
+      <tr key={useId()}>
+        {
+          data?.map(({ className, style, text }) => {
+            return (
+              <td className={className} onClick={() => onRowClick(index)} style={style}>
+                {text}
+              </td>
+            )
+          })
+        }
+        {
+          /** preparando a coluna "ação" */
+          props.columnAction && (
+            <td>
+              <select value={selectedValue} onChange={onActionChange}>
+                <option value='option-default'>Selecione</option>
+                {
+                  props.columnAction.map(({ title }, index: number) => (
+                    <option value={title}>
+                      <span>{title}</span>
+                    </option>
+                  ))
+                }
+              </select>
+            </td>
+          )
+        }
+      </tr >
     ));
-
-    return rowsResult;
   };
 
   /**
@@ -107,7 +166,7 @@ export default function MyTable(props: IProps) {
           {<TableColumns />}
         </thead>
         <tbody className="mytable-tbody">
-          {<TableContent />}
+          {<TableBody />}
         </tbody>
       </table>
       {/* totalizador */}
