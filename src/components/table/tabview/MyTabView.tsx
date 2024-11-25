@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./style.css";
 
 interface ITitle {
@@ -12,7 +12,13 @@ interface IProps {
   children: any[];
 }
 
-export function MyTabView(props: IProps) {
+const MyTabView = forwardRef((props: IProps, ref) => {
+  useImperativeHandle(ref, () => {
+    return {
+      setCurrentIndex,
+    }
+  })
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pages, setPages] = useState([] as any[]);
 
@@ -48,4 +54,6 @@ export function MyTabView(props: IProps) {
       </ul>
     </>
   );
-}
+});
+
+export default MyTabView;

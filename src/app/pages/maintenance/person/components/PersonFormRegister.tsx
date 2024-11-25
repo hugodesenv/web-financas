@@ -46,6 +46,7 @@ const PersonFormRegister = forwardRef((_, ref) => {
     }
 
     setAlertState({ message: MESSAGES.operation_successfully, key: Date.now() });
+    clearForm();
   }
 
   const clearForm = () => reset(defaultFields);

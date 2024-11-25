@@ -4,7 +4,6 @@ import MyDrawer from "@/components/drawer/MyDrawer";
 import MyMenuSidebar, {
   IMenuStructure,
 } from "@/components/menu/sidebar/MyMenuSidebar";
-import { MyTabView } from "@/components/tabview/MyTabView";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import {
@@ -16,6 +15,7 @@ import {
   MdOutlineReceiptLong,
   MdOutlineSettings
 } from "react-icons/md";
+import MyTabView from "../table/tabview/MyTabView";
 
 function PageMenu() {
   const [openSettings, setOpenSettings] = useState(false);

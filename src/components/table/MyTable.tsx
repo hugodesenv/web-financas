@@ -1,6 +1,8 @@
 'use client';
 
 import { CSSProperties, useEffect, useId, useState } from "react";
+import MySelect from "../select/MySelect";
+import MySelectOption from "../select/MySelectOption";
 import MyPagination from "./MyPagination";
 import "./style.css";
 
@@ -108,7 +110,6 @@ export default function MyTable(props: IProps) {
    * @param index 
    */
   function onRowClick(index: number) {
-    console.log('on row click')
     props.onSelectedRow && props.onSelectedRow(index);
   }
 
@@ -133,16 +134,14 @@ export default function MyTable(props: IProps) {
           /** preparando a coluna "ação" */
           props.columnAction && (
             <td>
-              <select value={selectedValue} onChange={onActionChange}>
-                <option value='option-default'>Selecione</option>
+              <MySelect style={{ border: 0 }} value={selectedValue} onChange={onActionChange}>
+                <MySelectOption value='option-default'>...</MySelectOption>
                 {
-                  props.columnAction.map(({ title }, index: number) => (
-                    <option value={title}>
-                      <span>{title}</span>
-                    </option>
+                  props.columnAction.map(({ title }) => (
+                    <MySelectOption value={title}>{title}</MySelectOption>
                   ))
                 }
-              </select>
+              </MySelect>
             </td>
           )
         }

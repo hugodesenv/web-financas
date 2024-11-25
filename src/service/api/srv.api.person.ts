@@ -26,7 +26,8 @@ export async function apiGetAll() {
   const data = await prisma.person.findMany({
     select: {
       id: true, name: true
-    }
+    },
+    orderBy: { id: 'asc' }
   });
 
   return data;

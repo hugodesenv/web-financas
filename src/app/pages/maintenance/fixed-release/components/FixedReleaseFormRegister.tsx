@@ -3,7 +3,7 @@
 import MyCard from "@/components/card/my-card/MyCardBox";
 import { MyForm } from "@/components/form/MyForm";
 import MyRadioGroup from "@/components/radioGroup/MyRadioGroup";
-import { MyTabView } from "@/components/tabview/MyTabView";
+import MyTabView from "@/components/table/tabview/MyTabView";
 import MyInputText from "@/components/text/MyInputText";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
