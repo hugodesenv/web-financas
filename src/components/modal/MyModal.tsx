@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import './style.css';
 
 export interface IPropsModal {
@@ -5,6 +6,7 @@ export interface IPropsModal {
   onClose: () => void;
   title: string;
   children?: any;
+  modalStyle?: CSSProperties;
 }
 
 export default function MyModal(props: IPropsModal) {
@@ -20,9 +22,9 @@ export default function MyModal(props: IPropsModal) {
 
   return props.isOpen &&
     <div className='my-modal' onClick={onClose}>
-      <div className='my-modal-body' onClick={onStopPropagation}>
+      <div className='my-modal-body' style={props.modalStyle} onClick={onStopPropagation}>
         <div className='my-modal-title'>
-          <h4>{props.title}</h4>
+          <h3>{props.title}</h3>
           <button onClick={onClose}>X</button>
         </div>
         <div className='my-modal-content'>

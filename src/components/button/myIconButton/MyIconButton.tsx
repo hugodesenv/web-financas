@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, CSSProperties } from "react";
 import { MdOutlineAddCircleOutline, MdOutlineCleaningServices, MdOutlineFilterList, MdOutlineSave, MdOutlineSearch } from "react-icons/md";
 import MyButton from "../myButton/MyButton";
 
@@ -14,6 +14,7 @@ export enum EnIconButtonType {
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   iconType: EnIconButtonType,
   isLoading?: boolean,
+  text?: string
 };
 
 const iconConfig = [
@@ -40,7 +41,12 @@ const iconConfig = [
 ] as {
   iconType: EnIconButtonType,
   icon: any,
-}[]
+}[];
+
+const customStyle = {
+  minWidth: 'min-content',
+  gap: 4
+} as CSSProperties;
 
 export default function MyIconButton(props: IProps) {
   // Com base no tipo passado pelo programador, buscamos ele no array de configuraçao na qual retorna
@@ -48,8 +54,9 @@ export default function MyIconButton(props: IProps) {
   const [{ icon }] = iconConfig.filter(({ iconType }) => iconType == props.iconType);
 
   return (
-    <MyButton {...props} style={{ minWidth: 'min-content' }}>
-      {icon}
+    <MyButton {...props} style={customStyle}>
+      <p>{icon}</p>
+      {props.text && <p>{props.text}</p>}
     </MyButton>
   )
 }

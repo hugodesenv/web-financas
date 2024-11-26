@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import MyModalConfirmation from "@/components/modal/MyModalConfirmation/MyModalConfirmation";
 import { IModalConfirmStep, useMyModalConfirmation } from "@/components/modal/MyModalConfirmation/hook";
 import MyTable, { IMyTableWrapper } from "@/components/table/MyTable";
@@ -20,13 +21,17 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
   const [personData, setPersonData] = useState<IPersonDto[]>([]);
   const {
     isOpen,
-    currentStepIndex,
-    setSteps,
+    stepIndex,
     steps,
     onConfirm,
     onCancel,
     onClose,
-  } = useMyModalConfirmation();
+    setSteps
+  } = useMyModalConfirmation({
+    onSuccess: () => {
+      console.log('caimos no sucesso')
+    }
+  });
 
   async function onSearch() {
     const { data } = await fetchPersonAll();
@@ -52,19 +57,9 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
   function handleDelete() {
     let steps: IModalConfirmStep[] = [
       {
-        actionResult: true,
-        title: 'Primeiro step',
-        message: 'Mensagem primeiro step'
-      },
-      {
-        actionResult: false,
-        title: 'Segundo step vai pular',
-        message: 'esse vai pular'
-      },
-      {
-        actionResult: true,
-        title: 'Terceiro e ultimo step',
-        message: 'Esse vai ser o ultimo e é pra dar boa'
+        title: 'Deseja excluir?',
+        message: "Ao confirmar essa ação não poderá ser desfeita",
+        actionResult: true
       }
     ];
 
@@ -86,12 +81,13 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
         ]}
       />
       <MyModalConfirmation
-        message={steps[currentStepIndex]?.message}
-        title={steps[currentStepIndex]?.title}
+        message={steps[stepIndex]?.message}
+        title={steps[stepIndex]?.title}
         isOpen={isOpen}
         onCancel={onCancel}
         onClose={onClose}
         onConfirm={onConfirm}
+        size="micro-small"
       />
     </>
   )

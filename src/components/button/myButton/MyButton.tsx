@@ -23,7 +23,7 @@ export default function MyButton(props: IMyButton) {
       {...props}
       style={{ ...btnStyle.static, ...props?.style }}
       className={btnStyle.className}
-      disabled={props?.isLoading}
+      disabled={props?.isLoading || props?.disabled}
     >
       {props.isLoading ? <MyCircularProgress color="blue" /> : props.children}
     </button>

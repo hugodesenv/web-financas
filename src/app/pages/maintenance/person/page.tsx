@@ -22,23 +22,18 @@ export default function Person() {
     <MyHorizontalStack>
       <MyIconButton
         iconType={EnIconButtonType.NEW}
-        isLoading={false}
         onClick={() => formRef.current.clearForm()}
-      />
-      <MyIconButton
-        type="submit"
-        form="fixed-person-register"
-        iconType={EnIconButtonType.SAVE}
-        isLoading={false}
+        text="Novo"
       />
       <MyIconButton
         iconType={EnIconButtonType.SEARCH}
-        isLoading={false}
         onClick={() => formSearchRef.current.onSearch()}
+        text="Consultar"
       />
       <MyIconButton
         iconType={EnIconButtonType.FILTER}
         onClick={() => setOpenFilter(true)}
+        text="Filtrar"
       />
     </MyHorizontalStack>
   );
@@ -47,10 +42,6 @@ export default function Person() {
     const { data } = await fetchPersonByID(personID);
     formRef.current.populateForm(data);
     formTab.current.setCurrentIndex(1);
-  }
-
-  function onDelete() {
-
   }
 
   return (
