@@ -47,6 +47,7 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
     ...personData.map((person) => {
       return {
         data: [
+          { checked: true },
           { text: person.id },
           { text: person.name }
         ]
@@ -60,7 +61,7 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
         title: 'Deseja excluir?',
         message: "Ao confirmar essa ação não poderá ser desfeita",
         actionResult: true
-      }
+      },
     ];
 
     setSteps(steps);
@@ -71,11 +72,14 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
       <MyTable
         key="tb-person-search"
         columns={[
+          { key: 'checked-person-search', type: "checkbox" },
           { key: "id-person-search", label: "Código", style: { width: "10%" } },
           { key: "name-person-search", label: "Nome" },
         ]}
         datasource={datasource}
         onSelectedRow={onPersonSelected}
+        onChecked={(rowIndex: number) => console.log('selecionou a linha', rowIndex)}
+        onCheckAll={(isChecked: boolean) => console.log('Tratar o marca desmarca todos aqui fora')}
         columnAction={[
           { title: 'Excluir', onClick: async () => handleDelete() }
         ]}

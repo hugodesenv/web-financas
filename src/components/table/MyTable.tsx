@@ -6,8 +6,11 @@ import MySelectOption from "../select/MySelectOption";
 import MyPagination from "./MyPagination";
 import "./style.css";
 
+const quantityItemsPerPage = 12;
+
 export interface IMyTableDataSource {
-  text: any;
+  text?: any;
+  checked?: boolean;
   style?: CSSProperties,
   className?: any;
 }
@@ -23,29 +26,42 @@ export interface IMyTableAction {
 
 export interface IMyTableColumn {
   key: string;
-  label: string;
+  label?: string;
   style?: CSSProperties;
   className?: any;
+  type?: "text" | "checkbox"
 }
 
-// Tipagem das propriedades.
 interface IProps {
   columns: IMyTableColumn[];
   columnAction?: IMyTableAction[]
   datasource: IMyTableWrapper[];
-  onSelectedRow?: (rowIndex: any) => void;
+  // when click on checkbox from register
+  onChecked?: (rowIndex: number, isChecked: boolean) => void;
+  // when click on checkbox master of grid column
+  onCheckAll?: (isChecked: boolean) => void;
+  // when click on the line from the grid
+  onSelectedRow?: (rowIndex: number) => void;
 };
 
-const quantityItemsPerPage = 12;
-
-// Estilo da coluna "ação". Forçando ficar por cima de todas as outras colunas.
-const styleColumnAction = {
-  position: 'sticky',
-  zIndex: 1,
-  right: 0,
-  backgroundColor: '#fff',
-  width: '40px'
-} as CSSProperties;
+let customStyle = {
+  actionColumn: {
+    position: 'sticky',
+    zIndex: 1,
+    right: 0,
+    backgroundColor: '#fff',
+    width: '40px'
+  } as CSSProperties,
+  actionSelect: {
+    border: 0
+  } as CSSProperties,
+  checkboxStyle: {
+    width: 0
+  } as CSSProperties,
+  totalizationWrapper: {
+    marginTop: '10px'
+  } as CSSProperties,
+}
 
 /**
 * Tratamos os itens que serao mostrados em tela com base na pagina 
@@ -68,31 +84,6 @@ export default function MyTable(props: IProps) {
   }, [props.datasource]);
 
   /**
-   * Componente das colunas do grid
-   * @returns uma listagem de Ths do grid.
-   */
-  function TableColumns() {
-    return (
-      // preparando as colunas padroes
-      <tr key={useId()}>
-        {
-          props.columns.map((column) => {
-            return (
-              <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
-                <span>{column.label}</span>
-              </th>
-            )
-          })
-        }
-        {
-          // preparando a coluna de "ação"
-          props.columnAction && <th style={styleColumnAction}><span>Ações</span></th>
-        }
-      </tr>
-    );
-  }
-
-  /**
    * Evento ao trocar a opção da coluna "ação".
    * Basicamente eu busco no meu objeto um cara que possui o mesmo nome do campo clicado.
    * Com o primeiro campo encontrado, eu invoco a sua propriedade onClick.
@@ -105,47 +96,98 @@ export default function MyTable(props: IProps) {
     setSelectedValue('option-default');
   }
 
-  /**
-   * Função quando clicar sob o conteudo da linha
-   * @param index 
-   */
+  // Event when the user click on the line from grid.
   function onRowClick(index: number) {
-    props.onSelectedRow && props.onSelectedRow(index);
+    props?.onSelectedRow && props.onSelectedRow(index);
   }
 
-  /**
-   * Componente que retorna os conteúdos de cada linha em coluna
-   * @returns 
-   */
-  const TableBody = () => {
-    return data.map(({ data }, index: number) => (
-      /** preparando as colunas padrões */
-      <tr key={useId()}>
+  // Event when the user click on the checkbox component
+  function handleCheckClick(index: number, event: any) {
+    event.preventDefault();
+    props?.onChecked && props.onChecked(index, event.target.checked);
+  }
+
+  // Event when click on checkbox from grid column
+  function hancleClickCheckAll(event: any) {
+    props?.onCheckAll && props.onCheckAll(event.target.checked);
+  }
+
+  function TableColumns() {
+    return (
+      // Preparing the default column from grid.
+      <tr key={Date.now()}>
         {
-          data?.map(({ className, style, text }) => {
+          props.columns.map((column) => {
             return (
-              <td className={className} onClick={() => onRowClick(index)} style={style}>
-                {text}
-              </td>
+              <th style={{ textAlign: 'left', ...column.style }} className={column.className} key={column.key}>
+                {
+                  column.type == 'checkbox'
+                    ? <input type="checkbox" onClick={hancleClickCheckAll} />
+                    : <span>{column.label}</span>
+                }
+              </th>
             )
           })
         }
         {
-          /** preparando a coluna "ação" */
+          // Preparing the action column from grid.
+          props.columnAction && (
+            <th style={customStyle.actionColumn}>
+              <span>Ações</span>
+            </th>
+          )
+        }
+      </tr>
+    );
+  }
+
+  const TableBody = () => {
+    return data.map(({ data }, index: number) => (
+      // Preparing the normal data columns from the grid.
+      <tr key={Date.now()}>
+        {
+          data?.map(({ className, checked, style, text }) => {
+            return (
+              checked
+                ? (
+                  <td className={className} style={customStyle.checkboxStyle}>
+                    <input
+                      type="checkbox"
+                      onClick={(event: any) => handleCheckClick(index, event)}
+                    />
+                  </td>
+                )
+                : (
+                  <td
+                    className={className}
+                    style={style}
+                    onClick={() => onRowClick(index)}>
+                    {text}
+                  </td>
+                )
+            )
+          })
+        }
+        {
+          // Preparing and showing action column if it exists
+          // 2024-11-26: Botafogo vs Palmeiras 3 a 1 Botafogo :D
+          // Dia 09/12 eu vou viajar para os Estados Unidos, o inicio de um sonho...
           props.columnAction && (
             <td>
-              <MySelect style={{ border: 0 }} value={selectedValue} onChange={onActionChange}>
+              <MySelect style={customStyle.actionSelect} value={selectedValue} onChange={onActionChange}>
                 <MySelectOption value='option-default'>...</MySelectOption>
                 {
                   props.columnAction.map(({ title }) => (
-                    <MySelectOption value={title}>{title}</MySelectOption>
+                    <MySelectOption value={title}>
+                      {title}
+                    </MySelectOption>
                   ))
                 }
               </MySelect>
             </td>
           )
         }
-      </tr >
+      </tr>
     ));
   };
 
@@ -162,14 +204,14 @@ export default function MyTable(props: IProps) {
     <div className="mytable-skedol">
       <table cellSpacing={0} width="100%">
         <thead className="mytable-thead">
-          {<TableColumns />}
+          <TableColumns />
         </thead>
         <tbody className="mytable-tbody">
-          {<TableBody />}
+          <TableBody />
         </tbody>
       </table>
       {/* totalizador */}
-      <div style={{ marginTop: '10px' }}>
+      <div style={customStyle.totalizationWrapper}>
         <MyPagination
           quantityItems={props.datasource?.length}
           quantityPerPage={quantityItemsPerPage}
