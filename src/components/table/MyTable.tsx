@@ -21,7 +21,7 @@ export interface IMyTableWrapper {
 
 export interface IMyTableAction {
   title: string;
-  onClick: () => void;
+  onClick: (rowIndex: number) => void;
 }
 
 export interface IMyTableColumn {
@@ -90,21 +90,15 @@ export default function MyTable(props: IProps) {
    * By Hugo Souza 23/11/2024
    * @param event 
    */
-  function onActionChange(event: any) {
+  function onActionChange(event: any, rowIndex: number) {
     const lAction = props.columnAction?.filter(({ title }) => title == event.target.value)[0];
-    lAction && lAction.onClick();
+    lAction && lAction.onClick(rowIndex);
     setSelectedValue('option-default');
   }
 
   // Event when the user click on the line from grid.
   function onRowClick(index: number) {
     props?.onSelectedRow && props.onSelectedRow(index);
-  }
-
-  // Event when the user click on the checkbox component
-  function handleCheckClick(index: number, event: any) {
-    event.preventDefault();
-    props?.onChecked && props.onChecked(index, event.target.checked);
   }
 
   // Event when click on checkbox from grid column
@@ -115,7 +109,7 @@ export default function MyTable(props: IProps) {
   function TableColumns() {
     return (
       // Preparing the default column from grid.
-      <tr key={Date.now()}>
+      <tr>
         {
           props.columns.map((column) => {
             return (
@@ -144,7 +138,7 @@ export default function MyTable(props: IProps) {
   const TableBody = () => {
     return data.map(({ data }, index: number) => (
       // Preparing the normal data columns from the grid.
-      <tr key={Date.now()}>
+      <tr key={useId()}>
         {
           data?.map(({ className, checked, style, text }) => {
             return (
@@ -153,7 +147,10 @@ export default function MyTable(props: IProps) {
                   <td className={className} style={customStyle.checkboxStyle}>
                     <input
                       type="checkbox"
-                      onClick={(event: any) => handleCheckClick(index, event)}
+                      onClick={(event: any) => {
+                        props?.onChecked &&
+                          props.onChecked(index, event.target.checked);
+                      }}
                     />
                   </td>
                 )
@@ -174,7 +171,7 @@ export default function MyTable(props: IProps) {
           // Dia 09/12 eu vou viajar para os Estados Unidos, o inicio de um sonho...
           props.columnAction && (
             <td>
-              <MySelect style={customStyle.actionSelect} value={selectedValue} onChange={onActionChange}>
+              <MySelect style={customStyle.actionSelect} value={selectedValue} onChange={(e) => onActionChange(e, index)}>
                 <MySelectOption value='option-default'>...</MySelectOption>
                 {
                   props.columnAction.map(({ title }) => (

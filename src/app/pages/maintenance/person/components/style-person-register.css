@@ -1,0 +1,18 @@
+#person-register-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+#person-register-left {
+  flex: 2;
+}
+
+#person-register-right {
+  flex: 1;
+}
+
+@media(max-width: 480px) {
+  #person-register-wrapper {
+    flex-direction: column;
+  }
+}

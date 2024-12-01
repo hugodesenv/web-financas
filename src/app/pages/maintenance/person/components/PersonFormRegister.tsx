@@ -8,20 +8,19 @@
 import MyAlert from "@/components/alert/MyAlert";
 import { useMyAlert } from "@/components/alert/hook";
 import MyFloattingButton from "@/components/button/myFloattingButton/MyFloattingButton";
+import MyCardBox from "@/components/card/my-card/MyCardBox";
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import { MESSAGES } from "@/lib/lib.constants";
-import { IPersonDto } from "@/lib/lib.types";
+import { IPersonDto, PersonType } from "@/lib/lib.types";
 import { savePerson, updatePerson } from "@/service/client/srv.client.person";
-import { forwardRef, useImperativeHandle } from "react";
+import { forwardRef, useId, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";
+import './style-person-register.css';
 
-// Campos padrão para inicialização do formulário
-const defaultFields: Partial<IPersonDto> = {
-  name: '',
-  nickname: ''
-};
+// Default field to formulate inicialization
+const defaultFields: Partial<IPersonDto> = { name: '', nickname: '' };
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
@@ -53,19 +52,39 @@ const PersonFormRegister = forwardRef((_, ref) => {
 
   const populateForm = (person: IPersonDto) => reset(person);
 
+  const PersonTypeSelector = () => (
+    <MyCardBox title={{ caption: 'Tipo da pessoa' }}>
+      <ul className="my-checkbox-style">
+        {PersonType.map(({ caption, type }) => (
+          <li key={`is_${type}`}>
+            <input type="checkbox" {...register(`is_${type}` as any)} />
+            <label>{caption}</label>
+          </li>
+        ))} Falta fazer gravar o tipo da pessoa...
+      </ul>
+    </MyCardBox>
+  );
+
   return (
     <>
       <MyForm onSubmit={handleSubmit(onSubmit)} id="fixed-person-register">
-        <MyInputText
-          title="Nome"
-          {...register('name', { required: MESSAGES.required_field })}
-          errorText={errors?.name?.message}
-        />
-        <MyInputText
-          title="Apelido"
-          {...register('nickname')}
-          errorText={errors?.nickname?.message}
-        />
+        <div id="person-register-wrapper">
+          <div id="person-register-left">
+            <MyInputText
+              title="Nome"
+              {...register('name', { required: MESSAGES.required_field })}
+              errorText={errors?.name?.message}
+            />
+            <MyInputText
+              title="Apelido"
+              {...register('nickname')}
+              errorText={errors?.nickname?.message}
+            />
+          </div>
+          <div id="person-register-right">
+            <PersonTypeSelector />
+          </div>
+        </div>
         <MyFloattingButton
           attributes={{ type: 'submit' }}
           icon={<FaRegSave size={18} />}

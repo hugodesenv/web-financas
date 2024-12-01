@@ -26,3 +26,15 @@ ul {
 .width-100-perc {
   width: 100%;
 }
+
+.my-checkbox-style {
+  display: flex;
+  flex-direction: column;
+  gap: 8;
+}
+
+.my-checkbox-style li {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}

@@ -36,3 +36,14 @@ export async function updatePerson(person: IPersonDto): Promise<IHTTPResponse> {
     return { success: false }
   }
 }
+
+export async function deletePerson(id: number): Promise<IHTTPResponse> {
+  try {
+    let { data } = await axiosInstance.delete('/api/person', {
+      params: { id }
+    });
+    return data;
+  } catch (e) {
+    return { success: false };
+  }
+}
