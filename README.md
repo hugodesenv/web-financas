@@ -11,5 +11,4 @@ steps: Divide a animação em um número fixo de etapas discretas, criando uma a
 - Passar descripto pra requisição e pra validação
 - Verificar se vamos continuar com o Zod ou remove-lo
 
-<b>No grid o que fazer:</b>
-Criar uma coluna fixa na tabela do grid pra por botões de ações (Excluir por exemplo)
+-->>> fazer o migrate do tipo de pessoa

@@ -14,7 +14,7 @@ import MyInputText from "@/components/text/MyInputText";
 import { MESSAGES } from "@/lib/lib.constants";
 import { IPersonDto, PersonType } from "@/lib/lib.types";
 import { savePerson, updatePerson } from "@/service/client/srv.client.person";
-import { forwardRef, useId, useImperativeHandle } from "react";
+import { forwardRef, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";
 import './style-person-register.css';
@@ -55,12 +55,17 @@ const PersonFormRegister = forwardRef((_, ref) => {
   const PersonTypeSelector = () => (
     <MyCardBox title={{ caption: 'Tipo da pessoa' }}>
       <ul className="my-checkbox-style">
-        {PersonType.map(({ caption, type }) => (
-          <li key={`is_${type}`}>
-            <input type="checkbox" {...register(`is_${type}` as any)} />
-            <label>{caption}</label>
-          </li>
-        ))} Falta fazer gravar o tipo da pessoa...
+        {
+          PersonType.map(({ caption, type }) => (
+            <li key={`is_${type}`}>
+              <input
+                type="checkbox"
+                {...register(`is_${type}` as any)}
+              />
+              <label>{caption}</label>
+            </li>
+          ))
+        }
       </ul>
     </MyCardBox>
   );

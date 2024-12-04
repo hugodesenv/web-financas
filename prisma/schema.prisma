@@ -21,8 +21,11 @@ model account {
 }
 
 model person {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  name      String   @db.VarChar(80)
-  nickname  String   @db.VarChar(80)
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  name        String   @db.VarChar(80)
+  nickname    String   @db.VarChar(80)
+  is_client   Boolean
+  is_company  Boolean
+  is_employee Boolean
 }

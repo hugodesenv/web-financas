@@ -19,7 +19,7 @@ export type IPersonDto = {
   nickname: string;
   id?: number,
   createdAt?: Date,
-  is_customer: boolean,
+  is_client: boolean,
   is_company: boolean,
   is_employee: boolean,
 }
@@ -34,7 +34,7 @@ export interface IPersonType {
 }
 
 export const PersonType = [
-  { type: 'customer', caption: 'Cliente' },
+  { type: 'client', caption: 'Cliente' },
   { type: 'company', caption: 'Empresa' },
   { type: 'employee', caption: 'Funcionário' },
 ] as IPersonType[];
