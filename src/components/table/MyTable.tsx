@@ -167,8 +167,6 @@ export default function MyTable(props: IProps) {
         }
         {
           // Preparing and showing action column if it exists
-          // 2024-11-26: Botafogo vs Palmeiras 3 a 1 Botafogo :D
-          // Dia 09/12 eu vou viajar para os Estados Unidos, o inicio de um sonho...
           props.columnAction && (
             <td>
               <MySelect style={customStyle.actionSelect} value={selectedValue} onChange={(e) => onActionChange(e, index)}>
