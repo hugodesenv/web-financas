@@ -18,7 +18,7 @@ export default function Person() {
   const formRef = useRef(null as any); // para manipulacao do formulario de cadastro.
   const formSearchRef = useRef(null as any); // para manipulação dos botoes principais da tela
 
-  const MainButtons = (
+  const FormButton = (
     <MyHorizontalStack>
       <MyIconButton
         iconType={EnIconButtonType.NEW}
@@ -47,7 +47,7 @@ export default function Person() {
   return (
     <>
       <MyLayout>
-        <LayoutRegister title="Pessoas" childrenBefore={MainButtons}>
+        <LayoutRegister title="Pessoas" childrenBefore={FormButton}>
           <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]} ref={formTab}>
             <PersonSearch ref={formSearchRef} onSelected={(id) => { id && loadPerson(id) }} />
             <PersonFormRegister ref={formRef} />

@@ -38,3 +38,8 @@ export const PersonType = [
   { type: 'company', caption: 'Empresa' },
   { type: 'employee', caption: 'Funcionário' },
 ] as IPersonType[];
+
+export type ICategory = {
+  id: number,
+  description: string
+};

@@ -40,6 +40,13 @@ function PageMenu() {
       key: "mn-add",
       sub_menus: [
         {
+          key: "category",
+          label: "Categoria",
+          onClick: () => {
+            router.push("/pages/maintenance/category");
+          },
+        },
+        {
           key: "fixed-release",
           label: "Lançamentos fixos",
           onClick: () => {
@@ -50,13 +57,6 @@ function PageMenu() {
           key: "person",
           label: "Pessoas",
           onClick: () => router.push("/pages/maintenance/person"),
-        },
-        {
-          key: "type-entry",
-          label: "Tipo",
-          onClick: () => {
-            router.push("/pages/maintenance/type");
-          },
         },
       ],
     },
