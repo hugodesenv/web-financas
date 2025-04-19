@@ -6,7 +6,7 @@ import MyLayout from "@/components/layout/MyLayout";
 import LayoutRegister from "@/components/layout/layout_topbar";
 import MyTabView from "@/components/table/tabview/MyTabView";
 import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import { fetchPersonByID } from "@/service/client/srv.client.person";
+import { fetchPersonByID } from "@/service/personService";
 import { useRef, useState } from "react";
 import PersonFormRegister from "./components/PersonFormRegister";
 import PersonSearch from "./components/PersonSearch";

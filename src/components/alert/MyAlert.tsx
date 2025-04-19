@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import './style.css';
 
 export interface IMyAlert {
-  message: string,
-  timeout?: number
-  disableTimeout?: boolean,
-  key?: any
+  message: string;
+  timeout?: number;
+  disableTimeout?: boolean;
+  color?: 'blue' | 'black' | 'red';
+  key?: any;
 }
 
 const MyAlert = (props: IMyAlert) => {
@@ -19,19 +20,21 @@ const MyAlert = (props: IMyAlert) => {
     if (props.disableTimeout !== true) {
       const timeout = setTimeout(() => {
         setShow(false);
-      }, props.timeout ?? 4000)
+      }, props.timeout ?? 4000);
 
       return () => clearTimeout(timeout);
     }
-  }, [props.message, props.key])
+  }, [props.message, props.key]);
 
-  return show && (
-    <div className='ma-box'>
-      <div className='ma-body'>
-        <span>{props.message}</span>
+  return (
+    show && (
+      <div className="ma-box">
+        <div className="ma-body">
+          <span style={{ color: props.color ?? 'black' }}>{props.message}</span>
+        </div>
       </div>
-    </div>
-  )
+    )
+  );
 };
 
 export default MyAlert;

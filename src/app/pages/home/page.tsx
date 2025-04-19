@@ -5,9 +5,8 @@ import MyCard from "@/components/card/my-card/MyCardBox";
 import MyTotalizationCard from "@/components/card/my-totalization-card/MyTotalizationCard";
 import MyLayout from "@/components/layout/MyLayout";
 import MyTopBar from "@/components/menu/topBar/MyTopBar";
-import MyModal from "@/components/modal/MyModal";
 import MyInputText from "@/components/text/MyInputText";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MdOutlineSearch } from "react-icons/md";
 import HomeAccountBalance from "./components/HomeAccountBalance";
 import HomeDrawerTotalizations, { ITableData } from "./components/HomeDrawerTotalizations";
@@ -15,16 +14,11 @@ import HomeGroupExpenses from "./components/HomeGroupExpenses";
 import "./style.css";
 
 export default function Home() {
-  const [modalTest, setModalTest] = useState(false);
-
   const [drawerTotalization, setDrawerTotalization] = useState({
     data: [] as ITableData[][],
     isOpen: false,
     title: "",
   });
-
-  useEffect(() => {
-  }, []);
 
   function _onClickTotalization(event: any, pTitle: string) {
     // fazer o filtro para setar no drawer aqui
@@ -157,9 +151,7 @@ export default function Home() {
           </div>
         </MyCard>
         <MyCard title={{ caption: "Estatísticas" }}>
-          <div>
-            <button onClick={() => setModalTest(!modalTest)}>Teste</button>
-          </div>
+
         </MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">
@@ -180,10 +172,6 @@ export default function Home() {
           isOpen: drawerTotalization.isOpen,
           onClose: _onCloseTotalization,
         }}
-      />
-      <MyModal
-        isOpen={modalTest}
-        onClose={() => setModalTest(false)}
       />
     </MyLayout>
   );

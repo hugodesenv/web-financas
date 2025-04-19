@@ -40,10 +40,10 @@ function PageMenu() {
       key: "mn-add",
       sub_menus: [
         {
-          key: "category",
-          label: "Categoria",
+          key: "´purpose",
+          label: "Finalidades",
           onClick: () => {
-            router.push("/pages/maintenance/category");
+            router.push("/pages/maintenance/purpose");
           },
         },
         {

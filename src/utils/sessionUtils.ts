@@ -1,7 +1,8 @@
-import { EnCookieKey } from "@/lib/lib.types";
+import { EnCookieKey } from "@/utils/typesUtils";
 import { jwtVerify } from "jose";
 import Cookies from 'universal-cookie';
 
+/*
 export async function isSessionValid(jwt: string, jwtKey: Uint8Array) {
   try {
     await jwtVerify(jwt, jwtKey, { algorithms: ['HS256'] });
@@ -10,6 +11,7 @@ export async function isSessionValid(jwt: string, jwtKey: Uint8Array) {
     return false;
   }
 }
+*/
 
 export async function saveSession(token: string) {
   let cookies = new Cookies(null, { path: '/' });

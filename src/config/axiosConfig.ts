@@ -8,10 +8,11 @@
  * By.: Hugo Souza 18/05/2024 15h24 em busca de um futuro automático.
  */
 
+import { getJWTFromCookie } from "@/utils/sessionUtils";
 import axios from "axios";
-import { getJWTFromCookie } from "./lib.session";
 
-const axiosInstance = axios.create({ baseURL: 'http://localhost:3000' });
+const axiosInstance = axios.create({ baseURL: 'http://127.0.0.1:8080' });
+
 
 axiosInstance.interceptors.request.use((config: any) => {
   config.headers.authorization = `Bearer ${getJWTFromCookie()}`;
