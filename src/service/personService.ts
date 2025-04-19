@@ -33,22 +33,30 @@ export async function tryCreatePerson(person: TPerson): Promise<IHTTPResponse> {
 
 export async function tryDeletePerson(id: number): Promise<IHTTPResponse> {
   try {
-    let { data } = await axiosInstance.delete('/person', { params: { id } });
-    return data;
+    let { data } = await axiosInstance.delete('/person/', { params: { id } });
+    return {
+      success: true,
+      data
+    };
   } catch (e) {
     return { success: false };
   }
 }
-////
 
-export async function fetchPersonByID(id: number): Promise<IHTTPResponse> {
+export async function tryFindByIDPerson(id: number): Promise<IHTTPResponse> {
   try {
-    let { data } = await axiosInstance.get('/api/person', { params: { id } });
-    return data;
+    let { data } = await axiosInstance.get('/person/find/', { params: { id } });
+    return {
+      success: true,
+      data: data?.data
+    };
   } catch (_) {
     return { success: false };
   }
 }
+
+
+////
 
 export async function updatePerson(person: TPerson): Promise<IHTTPResponse> {
   try {

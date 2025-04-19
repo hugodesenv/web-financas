@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import MyIconButton, { EnIconButtonType } from "@/components/button/myIconButton/MyIconButton";
-import MyDrawer from "@/components/drawer/MyDrawer";
-import MyLayout from "@/components/layout/MyLayout";
-import LayoutRegister from "@/components/layout/layout_topbar";
-import MyTabView from "@/components/table/tabview/MyTabView";
-import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import { fetchPersonByID } from "@/service/personService";
-import { useRef, useState } from "react";
-import PersonFormRegister from "./components/PersonFormRegister";
-import PersonSearch from "./components/PersonSearch";
+import MyIconButton, { EnIconButtonType } from '@/components/button/myIconButton/MyIconButton';
+import MyDrawer from '@/components/drawer/MyDrawer';
+import MyLayout from '@/components/layout/MyLayout';
+import LayoutRegister from '@/components/layout/layout_topbar';
+import MyTabView from '@/components/table/tabview/MyTabView';
+import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
+import { findByIDPersonCase } from '@/use/person/findByIDCase';
+import { useRef, useState } from 'react';
+import PersonFormRegister from './components/PersonFormRegister';
+import PersonSearch from './components/PersonSearch';
 
 export default function Person() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -20,26 +20,14 @@ export default function Person() {
 
   const FormButton = (
     <MyHorizontalStack>
-      <MyIconButton
-        iconType={EnIconButtonType.NEW}
-        onClick={() => formRef.current.clearForm()}
-        text="Novo"
-      />
-      <MyIconButton
-        iconType={EnIconButtonType.SEARCH}
-        onClick={() => formSearchRef.current.onSearch()}
-        text="Consultar"
-      />
-      <MyIconButton
-        iconType={EnIconButtonType.FILTER}
-        onClick={() => setOpenFilter(true)}
-        text="Filtrar"
-      />
+      <MyIconButton iconType={EnIconButtonType.NEW} onClick={() => formRef.current.clearForm()} text="Novo" />
+      <MyIconButton iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} text="Consultar" />
+      <MyIconButton iconType={EnIconButtonType.FILTER} onClick={() => setOpenFilter(true)} text="Filtrar" />
     </MyHorizontalStack>
   );
 
   async function loadPerson(personID: number) {
-    const { data } = await fetchPersonByID(personID);
+    const { data } = await findByIDPersonCase(personID);
     formRef.current.populateForm(data);
     formTab.current.setCurrentIndex(1);
   }
@@ -48,8 +36,13 @@ export default function Person() {
     <>
       <MyLayout>
         <LayoutRegister title="Pessoas" childrenBefore={FormButton}>
-          <MyTabView titles={[{ caption: "Consulta" }, { caption: "Digitação" }]} ref={formTab}>
-            <PersonSearch ref={formSearchRef} onSelected={(id) => { id && loadPerson(id) }} />
+          <MyTabView titles={[{ caption: 'Consulta' }, { caption: 'Digitação' }]} ref={formTab}>
+            <PersonSearch
+              ref={formSearchRef}
+              onSelected={async (id) => {
+                id && (await loadPerson(id));
+              }}
+            />
             <PersonFormRegister ref={formRef} />
           </MyTabView>
         </LayoutRegister>
