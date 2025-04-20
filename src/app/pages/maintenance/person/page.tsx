@@ -6,7 +6,7 @@ import MyLayout from '@/components/layout/MyLayout';
 import LayoutRegister from '@/components/layout/layout_topbar';
 import MyTabView from '@/components/table/tabview/MyTabView';
 import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
-import { findByIDPersonCase } from '@/use/person/findByIDCase';
+import { findByIDPersonCase } from '@/use/person/findByID';
 import { useRef, useState } from 'react';
 import PersonFormRegister from './components/PersonFormRegister';
 import PersonSearch from './components/PersonSearch';

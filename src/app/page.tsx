@@ -25,7 +25,6 @@ export default function Login() {
 
   /** evento de logar no sistema */
   const onSubmit: SubmitHandler<TLoginDTO> = async (data: TLoginDTO) => {
-    //const { success, message } = await tryLogin(data);
     const { success, message } = await authenticationCase(data);
 
     if (!success) {
@@ -34,7 +33,6 @@ export default function Login() {
     }
 
     setAlertState({ message, key: Date.now(), color: 'blue' });
-
     router.push(EnRoute.HOME.toString());
   };
 

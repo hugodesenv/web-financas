@@ -5,11 +5,13 @@ export type TPerson = {
   is_client: boolean,
   is_company: boolean,
   is_employee: boolean,
+  active?: boolean,
 }
 
 export const TPersonDefaultValues: TPerson = {
   name: "",
   nickname: "",
+  active: false,
   is_client: false,
   is_company: false,
   is_employee: false

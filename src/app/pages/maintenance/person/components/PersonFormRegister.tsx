@@ -17,7 +17,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
 import './style-person-register.css';
 import { PersonType, TPerson, TPersonDefaultValues } from '@/type/personTypes';
-import { createPersonCase } from '@/use/person/createCase';
+import { createPersonCase } from '@/use/person/create';
+import { updatePersonCase } from '@/use/person/update';
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
@@ -40,6 +41,8 @@ const PersonFormRegister = forwardRef((_, ref) => {
     let success = false;
 
     if (data.id && data.id > 0) {
+      const { success: updateSuccess } = await updatePersonCase(data);
+      success = updateSuccess;
     } else {
       const { success: createSuccess } = await createPersonCase(data);
       success = createSuccess;

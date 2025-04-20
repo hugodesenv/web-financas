@@ -6,7 +6,7 @@ export async function tryFindAllPerson(): Promise<IHTTPResponse> {
   try {
     const { data: axiosData } = await axiosInstance.get('/person/');
     return { success: true, data: axiosData.data }
-  } catch (e) {
+  } catch (_) {
     return { success: false, data: [] }
   }
 }
@@ -26,7 +26,7 @@ export async function tryCreatePerson(person: TPerson): Promise<IHTTPResponse> {
 
     let { data } = await axiosInstance.post('/person', payload);
     return data;
-  } catch (e) {
+  } catch (_) {
     return { success: false }
   }
 }
@@ -38,7 +38,7 @@ export async function tryDeletePerson(id: number): Promise<IHTTPResponse> {
       success: true,
       data
     };
-  } catch (e) {
+  } catch (_) {
     return { success: false };
   }
 }
@@ -55,14 +55,25 @@ export async function tryFindByIDPerson(id: number): Promise<IHTTPResponse> {
   }
 }
 
-
-////
-
-export async function updatePerson(person: TPerson): Promise<IHTTPResponse> {
+export async function tryUpdatePerson(person: TPerson): Promise<IHTTPResponse> {
   try {
-    let { data } = await axiosInstance.put('/api/person', person);
-    return data;
-  } catch (e) {
+    const payload = {
+      id: person.id,
+      data: {
+        name: person.name,
+        nickname: person.nickname,
+        active: person.active,
+        type: {
+          client: person.is_client,
+          company: person.is_company,
+          employee: person.is_employee
+        }
+      }
+    }
+
+    let { data } = await axiosInstance.put('/person', payload);
+    return { success: true, data };
+  } catch (_) {
     return { success: false }
   }
 }

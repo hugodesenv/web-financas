@@ -4,8 +4,8 @@ import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalC
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
 import { TPerson } from '@/type/personTypes';
-import { deletePersonCase } from '@/use/person/deleteCase';
-import { findAllPersonCase } from '@/use/person/findAllCase';
+import { deletePersonCase } from '@/use/person/delete';
+import { findAllPersonCase } from '@/use/person/findAll';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 interface IProps {
