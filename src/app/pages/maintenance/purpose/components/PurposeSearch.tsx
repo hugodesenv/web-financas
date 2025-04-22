@@ -1,7 +1,7 @@
 //Hugo.
 import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
 import { TPurpose } from '@/type/purposeTypes';
-import { findAllPurposeCase } from '@/use/purpose/findAllCase';
+import { findAllPurposeCase } from '@/use/purpose/findAll';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 const PurposeSearch = forwardRef((_, ref) => {
