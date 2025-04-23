@@ -1,70 +1,71 @@
 'use client';
 
-import MyCalendar from "@/components/calendar/calendar-events/MyCalendar";
-import { IEventsDay } from "@/components/calendar/calendar-events/myCalendarUtils";
-import MyDrawer from "@/components/drawer/MyDrawer";
-import LayoutRegister from "@/components/layout/layout_topbar";
-import { useState } from "react";
+import MyCalendar from '@/components/calendar/calendar-events/MyCalendar';
+import { IEventsDay } from '@/components/calendar/calendar-events/myCalendarUtils';
+import MyDrawer from '@/components/drawer/MyDrawer';
+import MyLayout from '@/components/layout/MyLayout';
+import LayoutRegister from '@/components/layout/layout_topbar';
+import { useState } from 'react';
 
 export default function Schedule() {
   const [events, setEvents] = useState([
     {
-      id: "1",
-      date: "2024-03-31",
-      title: "Dia 31 de março ",
-      backgroundColor: "#288334",
+      id: '1',
+      date: '2024-03-31',
+      title: 'Dia 31 de março ',
+      backgroundColor: '#288334',
     },
     {
-      id: "2",
-      date: "2024-01-22",
-      title: "Dia 22 de janeiro ",
-      backgroundColor: "#288334",
+      id: '2',
+      date: '2024-01-22',
+      title: 'Dia 22 de janeiro ',
+      backgroundColor: '#288334',
     },
     {
-      id: "3",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#288334",
+      id: '3',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#288334',
     },
     {
-      id: "4",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#393939",
+      id: '4',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#393939',
       data: {
-        description: "testing",
+        description: 'testing',
       },
     },
     {
-      id: "5",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#223333",
+      id: '5',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#223333',
     },
     {
-      id: "6",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#667755",
+      id: '6',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#667755',
     },
     {
-      id: "7",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#A8A8A8",
+      id: '7',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#A8A8A8',
     },
     {
-      id: "8",
-      date: "2024-04-05",
-      title: "Dia 5 ",
-      backgroundColor: "#223333",
+      id: '8',
+      date: '2024-04-05',
+      title: 'Dia 5 ',
+      backgroundColor: '#223333',
     },
     {
-      id: "9",
-      date: "2024-04-10",
-      title: "Dia 10 ",
+      id: '9',
+      date: '2024-04-10',
+      title: 'Dia 10 ',
       data: {
-        description: "testing",
+        description: 'testing',
       },
     },
   ] as IEventsDay[]);
@@ -81,7 +82,7 @@ export default function Schedule() {
   function handleEventMove(content: any) {
     const newEvents = events.map((event: IEventsDay) => {
       if (event.id == content?.elementID) {
-        return { ...event, date: content.newColumnID }
+        return { ...event, date: content.newColumnID };
       }
       return event;
     });
@@ -90,21 +91,15 @@ export default function Schedule() {
   }
 
   return (
-    <LayoutRegister title="Agenda">
-      {/** calendário contendo os agendamentos do dia */}
-      <MyCalendar
-        onItemClick={handleEventCalendarClick}
-        events={events}
-        onEventMoved={handleEventMove}
-      />
-      {/** drawer quando clicamos no evento do dia do calendário */}
-      <MyDrawer
-        title={detailtEvent.data?.title}
-        isOpen={detailtEvent.isOpen}
-        onClose={() => setDetailtEvent({ isOpen: false, data: {} })}
-      >
-        <div>{detailtEvent?.data?.date}</div>
-      </MyDrawer>
-    </LayoutRegister>
-  )
+    <MyLayout>
+      <LayoutRegister title="Agenda">
+        {/** calendário contendo os agendamentos do dia */}
+        <MyCalendar onItemClick={handleEventCalendarClick} events={events} onEventMoved={handleEventMove} />
+        {/** drawer quando clicamos no evento do dia do calendário */}
+        <MyDrawer title={detailtEvent.data?.title} isOpen={detailtEvent.isOpen} onClose={() => setDetailtEvent({ isOpen: false, data: {} })}>
+          <div>{detailtEvent?.data?.date}</div>
+        </MyDrawer>
+      </LayoutRegister>
+    </MyLayout>
+  );
 }
