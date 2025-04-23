@@ -1,17 +1,18 @@
-import { CSSProperties } from "react";
-import "./style.css";
+import { CSSProperties, useEffect, useState } from 'react';
+import './style.css';
 
 interface IDetail {
-  defaultChecked?: boolean;
   label: string;
   value: string;
+  id: string;
 }
 
 interface IProps {
   attributes: IDetail[];
+  valueChecked: string | boolean | undefined;
   onChange: (value: string) => void;
   name: string;
-  style?: { direction?: "row" | "column" };
+  style?: { direction?: 'row' | 'column' };
   title?: string;
 }
 
@@ -20,10 +21,6 @@ const MyRadioGroup = (props: IProps) => {
     flexDirection: props.style?.direction,
   } as CSSProperties;
 
-  function handleRadioChange(event: any) {
-    props.onChange(event.target.value);
-  }
-
   function RadioTitle() {
     return <div className="mrg-title">{props.title}</div>;
   }
@@ -31,18 +28,18 @@ const MyRadioGroup = (props: IProps) => {
   function RadiosButtons() {
     return (
       <ul style={handleCustomLayout} className="mrg-ul">
-        {props.attributes.map(({ defaultChecked, label, value }) => {
+        {props.attributes.map(({ id, label, value }) => {
           return (
-            <li key={value}>
+            <li key={id}>
               <input
-                defaultChecked={defaultChecked}
+                checked={value === props.valueChecked?.toString()}
                 type="radio"
-                id={value}
+                id={id}
                 name={props.name}
-                onChange={handleRadioChange}
+                onChange={(e) => props.onChange(e.target.value)}
                 value={value}
               />
-              <label htmlFor={value}>{label}</label>
+              <label htmlFor={id}>{label}</label>
             </li>
           );
         })}
@@ -51,10 +48,10 @@ const MyRadioGroup = (props: IProps) => {
   }
 
   return (
-    <div>
+    <>
       <RadioTitle />
       <RadiosButtons />
-    </div>
+    </>
   );
 };
 

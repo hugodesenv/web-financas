@@ -11,7 +11,7 @@ export type TPerson = {
 export const TPersonDefaultValues: TPerson = {
   name: "",
   nickname: "",
-  active: false,
+  active: true,
   is_client: false,
   is_company: false,
   is_employee: false

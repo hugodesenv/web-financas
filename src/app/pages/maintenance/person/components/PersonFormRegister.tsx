@@ -10,28 +10,28 @@ import { useMyAlert } from '@/components/alert/hook';
 import MyFloattingButton from '@/components/button/myFloattingButton/MyFloattingButton';
 import MyCardBox from '@/components/card/my-card/MyCardBox';
 import { MyForm } from '@/components/form/MyForm';
+import MyRadioGroup from '@/components/radioGroup/MyRadioGroup';
 import MyInputText from '@/components/text/MyInputText';
+import { PersonType, TPerson, TPersonDefaultValues } from '@/type/personTypes';
+import { createPersonCase } from '@/use/person/create';
+import { updatePersonCase } from '@/use/person/update';
 import { MESSAGES } from '@/utils/constantsUtils';
 import { forwardRef, useImperativeHandle } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
 import './style-person-register.css';
-import { PersonType, TPerson, TPersonDefaultValues } from '@/type/personTypes';
-import { createPersonCase } from '@/use/person/create';
-import { updatePersonCase } from '@/use/person/update';
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
-    return {
-      clearForm,
-      populateForm,
-    };
+    return { clearForm, populateForm };
   });
 
   const {
     handleSubmit,
     register,
     reset,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm<TPerson>();
 
@@ -59,17 +59,22 @@ const PersonFormRegister = forwardRef((_, ref) => {
 
   const clearForm = () => reset(TPersonDefaultValues);
 
-  const populateForm = (person: TPerson) => reset(person);
+  const populateForm = (person: TPerson) => {
+    reset(person);
+  };
 
   const PersonTypeSelector = () => (
     <MyCardBox title={{ caption: 'Tipo da pessoa' }}>
       <ul className="my-checkbox-style">
-        {PersonType.map(({ caption, type }) => (
-          <li key={`is_${type}`}>
-            <input type="checkbox" {...register(`is_${type}` as any)} />
-            <label>{caption}</label>
-          </li>
-        ))}
+        {PersonType.map(({ caption, type }) => {
+          const key = `is_${type}`;
+          return (
+            <li key={key}>
+              <input type="checkbox" id={key} {...register(key as any)} />
+              <label htmlFor={key}>{caption}</label>
+            </li>
+          );
+        })}
       </ul>
     </MyCardBox>
   );
@@ -81,6 +86,15 @@ const PersonFormRegister = forwardRef((_, ref) => {
           <div id="person-register-left">
             <MyInputText title="Nome" {...register('name', { required: MESSAGES.required_field })} errorText={errors?.name?.message} />
             <MyInputText title="Apelido" {...register('nickname')} errorText={errors?.nickname?.message} />
+            <MyRadioGroup
+              name="rdg-active"
+              valueChecked={watch('active')}
+              onChange={(value) => setValue('active', value === 'true' ? true : false)}
+              attributes={[
+                { label: 'Ativo', value: 'true', id: 'rdg-active' },
+                { label: 'Inativo', value: 'false', id: 'rdg-inactive' },
+              ]}
+            />
           </div>
           <div id="person-register-right">
             <PersonTypeSelector />
