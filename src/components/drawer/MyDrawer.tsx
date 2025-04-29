@@ -1,9 +1,11 @@
 import "./style.css";
 
-export interface IPropsMyDrawer {
-  children?: any;
+export interface IPropsMyDrawerCommom {
   isOpen: boolean;
   onClose: () => void;
+}
+export interface IPropsMyDrawer extends IPropsMyDrawerCommom {
+  children?: any;
   title?: string;
   width?: any;
 }
@@ -20,7 +22,6 @@ export default function MyDrawer(props: IPropsMyDrawer) {
   }
 
   function handleKeyDown(event: any) {
-    event.preventDefault();
     if (event.code === "Escape") {
       props.onClose();
     }
