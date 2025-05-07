@@ -1,18 +1,11 @@
 // Hugo.
 import axiosInstance from "@/config/axiosConfig";
-import { IHTTPResponse } from "@/utils/typesUtils"; 
-
-export async function tryAuthentication(username: string, password: string): Promise<IHTTPResponse> {
+export async function tryAuthentication(username: string, password: string) {
   try {
-    const config = axiosInstance.post("/account/auth", {
-      username,
-      password
-    });
-
-    const { data, status } = await config;
-
-    return { data, success: status === 202 };
+    const config = axiosInstance.post("/api/account/token", { username, password });
+    const { data } = await config;
+    return data;
   } catch (e: any) {
-    return { success: false, message: e?.response?.data }
+    return {}
   }
 }

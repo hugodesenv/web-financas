@@ -4,6 +4,12 @@ export interface IHTTPResponse {
   data?: any
 };
 
+export interface IAPIFinancasResponse {
+  statusCode: number;
+  message?: string;
+  data?: Record<string, any>
+}
+
 export enum EnRoute {
   HOME = '/pages/home',
   LOGIN = '/'

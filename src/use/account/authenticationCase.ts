@@ -5,19 +5,18 @@ import { saveSession } from "@/utils/sessionUtils";
 import { IHTTPResponse } from "@/utils/typesUtils";
 
 export async function authenticationCase(payload: TLoginDTO): Promise<IHTTPResponse> {
-  const { success, data: authenticationBody } = await tryAuthentication(payload.username, payload.password);
+  const data = await tryAuthentication(payload.username, payload.password);
 
-  if (!success) {
-    return { success, message: "Acesso negado" }
+  if (data?.statusCode !== 200) {
+    return { success: false, message: "Acesso negado" }
   }
 
-  const { token } = authenticationBody.data;
-
+  const token = data?.message;
+  
   if (!token) {
     return { success: false, message: "Houve uma falha na autenticação, tente novamente" }
   }
 
   await saveSession(token);
-
-  return { success, message: "Bem vindo(a) ao sistema! :)" }
+  return { success: true, message: "Bem vindo(a) ao sistema! :)" }
 }

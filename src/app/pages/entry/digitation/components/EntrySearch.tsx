@@ -1,5 +1,6 @@
 import MyTable, { IMyTableColumn } from '@/components/table/MyTable';
 import { IEntryDTO } from '@/type/entryTypes';
+import { getEntriesCase } from '@/use/entry/getEntries';
 import React, { useImperativeHandle, useState } from 'react';
 
 const _columns: IMyTableColumn[] = [
@@ -23,7 +24,7 @@ const EntrySearch = React.forwardRef((props: IProps, ref) => {
   });
 
   async function onSearch() {
-
+    const res = await getEntriesCase();
   }
 
   return (

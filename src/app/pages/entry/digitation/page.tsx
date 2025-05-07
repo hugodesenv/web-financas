@@ -45,7 +45,6 @@ export default function Entry() {
       case TTypeFieldEntryFilter.issueDate: {
         setFilterData(prev => ({ ...prev, issueEnd: dayjs(newValue).toDate() }))
         break;
-        ... terminar o filtro!
       }
     }
   }

@@ -18,7 +18,7 @@ const PurposeSearch = forwardRef((_, ref) => {
     setPurposes(data);
   }
 
-  const dataSource: IMyTableWrapper[] = purposes.map(({ id, description }) => ({
+  const dataSource: IMyTableWrapper[] = purposes?.map(({ id, description }) => ({
     data: [{ text: id }, { text: description }],
   }));
 

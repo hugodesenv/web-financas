@@ -4,7 +4,7 @@ import { IHTTPResponse } from "@/utils/typesUtils";
 
 export async function tryFindAllPerson(): Promise<IHTTPResponse> {
   try {
-    const { data: axiosData } = await axiosInstance.get('/person/');
+    const { data: axiosData } = await axiosInstance.get('api/person');
     return { success: true, data: axiosData.data }
   } catch (_) {
     return { success: false, data: [] }
@@ -17,15 +17,13 @@ export async function tryCreatePerson(person: TPerson): Promise<IHTTPResponse> {
       name: person.name,
       nickname: person.nickname,
       active: true,
-      type: {
-        client: person.is_client,
-        company: person.is_company,
-        employee: person.is_employee
-      }
+      is_client: person.is_client,
+      is_company: person.is_company,
+      is_employee: person.is_employee
     };
 
-    let { data } = await axiosInstance.post('/person', payload);
-    return data;
+    let { data: axiosData } = await axiosInstance.post('api/person', payload);
+    return { success: true, data: axiosData.data };
   } catch (_) {
     return { success: false }
   }
