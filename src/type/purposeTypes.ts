@@ -1,5 +1,5 @@
 // Hugo.
 export type TPurpose = {
-  id: number,
+  id?: number,
   description: string
 };

@@ -7,14 +7,15 @@ import MyTabView from '@/components/table/tabview/MyTabView';
 import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
+import { PurposeFormRegister } from './components/PurposeFormRegister';
 
 export default function Purpose() {
   const formSearchRef = useRef(null as any);
 
-  // Componente dos botões principais do formulário
+  // Componente dos botoes principais do formulario
   const FormButton = (
     <MyHorizontalStack>
-      <MyIconButton text="Novo" iconType={EnIconButtonType.NEW} onClick={() => {}} />
+      <MyIconButton text="Novo" iconType={EnIconButtonType.NEW} onClick={() => { }} />
       <MyIconButton text="Consultar" iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} />
     </MyHorizontalStack>
   );
@@ -24,7 +25,7 @@ export default function Purpose() {
       <LayoutTopBar title="Finalidades" childrenBefore={FormButton}>
         <MyTabView titles={[{ caption: 'Consulta' }, { caption: 'Digitação' }]}>
           <PurposeSearch ref={formSearchRef} />
-          <div>Criar aba de cadastro aqui</div>
+          <PurposeFormRegister />
         </MyTabView>
       </LayoutTopBar>
     </MyLayout>

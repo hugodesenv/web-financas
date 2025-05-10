@@ -14,12 +14,15 @@ interface IMyInputText extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 const MyInputText = forwardRef((props: IMyInputText, ref: ForwardedRef<HTMLInputElement>) => {
-  const { title, errorText, ...inputProps } = props;
+  const { title, errorText, hidden, ...inputProps } = props;
+  const wrappertyle = hidden ? { "display": "none" } : {};
+
   return (
-    <div className="wrapper-my-input-text">
+    <div style={wrappertyle} className="wrapper-my-input-text">
       {title && <label>{title}</label>}
       <input className="container-my-input-text" {...inputProps} ref={ref} />
-      {errorText && <span className="my-error-label">{errorText.toString()}</span>}
+      {errorText &&
+        <span className="my-error-label">{errorText.toString()}</span>}
     </div>
   );
 });
