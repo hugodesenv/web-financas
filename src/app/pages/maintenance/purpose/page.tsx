@@ -8,9 +8,18 @@ import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
 import { PurposeFormRegister } from './components/PurposeFormRegister';
+import { TPurpose } from '@/type/purposeTypes';
+import { findByIDPurposeUseCase } from '@/use/purpose/findByID';
+
+const columnTitle = [
+  { caption: 'Consulta' },
+  { caption: 'Digitação' }
+];
 
 export default function Purpose() {
+  const formRef = useRef(null as any);
   const formSearchRef = useRef(null as any);
+  const formTab = useRef(null as any);
 
   // Componente dos botoes principais do formulario
   const FormButton = (
@@ -20,12 +29,20 @@ export default function Purpose() {
     </MyHorizontalStack>
   );
 
+  const _loadPurpose = async ({ id }: TPurpose) => {
+    const { data } = await findByIDPurposeUseCase(id ?? 0);
+    if (data) {
+      formRef.current.populateForm(data);
+      formTab.current.setCurrentIndex(1);
+    }
+  }
+
   return (
     <MyLayout>
       <LayoutTopBar title="Finalidades" childrenBefore={FormButton}>
-        <MyTabView titles={[{ caption: 'Consulta' }, { caption: 'Digitação' }]}>
-          <PurposeSearch ref={formSearchRef} />
-          <PurposeFormRegister />
+        <MyTabView ref={formTab} titles={columnTitle} >
+          <PurposeSearch ref={formSearchRef} onPurposeSelected={_loadPurpose} />
+          <PurposeFormRegister ref={formRef} />
         </MyTabView>
       </LayoutTopBar>
     </MyLayout>

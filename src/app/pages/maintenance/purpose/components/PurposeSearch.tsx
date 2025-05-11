@@ -4,10 +4,14 @@ import { TPurpose } from '@/type/purposeTypes';
 import { findAllPurposeCase } from '@/use/purpose/findAll';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
-const PurposeSearch = forwardRef((_, ref) => {
+interface IProps {
+  onPurposeSelected: (purpose: TPurpose) => void;
+}
+
+const PurposeSearch = forwardRef((props: IProps, ref) => {
   useImperativeHandle(ref, () => {
     return {
-      onSearch,
+      onSearch
     };
   });
 
@@ -22,6 +26,11 @@ const PurposeSearch = forwardRef((_, ref) => {
     data: [{ text: id }, { text: description }],
   }));
 
+  const _onSelected = (rowIndex: number) => {
+    const purpose = purposes[rowIndex];
+    props.onPurposeSelected(purpose);
+  }
+
   return (
     <MyTable
       key="tb-category-search"
@@ -30,6 +39,7 @@ const PurposeSearch = forwardRef((_, ref) => {
         { key: 'id-description', label: 'Descrição' },
       ]}
       datasource={dataSource}
+      onSelectedRow={_onSelected}
     />
   );
 });
