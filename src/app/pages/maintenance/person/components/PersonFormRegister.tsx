@@ -23,7 +23,7 @@ import './style-person-register.css';
 
 const PersonFormRegister = forwardRef((_, ref) => {
   useImperativeHandle(ref, () => {
-    return { clearForm, populateForm };
+    return { populateForm };
   });
 
   const {
@@ -54,10 +54,8 @@ const PersonFormRegister = forwardRef((_, ref) => {
     }
 
     setAlertState({ message: MESSAGES.operation_successfully, key: Date.now() });
-    clearForm();
+    populateForm(TPersonDefaultValues);
   };
-
-  const clearForm = () => reset(TPersonDefaultValues);
 
   const populateForm = (person: TPerson) => {
     reset(person);

@@ -1,4 +1,5 @@
 import axiosInstance from "@/config/axiosConfig";
+import { TPurpose } from "@/type/purposeTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
 import { AxiosRequestConfig } from "axios";
 
@@ -23,3 +24,14 @@ export async function tryFindByIDPurpose(id: number): Promise<IHTTPResponse> {
     return { success: false, data: [] }
   }
 }
+
+export async function tryCreatePurpose(purpose: TPurpose): Promise<IHTTPResponse> {
+  try {
+    const { data: axiosData, status } = await axiosInstance.post('api/purpose');
+    return { success: status === 200, data: axiosData.data };
+  } catch (e) {
+    return { success: false, data: [] };
+  }
+}
+
+Try the update of Purpose. API is ok!
