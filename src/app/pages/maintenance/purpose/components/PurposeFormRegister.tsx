@@ -46,7 +46,10 @@ export const PurposeFormRegister = forwardRef((props, ref) => {
   }
 
   return <>
-    <MyForm onSubmit={handleSubmit(_onSubmit)} id="fixed-person-register">
+    <MyForm
+      id="fixed-person-register"
+      onSubmit={handleSubmit(_onSubmit)}
+    >
       <MyInputText title="ID" hidden {...register("id")} />
       <MyInputText title="Descrição" {...register('description')} />
       <MyFloattingButton attributes={{ type: 'submit' }} icon={<FaRegSave size={18} />} />

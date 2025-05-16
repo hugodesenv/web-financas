@@ -27,11 +27,18 @@ export async function tryFindByIDPurpose(id: number): Promise<IHTTPResponse> {
 
 export async function tryCreatePurpose(purpose: TPurpose): Promise<IHTTPResponse> {
   try {
-    const { data: axiosData, status } = await axiosInstance.post('api/purpose');
+    const { data: axiosData, status } = await axiosInstance.post('api/purpose', purpose);
     return { success: status === 200, data: axiosData.data };
   } catch (e) {
     return { success: false, data: [] };
   }
 }
 
-Try the update of Purpose. API is ok!
+export async function tryUpdatePurpose(purpose: TPurpose): Promise<IHTTPResponse> {
+  try {
+    const { data: axiosData, status } = await axiosInstance.put('api/purpose', purpose);
+    return { success: status === 200, data: axiosData };
+  } catch (e) {
+    return { success: false, data: [] }
+  }
+}
