@@ -38,8 +38,7 @@ export default function LayoutTopBar(props: IPropsLayoutRegister) {
         <MyCardBox>{props.children}</MyCardBox>
       </div>
       {
-        props.optionsFloatting &&
-        <MyFloattingButton
+        props.optionsFloatting && <MyFloattingButton
           attributes={{}}
           icon={MdLineWeight}
           options={props.optionsFloatting || []}

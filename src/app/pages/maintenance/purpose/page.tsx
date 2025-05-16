@@ -9,7 +9,7 @@ import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
 import { PurposeFormRegister } from './components/PurposeFormRegister';
 import { TPurpose } from '@/type/purposeTypes';
-import { findByIDPurposeUseCase } from '@/use/purpose/findByID';
+import { findByIDPurposeUseCase } from '@/use/purpose/purposeFindByIDUseCase';
 
 const columnTitle = [
   { caption: 'Consulta' },

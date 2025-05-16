@@ -49,7 +49,7 @@ export function useMyModalConfirmation(props: IProps) {
 
     let action = step.list[stepIndex]?.actionResult;
 
-    // if had something that prevented to continue the oepration:
+    // if it had something that prevented to continue the oepration:
     if (action == true) {
       setStepIndex(stepIndex);
       setIsOpen(true);

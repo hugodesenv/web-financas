@@ -10,7 +10,9 @@ interface IProps {
 export default function MyAccordionItem(props: IProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  useEffect(() => setIsOpen(props?.defaultOpen ?? false), []);
+  useEffect(() => {
+    setIsOpen(props?.defaultOpen ?? false);
+  }, []);
 
   const style = {
     content: {

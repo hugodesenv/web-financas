@@ -4,5 +4,6 @@ export const MESSAGES = {
   changed_record: "Registro alterado com sucessso",
   removed_record: "Registro removido com sucesso",
   fail_record: "Falha ao cadastrar, verifique ou tente novamente",
-  record_not_found: "Registro não localizado"
+  record_not_found: "Registro não localizado",
+  id_must_be_grather_than_zero: "O ID deve ser maior que zero"
 }

@@ -13,14 +13,14 @@ interface IProps {
 }
 
 const PersonSearch = forwardRef((props: IProps, ref) => {
-  useImperativeHandle(ref, () => {
+  useImperativeHandle(ref, function () {
     return {
       onSearch,
     };
   });
 
   const [personData, setPersonData] = useState<TPerson[]>([]);
-  
+
   const { isOpen, stepIndex, step, onConfirm, onCancel, onClose, prepareSteps } = useMyModalConfirmation({
     onSuccess: async () => await handleDelete(),
   });

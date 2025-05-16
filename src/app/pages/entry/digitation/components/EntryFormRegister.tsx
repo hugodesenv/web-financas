@@ -12,7 +12,10 @@ export default function EntryFormRegister() {
           input_id="person-register-input"
           list_id="person-register-list"
         />
-        <MyFloattingButton attributes={{ type: 'submit' }} icon={<FaRegSave size={18} />} />
+        <MyFloattingButton
+          attributes={{ type: 'submit' }}
+          icon={<FaRegSave size={18} />}
+        />
       </MyForm>
     </>
   );

@@ -21,7 +21,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
 import './style-person-register.css';
 
-const PersonFormRegister = forwardRef((_, ref) => {
+const PersonFormRegister = forwardRef((props, ref) => {
   useImperativeHandle(ref, () => {
     return { populateForm };
   });
@@ -98,7 +98,10 @@ const PersonFormRegister = forwardRef((_, ref) => {
             <PersonTypeSelector />
           </div>
         </div>
-        <MyFloattingButton attributes={{ type: 'submit' }} icon={<FaRegSave size={18} />} />
+        <MyFloattingButton
+          attributes={{ type: 'submit' }}
+          icon={<FaRegSave size={18} />}
+        />
       </MyForm>
       <MyAlert {...alertState} />
     </>

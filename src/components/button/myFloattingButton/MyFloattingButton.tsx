@@ -28,7 +28,7 @@ export default function MyFloattingButton(props: IProps) {
         showItems && props.options && (
           <MyCardBox>
             <ul className='mfb-items'>
-              {props?.options?.map((component) => <li>{component}</li>)}
+              {props?.options?.map((component) => <li key={`option-${Date.now()}`}>{component}</li>)}
             </ul>
           </MyCardBox>
         )

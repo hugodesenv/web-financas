@@ -4,8 +4,8 @@ import MyFloattingButton from "@/components/button/myFloattingButton/MyFloatting
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import { TPurpose, TPurposeDefaultValue } from "@/type/purposeTypes";
-import { createPurposeUseCase } from "@/use/purpose/create";
-import { updatePurposeUseCase } from "@/use/purpose/update";
+import { createPurposeUseCase } from "@/use/purpose/purposeCreateUseCase";
+import { updatePurposeUseCase } from "@/use/purpose/purposeUpdateUseCase";
 import { MESSAGES } from "@/utils/constantsUtils";
 import { IHTTPResponse } from "@/utils/typesUtils";
 import { forwardRef, useImperativeHandle } from "react";
@@ -52,7 +52,10 @@ export const PurposeFormRegister = forwardRef((props, ref) => {
     >
       <MyInputText title="ID" hidden {...register("id")} />
       <MyInputText title="Descrição" {...register('description')} />
-      <MyFloattingButton attributes={{ type: 'submit' }} icon={<FaRegSave size={18} />} />
+      <MyFloattingButton
+        attributes={{ type: 'submit' }}
+        icon={<FaRegSave size={18} />}
+      />
     </MyForm>
     <MyAlert {...alertState} />
   </>

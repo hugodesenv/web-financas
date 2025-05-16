@@ -49,7 +49,7 @@ export default function HomeAccountBalance(props: IProps) {
     if (dayjs(props.final_date).isValid()) {
       _loadBalance();
     }
-  }, [props.final_date]);
+  }, [props?.final_date]);
 
   return (
     <MyCardBox
@@ -86,7 +86,7 @@ export default function HomeAccountBalance(props: IProps) {
             },
           ]}
           datasource={dataSource}
-          onSelectedRow={(rowIndex) => console.log(rowIndex)}
+          onSelectedRow={(row) => { }}
         />
       </div>
     </MyCardBox>
