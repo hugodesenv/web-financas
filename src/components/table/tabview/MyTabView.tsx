@@ -42,7 +42,6 @@ const MyTabView = forwardRef((props: IProps, ref) => {
         {
           props.titles?.map((title, idx: number) => (
             <li
-              key={`mtv-tab-${Date.now()}`}
               className={currentIndex === idx ? "mtv-title-selected" : ""}
               onClick={(e) => onTitleClick(e, idx)}>
               {title.caption}

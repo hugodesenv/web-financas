@@ -8,13 +8,8 @@ import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
 import { PurposeFormRegister } from './components/PurposeFormRegister';
-import { TPurpose } from '@/type/purposeTypes';
+import { TPurpose, TPurposeDefaultValue } from '@/type/purposeTypes';
 import { findByIDPurposeUseCase } from '@/use/purpose/purposeFindByIDUseCase';
-
-const columnTitle = [
-  { caption: 'Consulta' },
-  { caption: 'Digitação' }
-];
 
 export default function Purpose() {
   const formRef = useRef(null as any);
@@ -24,7 +19,7 @@ export default function Purpose() {
   // Componente dos botoes principais do formulario
   const FormButton = (
     <MyHorizontalStack>
-      <MyIconButton text="Novo" iconType={EnIconButtonType.NEW} onClick={() => { }} />
+      <MyIconButton text="Novo" iconType={EnIconButtonType.NEW} onClick={(e) => _onNew()} />
       <MyIconButton text="Consultar" iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} />
     </MyHorizontalStack>
   );
@@ -37,10 +32,20 @@ export default function Purpose() {
     }
   }
 
+  Go to Person.
+
+  const _onNew = () => {
+    formRef.current.populateForm(TPurposeDefaultValue);
+    formTab.current.setCurrentIndex(1);
+  }
+
   return (
     <MyLayout>
       <LayoutTopBar title="Finalidades" childrenBefore={FormButton}>
-        <MyTabView ref={formTab} titles={columnTitle} >
+        <MyTabView ref={formTab} titles={[
+          { caption: 'Consulta' },
+          { caption: 'Digitação' }
+        ]} >
           <PurposeSearch ref={formSearchRef} onPurposeSelected={_loadPurpose} />
           <PurposeFormRegister ref={formRef} />
         </MyTabView>

@@ -15,7 +15,7 @@ export function useMyModalConfirmation(props: IProps) {
 
   const [step, setStep] = useState({
     list: [] as IModalConfirmStep[],
-    data: null
+    data: null as any
   });
 
   const [stepIndex, setStepIndex] = useState(-1);

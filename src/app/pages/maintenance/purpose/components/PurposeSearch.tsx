@@ -5,10 +5,10 @@ import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalC
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableAction, IMyTableWrapper } from '@/components/table/MyTable';
 import { TPurpose } from '@/type/purposeTypes';
+import { deletePurposeByID } from '@/use/purpose/purposeDeleteByIDUseCase';
 import { findAllPurposeCase } from '@/use/purpose/purposeFindAllUseCae';
+import { MESSAGES } from '@/utils/constantsUtils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-
-Preparar o delete.
 
 interface IProps {
   onPurposeSelected: (purpose: TPurpose) => void;
@@ -46,7 +46,7 @@ const PurposeSearch = forwardRef((props: IProps, ref) => {
       {
         title: 'Deseja excluir?',
         message: 'Ao confirmar essa ação não poderá ser desfeita',
-        actionResult: false,
+        actionResult: true,
       },
     ];
 
@@ -54,8 +54,17 @@ const PurposeSearch = forwardRef((props: IProps, ref) => {
   }
 
   const _deletePurpose = async () => {
+    const { id } = step.data;
+    const { success, message } = await deletePurposeByID(id);
 
-  }
+    if (success === true) {
+      setPurposes(purposes.filter((p) => p.id !== id));
+      setAlertState({ message: MESSAGES.operation_successfully, key: Date.now() });
+      return;
+    }
+
+    setAlertState({ message });
+  };
 
   const _actionButton: IMyTableAction[] = [
     {

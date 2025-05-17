@@ -45,14 +45,7 @@ export async function tryUpdatePurpose(purpose: TPurpose): Promise<IHTTPResponse
 
 export async function tryDeletePurposeByID(id: number): Promise<IHTTPResponse> {
   try {
-    const config: AxiosRequestConfig = {
-      params: { id }
-    }
-
-    const { data: axiosData, status } = await axiosInstance.delete('api/purpose', config);
-
-    console.log('purpose response', axiosData);
-
+    const { data: axiosData, status } = await axiosInstance.delete(`api/purpose/${id}`);
     return { success: status === 200, data: axiosData.data };
   } catch (e) {
     return { success: false, data: [] }
