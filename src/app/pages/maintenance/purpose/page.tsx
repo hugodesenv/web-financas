@@ -32,8 +32,6 @@ export default function Purpose() {
     }
   }
 
-  Go to Person.
-
   const _onNew = () => {
     formRef.current.populateForm(TPurposeDefaultValue);
     formTab.current.setCurrentIndex(1);
