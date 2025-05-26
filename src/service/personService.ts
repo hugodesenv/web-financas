@@ -31,11 +31,8 @@ export async function tryCreatePerson(person: TPerson): Promise<IHTTPResponse> {
 
 export async function tryDeletePerson(id: number): Promise<IHTTPResponse> {
   try {
-    let { data } = await axiosInstance.delete('/person/', { params: { id } });
-    return {
-      success: true,
-      data
-    };
+    let { data: axiosData } = await axiosInstance.delete(`api/person/${id}`);
+    return { success: true, data: axiosData?.data };
   } catch (_) {
     return { success: false };
   }
@@ -43,11 +40,8 @@ export async function tryDeletePerson(id: number): Promise<IHTTPResponse> {
 
 export async function tryFindByIDPerson(id: number): Promise<IHTTPResponse> {
   try {
-    let { data } = await axiosInstance.get('/person/find/', { params: { id } });
-    return {
-      success: true,
-      data: data?.data
-    };
+    let { data: axiosData } = await axiosInstance.get(`api/person/`, { params: { id } });
+    return { success: true, data: axiosData.data };
   } catch (_) {
     return { success: false };
   }
@@ -61,17 +55,18 @@ export async function tryUpdatePerson(person: TPerson): Promise<IHTTPResponse> {
         name: person.name,
         nickname: person.nickname,
         active: person.active,
-        type: {
-          client: person.is_client,
-          company: person.is_company,
-          employee: person.is_employee
-        }
+      },
+      type: {
+        client: person.is_client,
+        company: person.is_company,
+        employee: person.is_employee
       }
     }
 
-    let { data } = await axiosInstance.put('/person', payload);
-    return { success: true, data };
-  } catch (_) {
+    let { data: axiosData } = await axiosInstance.put('api/person/', payload);
+    return { success: true, data: axiosData.data };
+  } catch (e) {
+    console.log('exception', e);
     return { success: false }
   }
 }

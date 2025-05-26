@@ -10,6 +10,7 @@ import { findByIDPersonCase } from '@/use/person/findByID';
 import { useRef, useState } from 'react';
 import PersonFormRegister from './components/PersonFormRegister';
 import PersonSearch from './components/PersonSearch';
+import { TPersonDefaultValues } from '@/type/personTypes';
 
 export default function Person() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -20,7 +21,7 @@ export default function Person() {
 
   const FormButton = (
     <MyHorizontalStack>
-      <MyIconButton iconType={EnIconButtonType.NEW} onClick={() => formRef.current.clearForm()} text="Novo" />
+      <MyIconButton iconType={EnIconButtonType.NEW} onClick={() => formRef.current.populateForm(TPersonDefaultValues)} text="Novo" />
       <MyIconButton iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} text="Consultar" />
       <MyIconButton iconType={EnIconButtonType.FILTER} onClick={() => setOpenFilter(true)} text="Filtrar" />
     </MyHorizontalStack>
