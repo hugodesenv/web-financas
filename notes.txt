@@ -1,4 +1,4 @@
-- Purpose OK
-- Person (Verify)
-- Entry (To do)
-- Load on home (To do)
+ToDo:
+
+Cadastro de lançamentos
+Consulta de lançamentos (Verificar como estamos puxando)

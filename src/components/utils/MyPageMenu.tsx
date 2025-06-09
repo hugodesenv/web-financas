@@ -58,7 +58,7 @@ function PageMenu() {
         {
           key: 'mn-entry-digitation',
           label: 'Digitação',
-          onClick: () => router.push('/pages/entry/digitation'),
+          onClick: () => router.push('/pages/maintenance/entry'),
         },
       ],
     },

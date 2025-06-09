@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
 import '../text/style.css';
+import MyInputText from '../text/MyInputText';
 
 export interface IMyDataListOption {
   id: string;
@@ -44,14 +45,16 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
         {
           title && <label htmlFor={input_id}>{title}</label>
         }
-        <input
+        <MyInputText
           className="container-my-input-text"
           list={list_id}
           id={input_id}
           name={input_id}
           onFocus={_handleData}
           onChange={_handleData}
+          title=''
         />
+
         <datalist id={list_id}>
           {options?.map(({ id, label }) => (
             <option key={id} value={label} />
