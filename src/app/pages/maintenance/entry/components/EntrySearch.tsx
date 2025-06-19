@@ -1,7 +1,7 @@
 /** #HUGO: Continuar. */
 
 import MyTable, { IMyTableColumn } from '@/components/table/MyTable';
-import { IEntryDTO } from '@/type/entryTypes';
+import { TEntry } from '@/type/entryTypes';
 import { getEntriesCase } from '@/use/entry/getEntries';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
@@ -13,7 +13,7 @@ const _columns: IMyTableColumn[] = [
 ];
 
 const EntrySearch = forwardRef((props, ref) => {
-  const [entries, setEntries] = useState([] as IEntryDTO[]);
+  const [entries, setEntries] = useState([] as TEntry[]);
 
   useImperativeHandle(ref, function () {
     return {

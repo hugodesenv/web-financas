@@ -6,7 +6,7 @@ import MyTotalizationCard from '@/components/card/my-totalization-card/MyTotaliz
 import MyLayout from '@/components/layout/MyLayout';
 import MyTopBar from '@/components/menu/topBar/MyTopBar';
 import MyInputText from '@/components/text/MyInputText';
-import { IEntryDTO } from '@/type/entryTypes';
+import { EnEntryType, TEntry } from '@/type/entryTypes';
 import { getEntriesCase } from '@/use/entry/getEntries';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ import './style.css';
 export default function Home() {
   const [drawerTotalization, setDrawerTotalization] = useState({ data: [] as ITableData[][], isOpen: false, title: '' });
   const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
-  const [entriesData, setEntriesData] = useState([] as IEntryDTO[]);
+  const [entriesData, setEntriesData] = useState([] as TEntry[]);
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
@@ -147,10 +147,10 @@ export default function Home() {
   };
 
   const _totalizationValues = entriesData.reduce(
-    (previousValue, { type, total }: IEntryDTO) => {
+    (previousValue, { type, total }: TEntry) => {
       const _total = parseFloat(total);
 
-      if (type === 'expense') {
+      if (type === EnEntryType.PAYABLE) {
         return { ...previousValue, expense: previousValue.expense + _total };
       }
 
@@ -160,7 +160,7 @@ export default function Home() {
   );
 
   const _totalByPurpose = entriesData.reduce(
-    (prev: Record<string, { description: string; income: number; expense: number }>, { type, purpose, total }: IEntryDTO) => {
+    (prev: Record<string, { description: string; income: number; expense: number }>, { type, purpose, total }: TEntry) => {
       const { description, id } = purpose;
 
       if (!prev[id]) {
@@ -168,7 +168,7 @@ export default function Home() {
       }
 
       const _total = parseFloat(total ?? '0');
-      if (type === 'expense') {
+      if (type === EnEntryType.PAYABLE) {
         prev[id].expense += _total;
       } else {
         prev[id].income += _total;
@@ -184,7 +184,7 @@ export default function Home() {
       <form id="searchHomeForm" onSubmit={handleSubmit(onTopbarSubmit)}>
         <MyTopBar title="Home">
           <MyInputText title="" type="date" {...register('selected_date')} />
-          <MyButton theme="dark" onClick={() => {}} style={{ minWidth: 'min-content' }}>
+          <MyButton theme="dark" onClick={() => { }} style={{ minWidth: 'min-content' }}>
             <MdOutlineSearch />
           </MyButton>
         </MyTopBar>
