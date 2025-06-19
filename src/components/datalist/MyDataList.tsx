@@ -15,7 +15,7 @@ export interface IPropsMyDataList {
 
 interface IProps extends IPropsMyDataList {
   options: IMyDataListOption[];
-  onChange: () => Promise<void>;
+  onChange: (input: string) => Promise<void>;
 }
 
 const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => {
@@ -35,7 +35,7 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
     }
 
     timeoutRef.current = setTimeout(async () => {
-      await onChange();
+      await onChange(event?.target.value ?? "");
     }, 2000);
   }
 
@@ -53,14 +53,15 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
           onFocus={_handleData}
           onChange={_handleData}
           title=''
+          autoComplete="off"
         />
 
-        <datalist id={list_id}>
+        <datalist id={list_id} >
           {options?.map(({ id, label }) => (
             <option key={id} value={label} />
           ))}
         </datalist>
-      </div>
+      </div >
     </>
   );
 };

@@ -19,11 +19,16 @@ export default function EntryFormRegister() {
   return (
     <>
       <MyForm id="entry-form-register" onSubmit={handleSubmit(onSubmit)}>
-        <MyPersonDataList
-          title='Pessoa'
-          input_id="person-register-input"
-          list_id="person-register-list"
-        />
+        <MyHorizontalStack>
+          <div style={{ flex: 1 }}>
+            <MyPersonDataList
+              title='Pessoa'
+              input_id="person-register-input"
+              list_id="person-register-list"
+            />
+          </div>
+          <MyInputText {...register('issue_date')} title='Data de emissão' type='date' />
+        </MyHorizontalStack>
         <MyPurposeDataList
           title='Finalidade'
           input_id='purpose-register-input'
@@ -38,7 +43,6 @@ export default function EntryFormRegister() {
             <option value={EnEntryType.RECEIVABLE}>Receber</option>
             <option value={EnEntryType.PAYABLE}>Pagar</option>
           </MySelect>
-          <MyInputText {...register('issue_date')} title='Data de emissão' type='date' />
         </MyHorizontalStack>
         <MyInputText {...register('total')} title='Total' type='number' style={{ flex: 1 }} />
         <MyFloattingButton

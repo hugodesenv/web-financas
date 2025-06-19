@@ -2,9 +2,14 @@ import axiosInstance from "@/config/axiosConfig";
 import { TPerson } from "@/type/personTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
 
-export async function tryFindAllPerson(): Promise<IHTTPResponse> {
+export interface ITryFindAllPersonFilter {
+  name: string;
+}
+
+export async function tryFindAllPerson(props: ITryFindAllPersonFilter): Promise<IHTTPResponse> {
   try {
-    const { data: axiosData } = await axiosInstance.get('api/person');
+    const { data: axiosData } = await axiosInstance.get('api/person', { params: props });
+    console.log('resultado final', axiosData.data);
     return { success: true, data: axiosData.data }
   } catch (_) {
     return { success: false, data: [] }
