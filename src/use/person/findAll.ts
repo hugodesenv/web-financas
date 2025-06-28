@@ -2,5 +2,6 @@ import { ITryFindAllPersonFilter, tryFindAllPerson } from "@/service/personServi
 import { IHTTPResponse } from "@/utils/typesUtils";
 
 export async function findAllPersonCase(props: ITryFindAllPersonFilter): Promise<IHTTPResponse> {
-  return await tryFindAllPerson(props);
+  let people = await tryFindAllPerson(props);
+  return people;
 }

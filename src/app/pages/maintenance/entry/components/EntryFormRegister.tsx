@@ -1,5 +1,4 @@
 import MyFloattingButton from '@/components/button/myFloattingButton/MyFloattingButton';
-import MyPersonDataList from '@/components/datalist/custom/MyPersonDataList';
 import { MyPurposeDataList } from '@/components/datalist/custom/MyPurposeDataList';
 import { MyForm } from '@/components/form/MyForm';
 import MySelect from '@/components/select/MySelect';
@@ -8,6 +7,8 @@ import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { EnEntryMode, EnEntryType, TEntry } from '@/type/entryTypes';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
+import { Select } from "antd";
+import { MyPersonSelect } from '@/components/select/custom/MyPersonSelect';
 
 export default function EntryFormRegister() {
   const { handleSubmit, setValue, register } = useForm<TEntry>();
@@ -16,15 +17,19 @@ export default function EntryFormRegister() {
     console.log('como ficou ', data);
   }
 
+  function onChangeTeste(value: any, option: any) {
+    console.log(value, option)
+  }
+
   return (
     <>
       <MyForm id="entry-form-register" onSubmit={handleSubmit(onSubmit)}>
         <MyHorizontalStack>
           <div style={{ flex: 1 }}>
-            <MyPersonDataList
+            <MyPersonSelect
+              id='person-register-input'
               title='Pessoa'
-              input_id="person-register-input"
-              list_id="person-register-list"
+              onSelect={(_, { value }) => setValue('person_id', value as number)}
             />
           </div>
           <MyInputText {...register('issue_date')} title='Data de emissão' type='date' />

@@ -1,8 +1,11 @@
 .wrapper-my-input-text {
   color: black;
   display: flex;
-  gap: 4px;
   flex-direction: column;
+}
+
+.wrapper-my-input-text label {
+  margin-bottom: 4px;
 }
 
 .container-my-input-text {

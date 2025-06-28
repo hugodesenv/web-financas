@@ -9,7 +9,6 @@ export interface ITryFindAllPersonFilter {
 export async function tryFindAllPerson(props: ITryFindAllPersonFilter): Promise<IHTTPResponse> {
   try {
     const { data: axiosData } = await axiosInstance.get('api/person', { params: props });
-    console.log('resultado final', axiosData.data);
     return { success: true, data: axiosData.data }
   } catch (_) {
     return { success: false, data: [] }

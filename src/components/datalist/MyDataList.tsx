@@ -1,6 +1,6 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
-import '../text/style.css';
+import { ChangeEvent, DOMAttributes, MouseEventHandler, SyntheticEvent, useRef } from 'react';
 import MyInputText from '../text/MyInputText';
+import '../text/style.css';
 
 export interface IMyDataListOption {
   id: string;
@@ -29,7 +29,6 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
    */
   async function _handleData(event?: ChangeEvent<HTMLInputElement>) {
     event?.preventDefault();
-
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -50,7 +49,7 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
           list={list_id}
           id={input_id}
           name={input_id}
-          onFocus={_handleData}
+          //onFocus={_handleData}
           onChange={_handleData}
           title=''
           autoComplete="off"
@@ -67,3 +66,5 @@ const MyDataList = ({ options, title, input_id, list_id, onChange }: IProps) => 
 };
 
 export default MyDataList;
+
+//==> Preciso pegar do Texto o ID.
