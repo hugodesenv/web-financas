@@ -9,6 +9,7 @@ const style = {
   display: 'flex',
   flexDirection: 'row',
   gap: '8px',
+  flexWrap: 'wrap'
 } as CSSProperties;
 
 export default function MyHorizontalStack(props: IProps) {

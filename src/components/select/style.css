@@ -5,6 +5,7 @@
   font-size: 12px;
   outline: none;
   padding: 4px;
+  flex: 1;
 }
 
 .my-select:hover {
