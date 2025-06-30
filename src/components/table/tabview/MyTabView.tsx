@@ -3,7 +3,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import "./style.css";
 
-interface ITitle {
+export interface ITitle {
   caption: string;
 }
 

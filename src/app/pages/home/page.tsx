@@ -7,7 +7,7 @@ import MyLayout from '@/components/layout/MyLayout';
 import MyTopBar from '@/components/menu/topBar/MyTopBar';
 import MyInputText from '@/components/text/MyInputText';
 import { EnEntryType, TEntry } from '@/type/entryTypes';
-import { getEntriesCase } from '@/use/entry/getEntries';
+import { getEntriesCase } from '@/use/entry/findAll';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';

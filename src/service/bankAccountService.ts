@@ -1,23 +1,30 @@
 import axiosInstance from "@/config/axiosConfig";
+import { TBankAccount } from "@/type/bankAccountTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
 
-/**
- * dates: format YYYY-MM-DD.
- */
-export interface IPropsGetBalance {
-  initial_date: string;
-  final_date: string;
-}
+const URL_BASE = 'api/bankaccount';
 
-export async function tryGetAccountBalance(params: IPropsGetBalance): Promise<IHTTPResponse> {
+export async function tryFindAllBankAccount(): Promise<IHTTPResponse> {
   try {
-    const { data: response } = await axiosInstance.get('/bank-account/account-balance', { params });
-    return { success: true, data: response }
+    const { data: response } = await axiosInstance.get(URL_BASE);
+    return { success: true, data: response?.data }
   } catch (e) {
     return {
       success: false,
       data: [],
       message: "Nenhum registro encontrado"
+    }
+  }
+}
+
+export async function tryCreateBankAccount(bank: TBankAccount): Promise<IHTTPResponse> {
+  try {
+    const { data: response } = await axiosInstance.post(URL_BASE, bank);
+    return { success: true, data: response?.data }
+  } catch (e) {
+    return {
+      success: false,
+      message: "Erro na criação da conta bancária"
     }
   }
 }

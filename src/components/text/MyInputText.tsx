@@ -20,7 +20,7 @@ const MyInputText = forwardRef((props: IMyInputText, ref: ForwardedRef<HTMLInput
   return (
     <div style={wrappertyle} className="wrapper-my-input-text">
       {title && <label>{title}</label>}
-      <input className="container-my-input-text" {...inputProps} ref={ref} />
+      <input className="container-my-input-text" autoComplete='off' {...inputProps} ref={ref} />
       {errorText &&
         <span className="my-error-label">{errorText.toString()}</span>}
     </div>

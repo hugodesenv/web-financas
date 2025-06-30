@@ -6,6 +6,8 @@ import '../../text/style.css';
 import { findAllPurposeCase } from "@/use/purpose/purposeFindAllUseCae";
 import { TPurpose } from "@/type/purposeTypes";
 import { debounce } from "lodash";
+import { findAllBankAccountUseCase } from "@/use/bankAccount/findAll";
+import { TBankAccount } from "@/type/bankAccountTypes";
 
 type IProps = SelectProps & {
   type: "person" | "purpose" | "bank_account"
@@ -20,7 +22,14 @@ const config = {
   "bank_account": {
     placeHolder: "Selecione a conta bancária",
     onSearch: async (filter: Record<string, any>) => {
-      return {}
+      const { data } = await findAllBankAccountUseCase();
+      return data?.map((bank: TBankAccount) => {
+        return {
+          value: bank.id,
+          label: bank.description,
+          title: bank.description
+        }
+      });
     }
   } as IConfig,
   "person": {

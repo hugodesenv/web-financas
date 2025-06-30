@@ -37,7 +37,14 @@ function PageMenu() {
       key: 'mn-add',
       sub_menus: [
         {
-          key: '´purpose',
+          key: 'bank-account',
+          label: 'Conta bancária',
+          onClick: () => {
+            router.push('/pages/maintenance/bank-account')
+          }
+        },
+        {
+          key: 'purpose',
           label: 'Finalidades',
           onClick: () => {
             router.push('/pages/maintenance/purpose');

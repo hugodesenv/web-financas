@@ -1,4 +1,11 @@
 to do:
+==>
 no cadastro da conta bancária, ter uma opção pra reajustar o saldo da conta
 com isso eu vou ter a data de reajustes + valores + observacao
 considerar isso nos relatorios futuros.
+
+==> criar a exclusao + alteraçao da conta bancária
+
+==> fazer cadastrar os lançamentos
+
+==> criar listagem de lançamentos

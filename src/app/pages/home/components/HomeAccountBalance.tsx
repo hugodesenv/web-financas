@@ -2,18 +2,9 @@ import MyAccordion from '@/components/accordion/MyAccordion';
 import MyAccordionPanel from '@/components/accordion/MyAccordionPanel';
 import MyAccordionItem from '@/components/accordion/MyAccordtionItem';
 import MyCardBox from '@/components/card/my-card/MyCardBox';
-import MyTable, { IMyTableDataSource, IMyTableWrapper } from '@/components/table/MyTable';
-import { getBankBalanceCase } from '@/use/bankAccount/getBankBalance';
+import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
 import dayjs from 'dayjs';
 import { CSSProperties, useEffect, useState } from 'react';
-
-interface IBalanceResponseAPI {
-  bank_account_description: string;
-  bank_account_id: string;
-  initial_date: string;
-  initial_value: string;
-  total: string;
-}
 
 interface IProps {
   initial_date: string;
@@ -33,9 +24,9 @@ export default function HomeAccountBalance(props: IProps) {
 
   useEffect(() => {
     const _loadBalance = async () => {
-      const { data, success } = await getBankBalanceCase(props);
+      //const { data, success } = await getBankBalanceCase(props);
 
-      if (!success) {
+      /*if (!success) {
         return console.error('Fail to load balances...');
       }
 
@@ -43,7 +34,7 @@ export default function HomeAccountBalance(props: IProps) {
         return { data: [{ text: bank_account_description }, { text: total }] as IMyTableDataSource[] };
       });
 
-      setDataSource(dataSource);
+      setDataSource(dataSource);*/
     };
 
     if (dayjs(props.final_date).isValid()) {

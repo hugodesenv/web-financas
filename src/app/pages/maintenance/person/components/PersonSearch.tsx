@@ -34,7 +34,7 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
   }
 
   async function onSearch() {
-    const { data } = await findAllPersonCase();
+    const { data } = await findAllPersonCase({ name: "" });
     setPersonData(data);
   }
 

@@ -3,7 +3,7 @@ import { TPerson } from "@/type/personTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
 
 export interface ITryFindAllPersonFilter {
-  name: string;
+  name?: string;
 }
 
 export async function tryFindAllPerson(props: ITryFindAllPersonFilter): Promise<IHTTPResponse> {
