@@ -5,8 +5,8 @@ import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalC
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableAction, IMyTableWrapper } from '@/components/table/MyTable';
 import { TPurpose } from '@/type/purposeTypes';
-import { deletePurposeByID } from '@/use/purpose/purposeDeleteByIDUseCase';
-import { findAllPurposeCase } from '@/use/purpose/purposeFindAllUseCae';
+import { deletePurposeByID } from '@/use/purpose/deleteById';
+import { findAllPurposeCase } from '@/use/purpose/findAll';
 import { MESSAGES } from '@/utils/constantsUtils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 

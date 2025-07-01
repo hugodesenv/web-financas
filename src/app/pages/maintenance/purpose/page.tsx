@@ -9,7 +9,7 @@ import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
 import { PurposeFormRegister } from './components/PurposeFormRegister';
 import { TPurpose, TPurposeDefaultValue } from '@/type/purposeTypes';
-import { findByIDPurposeUseCase } from '@/use/purpose/purposeFindByIDUseCase';
+import { findByIDPurposeUseCase } from '@/use/purpose/findByID';
 
 export default function Purpose() {
   const formRef = useRef(null as any);

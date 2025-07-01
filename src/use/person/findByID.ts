@@ -1,4 +1,4 @@
-import { tryFindByIDPerson } from "@/service/personService";
+import { tryFindByIDPerson } from "@/config/service/personService";
 import { IHTTPResponse } from "@/utils/typesUtils";
 
 export async function findByIDPersonCase(id: number): Promise<IHTTPResponse> {

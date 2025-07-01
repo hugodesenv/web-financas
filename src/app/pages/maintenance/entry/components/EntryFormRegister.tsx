@@ -5,25 +5,49 @@ import { MyCustomSelect } from '@/components/select/custom/MyCustomSelect';
 import MyInputText from '@/components/text/MyInputText';
 import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { EnEntryMode, EnEntryType, TEntryDefaultValue, TEntry } from '@/type/entryTypes';
+import { createEntryCase } from '@/use/entry/create';
+import { IHTTPResponse } from '@/utils/typesUtils';
+import { message } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
 
 export default function EntryFormRegister() {
-  const { handleSubmit, setValue, register } = useForm<TEntry>({
+  const [messageApi, contextHolder] = message.useMessage();
+  const { handleSubmit, setValue, register, reset } = useForm<TEntry>({
     defaultValues: {
       ...TEntryDefaultValue,
       issue_date: dayjs().format("YYYY-MM-DD")
     }
   });
 
+  /**
+   * Creating entry
+   * @param data 
+   * @returns 
+   */
   const onSubmit: SubmitHandler<TEntry> = async (data) => {
-    console.log('como ficou ', data);
+    let response: IHTTPResponse = { success: false };
+
+    if (data.id > 0) {
+      console.log("Incluir o modo de alteração aqui.");
+    } else {
+      response.success = await createEntryCase(data);
+    }
+
+    if (!response.success) {
+      messageApi.open({ content: "Não foi possível incluir o lançamento", type: "error" });
+      return;
+    }
+
+    messageApi.open({ content: "Cadastro realizado com sucesso", type: "success" });
+    reset();
   }
 
   return (
     <>
+      {contextHolder}
       <MyForm id="entry-form-register" onSubmit={handleSubmit(onSubmit)}>
         <MyHorizontalStack>
           <div style={{ flex: 1 }}>
@@ -41,13 +65,13 @@ export default function EntryFormRegister() {
             type='bank_account'
             title='Conta bancária'
             id='purpose-register-input'
-            onSelect={(_, { value }) => setValue('purpose.id', value as number)}
+            onSelect={(_, { value }) => setValue('bank_account_id', value as number)}
           />
           <MyCustomSelect
             type='purpose'
             title='Finalidade'
             id='purpose-register-input'
-            onSelect={(_, { value }) => setValue('purpose.id', value as number)}
+            onSelect={(_, { value }) => setValue('purpose_id', value as number)}
           />
         </MyHorizontalStack>
         <MyHorizontalStack>

@@ -1,9 +1,18 @@
 import axiosInstance from "@/config/axiosConfig";
+import { TEntry } from "@/type/entryTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
+const URL_BASE = 'api/entry';
 
 export async function tryFindAllEntry(): Promise<IHTTPResponse> {
-  const { data: axiosData } = await axiosInstance.get('api/entry');
-  const { data, success, message } = axiosData;
+  const { data: axiosData } = await axiosInstance.get(URL_BASE);
+  return { success: true, data: axiosData?.data };
+}
 
-  return { success, data, message }
+export async function tryCreateEntry(payload: TEntry): Promise<IHTTPResponse> {
+  const { data: axiosData } = await axiosInstance.post(URL_BASE, payload);
+
+  return {
+    success: axiosData.statusCode === 200,
+    data: axiosData?.data
+  };
 }

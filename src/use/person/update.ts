@@ -1,4 +1,4 @@
-import { tryUpdatePerson } from "@/service/personService";
+import { tryUpdatePerson } from "@/config/service/personService";
 import { TPerson } from "@/type/personTypes";
 import { IHTTPResponse } from "@/utils/typesUtils";
 

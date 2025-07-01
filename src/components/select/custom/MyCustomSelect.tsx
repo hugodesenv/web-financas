@@ -3,7 +3,7 @@ import { findAllPersonCase } from "@/use/person/findAll";
 import { Select, SelectProps } from "antd";
 import { useState } from "react";
 import '../../text/style.css';
-import { findAllPurposeCase } from "@/use/purpose/purposeFindAllUseCae";
+import { findAllPurposeCase } from "@/use/purpose/findAll";
 import { TPurpose } from "@/type/purposeTypes";
 import { debounce } from "lodash";
 import { findAllBankAccountUseCase } from "@/use/bankAccount/findAll";

@@ -6,10 +6,9 @@ import MyTotalizationCard from '@/components/card/my-totalization-card/MyTotaliz
 import MyLayout from '@/components/layout/MyLayout';
 import MyTopBar from '@/components/menu/topBar/MyTopBar';
 import MyInputText from '@/components/text/MyInputText';
-import { EnEntryType, TEntry } from '@/type/entryTypes';
-import { getEntriesCase } from '@/use/entry/findAll';
+import { TEntry } from '@/type/entryTypes';
 import dayjs from 'dayjs';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { MdOutlineSearch } from 'react-icons/md';
 import HomeAccountBalance from './components/HomeAccountBalance';
@@ -27,22 +26,6 @@ export default function Home() {
       selected_date: dayjs().format('YYYY-MM-DD'),
     },
   });
-
-  useEffect(() => {
-    const _getEntries = async () => {
-      const { data, success, message } = await getEntriesCase(selectedDate);
-
-      if (!success) {
-        return console.error('Fail to get entries from API', message);
-      }
-
-      setEntriesData(data);
-    };
-
-    if (dayjs(selectedDate).isValid()) {
-      _getEntries();
-    }
-  }, [selectedDate]);
 
   function _onClickTotalization(event: any, pTitle: string) {
     // fazer o filtro para setar no drawer aqui
@@ -146,39 +129,6 @@ export default function Home() {
     }
   };
 
-  const _totalizationValues = entriesData.reduce(
-    (previousValue, { type, total }: TEntry) => {
-      const _total = parseFloat(total);
-
-      if (type === EnEntryType.PAYABLE) {
-        return { ...previousValue, expense: previousValue.expense + _total };
-      }
-
-      return { ...previousValue, income: previousValue.income + _total };
-    },
-    { income: 0, expense: 0 },
-  );
-
-  const _totalByPurpose = entriesData.reduce(
-    (prev: Record<string, { description: string; income: number; expense: number }>, { type, purpose, total }: TEntry) => {
-      const { description, id } = purpose;
-
-      if (!prev[id]) {
-        prev[id] = { expense: 0, income: 0, description };
-      }
-
-      const _total = parseFloat(total ?? '0');
-      if (type === EnEntryType.PAYABLE) {
-        prev[id].expense += _total;
-      } else {
-        prev[id].income += _total;
-      }
-
-      return prev;
-    },
-    {} as Record<string, { description: string; income: number; expense: number }>,
-  );
-
   return (
     <MyLayout>
       <form id="searchHomeForm" onSubmit={handleSubmit(onTopbarSubmit)}>
@@ -194,24 +144,24 @@ export default function Home() {
           <div className="page-totalization-content">
             <MyTotalizationCard
               title="Ganhos (+)"
-              content={_totalizationValues.income}
+              content={9}
               onClick={(e: any) => _onClickTotalization(e, 'Minhas receitas')}
               className="my-color-blue"
             />
             <MyTotalizationCard
               title="Gastos (-)"
-              content={_totalizationValues.expense}
+              content={4}
               onClick={(e: any) => _onClickTotalization(e, 'Minhas despesas')}
               className="my-color-red"
             />
-            <MyTotalizationCard title="Saldo (=)" content={_totalizationValues.income - _totalizationValues.expense} className="my-color-gray" />
+            <MyTotalizationCard title="Saldo (=)" content={9 - 4} className="my-color-gray" />
           </div>
         </MyCard>
         <MyCard title={{ caption: 'Estatísticas' }}></MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">
             <MyCard title={{ caption: 'Total por finalidade' }}>
-              <HomeGroupExpenses data={_totalByPurpose} />
+              <HomeGroupExpenses data={{}} />
             </MyCard>
           </div>
           <div className="page-card-balance">

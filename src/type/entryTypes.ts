@@ -15,14 +15,10 @@ export interface TEntry {
   total: string;
   type: EnEntryType;
   mode: EnEntryMode,
-  bank_account_id: string;
+  bank_account_id: number;
   created_at: string;
   observation?: string;
   issue_date: string;
-  purpose: {
-    id: number;
-    description: string;
-  }
 }
 
 export const TEntryDefaultValue: TEntry = {
@@ -32,12 +28,8 @@ export const TEntryDefaultValue: TEntry = {
   id: 0,
   person_id: 0,
   purpose_id: 0,
-  bank_account_id: "",
+  bank_account_id: 0,
   created_at: "",
   issue_date: "",
   observation: "",
-  purpose: {
-    id: 0,
-    description: ""
-  }
 }
