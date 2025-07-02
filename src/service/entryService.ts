@@ -1,6 +1,6 @@
 import axiosInstance from "@/config/axiosConfig";
 import { TEntry } from "@/type/entryTypes";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 const URL_BASE = 'api/entry';
 
 export async function tryFindAllEntry(): Promise<IHTTPResponse> {

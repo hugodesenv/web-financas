@@ -51,6 +51,7 @@ export default function Entry() {
 
   return (
     <>
+      <h1 style={{ color: "red" }}>Fazer o esquema de alteração, consulta, exclusão, novo</h1>
       <MyLayout>
         <LayoutTopBar title="Lançamentos" childrenBefore={FormButton}>
           <MyTabView titles={_columnsTitle}>

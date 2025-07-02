@@ -1,6 +1,6 @@
 import axiosInstance from "@/config/axiosConfig";
 import { TPurpose } from "@/type/purposeTypes";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 import { AxiosRequestConfig } from "axios";
 
 export async function tryFindAllPurpose(): Promise<IHTTPResponse> {

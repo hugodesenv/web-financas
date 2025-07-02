@@ -1,7 +1,7 @@
 import { tryUpdatePurpose } from "@/service/purposeService";
 import { TPurpose } from "@/type/purposeTypes";
 import { MESSAGES } from "@/utils/constantsUtils";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 
 export async function updatePurposeUseCase(purpose: TPurpose): Promise<IHTTPResponse> {
   if (!purpose.id) {

@@ -1,6 +1,6 @@
-import { tryUpdatePerson } from "@/config/service/personService";
+import { tryUpdatePerson } from "@/service/personService";
+import { IHTTPResponse } from "@/type/commomTypes";
 import { TPerson } from "@/type/personTypes";
-import { IHTTPResponse } from "@/utils/typesUtils";
 
 export async function updatePersonCase(person: TPerson): Promise<IHTTPResponse> {
   if (!person.id) {

@@ -18,3 +18,7 @@ export enum EnRoute {
 export enum EnCookieKey {
   JWT = 'jwt'
 };
+
+export type TPropsSearchScreen = {
+  onSelect: (data: any) => void;
+}

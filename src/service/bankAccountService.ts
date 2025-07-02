@@ -1,6 +1,6 @@
 import axiosInstance from "@/config/axiosConfig";
 import { TBankAccount } from "@/type/bankAccountTypes";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 
 const URL_BASE = 'api/bankaccount';
 
@@ -14,6 +14,15 @@ export async function tryFindAllBankAccount(): Promise<IHTTPResponse> {
       data: [],
       message: "Nenhum registro encontrado"
     }
+  }
+}
+
+export async function tryFIndByIDBankAccount(id: number): Promise<IHTTPResponse> {
+  try {
+    const { data: axiosData } = await axiosInstance.get(URL_BASE, { params: { id } });
+    return { success: true, data: axiosData?.data };
+  } catch (e) {
+    return { success: false }
   }
 }
 

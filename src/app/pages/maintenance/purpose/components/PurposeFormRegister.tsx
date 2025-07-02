@@ -7,7 +7,7 @@ import { TPurpose, TPurposeDefaultValue } from "@/type/purposeTypes";
 import { createPurposeUseCase } from "@/use/purpose/create";
 import { updatePurposeUseCase } from "@/use/purpose/update";
 import { MESSAGES } from "@/utils/constantsUtils";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 import { forwardRef, useImperativeHandle } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";

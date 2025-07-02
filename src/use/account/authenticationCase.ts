@@ -2,7 +2,7 @@
 import { tryAuthentication } from "@/service/accountService";
 import { TLoginDTO } from "@/type/accountTypes";
 import { saveSession } from "@/utils/sessionUtils";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 
 export async function authenticationCase(payload: TLoginDTO): Promise<IHTTPResponse> {
   const data = await tryAuthentication(payload.username, payload.password);

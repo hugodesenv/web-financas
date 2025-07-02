@@ -131,6 +131,8 @@ export default function Home() {
 
   return (
     <MyLayout>
+      <h1 style={{ color: "red" }}>Criar esquema de Charts Js, consulta de lançamentos, separaçao por finalidade etc.
+        Tentar trazer em apenas um e depois sair destrinchando tudo.</h1>
       <form id="searchHomeForm" onSubmit={handleSubmit(onTopbarSubmit)}>
         <MyTopBar title="Home">
           <MyInputText title="" type="date" {...register('selected_date')} />

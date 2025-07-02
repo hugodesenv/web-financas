@@ -1,6 +1,6 @@
 import axiosInstance from "@/config/axiosConfig";
 import { TPerson } from "@/type/personTypes";
-import { IHTTPResponse } from "@/utils/typesUtils";
+import { IHTTPResponse } from "@/type/commomTypes";
 
 export interface ITryFindAllPersonFilter {
   name?: string;

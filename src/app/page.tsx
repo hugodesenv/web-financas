@@ -7,7 +7,7 @@ import MyInputText from '@/components/text/MyInputText';
 import { TLoginDTO } from '@/type/accountTypes';
 import { authenticationCase } from '@/use/account/authenticationCase';
 import { MESSAGES } from '@/utils/constantsUtils';
-import { EnRoute } from '@/utils/typesUtils';
+import { EnRoute } from '@/type/commomTypes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';

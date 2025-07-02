@@ -6,7 +6,7 @@ import MyInputText from '@/components/text/MyInputText';
 import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
 import { EnEntryMode, EnEntryType, TEntryDefaultValue, TEntry } from '@/type/entryTypes';
 import { createEntryCase } from '@/use/entry/create';
-import { IHTTPResponse } from '@/utils/typesUtils';
+import { IHTTPResponse } from '@/type/commomTypes';
 import { message } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';

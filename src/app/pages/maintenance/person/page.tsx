@@ -10,7 +10,7 @@ import { findByIDPersonCase } from '@/use/person/findByID';
 import { useRef, useState } from 'react';
 import PersonFormRegister from './components/PersonFormRegister';
 import PersonSearch from './components/PersonSearch';
-import { TPersonDefaultValues } from '@/type/personTypes';
+import { TPerson, TPersonDefaultValues } from '@/type/personTypes';
 
 export default function Person() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -40,8 +40,8 @@ export default function Person() {
           <MyTabView titles={[{ caption: 'Consulta' }, { caption: 'Digitação' }]} ref={formTab}>
             <PersonSearch
               ref={formSearchRef}
-              onSelected={async (id) => {
-                id && (await loadPerson(id));
+              onSelect={async (person: TPerson) => {
+                person.id && (await loadPerson(person.id));
               }}
             />
             <PersonFormRegister ref={formRef} />

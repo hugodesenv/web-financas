@@ -4,10 +4,17 @@ import MyInputText from "@/components/text/MyInputText";
 import { TBankAccount } from "@/type/bankAccountTypes";
 import { createBankAccountUse } from "@/use/bankAccount/create";
 import { message } from "antd";
+import { forwardRef, useImperativeHandle } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { FaRegSave } from "react-icons/fa";
 
-export function BankAccountRegister() {
+const BankAccountRegister = forwardRef((props, ref) => {
+  useImperativeHandle(ref, () => {
+    return {
+      populateForm
+    };
+  });
+
   const { handleSubmit, register, reset } = useForm();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -27,6 +34,10 @@ export function BankAccountRegister() {
     reset();
   }
 
+  const populateForm = (bankAccount: TBankAccount) => {
+    reset(bankAccount);
+  };
+
   return <>
     {contextHolder}
     <MyForm id="bank-account-register" onSubmit={handleSubmit(onValid)}>
@@ -41,4 +52,6 @@ export function BankAccountRegister() {
       />
     </MyForm>
   </>
-}
+});
+
+export default BankAccountRegister;

@@ -39,6 +39,7 @@ export default function Purpose() {
 
   return (
     <MyLayout>
+      <h1 style={{ color: "red" }}>Verificar a exclusão</h1>
       <LayoutTopBar title="Finalidades" childrenBefore={FormButton}>
         <MyTabView ref={formTab} titles={[
           { caption: 'Consulta' },

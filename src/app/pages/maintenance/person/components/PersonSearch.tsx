@@ -3,28 +3,26 @@
 import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalConfirmation';
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
+import { TPropsSearchScreen } from '@/type/commomTypes';
 import { TPerson } from '@/type/personTypes';
 import { deletePersonCase } from '@/use/person/delete';
 import { findAllPersonCase } from '@/use/person/findAll';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
-interface IProps {
-  onSelected: (id?: number) => void;
-}
-
-const PersonSearch = forwardRef((props: IProps, ref) => {
+const PersonSearch = forwardRef((props: TPropsSearchScreen, ref) => {
   useImperativeHandle(ref, function () {
     return {
       onSearch,
     };
   });
 
+  // states
   const [personData, setPersonData] = useState<TPerson[]>([]);
-
   const { isOpen, stepIndex, step, onConfirm, onCancel, onClose, prepareSteps } = useMyModalConfirmation({
     onSuccess: async () => await handleDelete(),
   });
 
+  // deleting peson
   async function handleDelete() {
     let isDeleted = await deletePersonCase(step.data ?? 0);
 
@@ -33,28 +31,19 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
     }
   }
 
+  // searching all person results
   async function onSearch() {
     const { data } = await findAllPersonCase({ name: "" });
     setPersonData(data);
   }
 
-  function onPersonSelected(index: number) {
+  // event when clicked on the row
+  function onSelect(index: number) {
     const person = personData[index];
-    props.onSelected(person.id);
+    props.onSelect(person);
   }
 
-  const datasource = [
-    ...personData.map((person) => {
-      return {
-        data: [
-          //{ checked: true },
-          { text: person.id },
-          { text: person.name },
-        ],
-      } as IMyTableWrapper;
-    }),
-  ] as IMyTableWrapper[];
-
+  // event when clicked to delete the person
   function onDeleteClick(dataIndex: number) {
     let { id } = personData[dataIndex];
     let steps: IModalConfirmStep[] = [
@@ -68,8 +57,22 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
     prepareSteps(steps, id);
   }
 
+  // transforming my data into dataSource type
+  const datasource = [
+    ...personData.map((person) => {
+      return {
+        data: [
+          //{ checked: true },
+          { text: person.id },
+          { text: person.name },
+        ],
+      } as IMyTableWrapper;
+    }),
+  ] as IMyTableWrapper[];
+
   return (
     <>
+      <h1 style={{ color: "red" }}>Ver o esquema de exclusao</h1>
       <MyTable
         key="tb-person-search"
         columns={[
@@ -78,7 +81,7 @@ const PersonSearch = forwardRef((props: IProps, ref) => {
           { key: 'name-person-search', label: 'Nome' },
         ]}
         datasource={datasource}
-        onSelectedRow={onPersonSelected}
+        onSelectedRow={onSelect}
         //onChecked={(rowIndex: number) => console.log('selecionou a linha', rowIndex)}
         //onCheckAll={(isChecked: boolean) => console.log('Tratar o marca desmarca todos aqui fora')}
         columnAction={[{ title: 'Excluir', onClick: (rowIndex) => onDeleteClick(rowIndex) }]}
