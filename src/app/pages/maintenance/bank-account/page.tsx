@@ -40,14 +40,13 @@ export default function BankAccount() {
 
   // loading single bank account
   async function loadbyID(id: number) {
-    const { data } = await findByIDBankAccountUse(id);
+    const { data } = await findByIDBankAccountUse(id); 
     formRef.current.populateForm(data);
     formTab.current.setCurrentIndex(1);
   }
 
   return <>
     <MyLayout>
-      <h1 style={{ color: "red" }}>Tratar a edição e exclusão</h1>
       <LayoutTopBar title="Conta bancária" childrenBefore={buttons}>
         <MyTabView titles={titleTab} ref={formTab}>
           <BankAccountSearch

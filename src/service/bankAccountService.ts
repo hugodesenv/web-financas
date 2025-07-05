@@ -19,7 +19,7 @@ export async function tryFindAllBankAccount(): Promise<IHTTPResponse> {
 
 export async function tryFIndByIDBankAccount(id: number): Promise<IHTTPResponse> {
   try {
-    const { data: axiosData } = await axiosInstance.get(URL_BASE, { params: { id } });
+    const { data: axiosData } = await axiosInstance.get(`${URL_BASE}/${id}`);
     return { success: true, data: axiosData?.data };
   } catch (e) {
     return { success: false }

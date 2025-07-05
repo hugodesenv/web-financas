@@ -2,7 +2,6 @@
 
 import MyButton from '@/components/button/myButton/MyButton';
 import MyCard from '@/components/card/my-card/MyCardBox';
-import MyTotalizationCard from '@/components/card/my-totalization-card/MyTotalizationCard';
 import MyLayout from '@/components/layout/MyLayout';
 import MyTopBar from '@/components/menu/topBar/MyTopBar';
 import MyInputText from '@/components/text/MyInputText';
@@ -13,8 +12,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { MdOutlineSearch } from 'react-icons/md';
 import HomeAccountBalance from './components/HomeAccountBalance';
 import HomeDrawerTotalizations, { ITableData } from './components/HomeDrawerTotalizations';
-import HomeGroupExpenses from './components/HomeGroupExpenses';
 import './style.css';
+import { HomeChartEntries } from './components/HomeChartEntries';
 
 export default function Home() {
   const [drawerTotalization, setDrawerTotalization] = useState({ data: [] as ITableData[][], isOpen: false, title: '' });
@@ -131,8 +130,6 @@ export default function Home() {
 
   return (
     <MyLayout>
-      <h1 style={{ color: "red" }}>Criar esquema de Charts Js, consulta de lançamentos, separaçao por finalidade etc.
-        Tentar trazer em apenas um e depois sair destrinchando tudo.</h1>
       <form id="searchHomeForm" onSubmit={handleSubmit(onTopbarSubmit)}>
         <MyTopBar title="Home">
           <MyInputText title="" type="date" {...register('selected_date')} />
@@ -142,28 +139,13 @@ export default function Home() {
         </MyTopBar>
       </form>
       <div className="page-display-gap page-content-body">
-        <MyCard title={{ caption: 'Totalizadores' }}>
-          <div className="page-totalization-content">
-            <MyTotalizationCard
-              title="Ganhos (+)"
-              content={9}
-              onClick={(e: any) => _onClickTotalization(e, 'Minhas receitas')}
-              className="my-color-blue"
-            />
-            <MyTotalizationCard
-              title="Gastos (-)"
-              content={4}
-              onClick={(e: any) => _onClickTotalization(e, 'Minhas despesas')}
-              className="my-color-red"
-            />
-            <MyTotalizationCard title="Saldo (=)" content={9 - 4} className="my-color-gray" />
-          </div>
+        <MyCard title={{ caption: 'Comparativo entre mêses' }}>
+          <HomeChartEntries />
         </MyCard>
-        <MyCard title={{ caption: 'Estatísticas' }}></MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">
             <MyCard title={{ caption: 'Total por finalidade' }}>
-              <HomeGroupExpenses data={{}} />
+              <p>Incluir a totalização pela finalidade aqui</p>
             </MyCard>
           </div>
           <div className="page-card-balance">
