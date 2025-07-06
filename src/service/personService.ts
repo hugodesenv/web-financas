@@ -44,7 +44,7 @@ export async function tryDeletePerson(id: number): Promise<IHTTPResponse> {
 
 export async function tryFindByIDPerson(id: number): Promise<IHTTPResponse> {
   try {
-    let { data: axiosData } = await axiosInstance.get(`api/person/`, { params: { id } });
+    let { data: axiosData } = await axiosInstance.get(`api/person/${id}`);
     return { success: true, data: axiosData.data };
   } catch (_) {
     return { success: false };

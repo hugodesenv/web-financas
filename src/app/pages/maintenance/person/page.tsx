@@ -29,6 +29,7 @@ export default function Person() {
 
   async function loadPerson(personID: number) {
     const { data } = await findByIDPersonCase(personID);
+    console.log("Data", data);
     formRef.current.populateForm(data);
     formTab.current.setCurrentIndex(1);
   }
