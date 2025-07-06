@@ -31,6 +31,11 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
     props.onSelect(bank);
   }
 
+  // event when click on row table to delete register
+  async function onDelete(index: number) {
+    console.log("Tratar a exclusao. Item selecionado: ", bankAccount[index]);
+  }
+
   // transforming results in datasource
   const _dataSource: IMyTableWrapper[] = bankAccount?.map(({ id, description }) => {
     return {
@@ -48,6 +53,7 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
         columns={_columns}
         datasource={_dataSource}
         onSelectedRow={onSelect}
+        columnAction={[{ title: 'Excluir', onClick: (r) => onDelete(r) }]}
       />
     </>
   );

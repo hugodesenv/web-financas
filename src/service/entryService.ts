@@ -1,5 +1,5 @@
 import axiosInstance from "@/config/axiosConfig";
-import { TEntry } from "@/type/entryTypes";
+import { TEntry, TEntryAPICreate } from "@/type/entryTypes";
 import { IHTTPResponse } from "@/type/commomTypes";
 const URL_BASE = 'api/entry';
 
@@ -9,7 +9,15 @@ export async function tryFindAllEntry(): Promise<IHTTPResponse> {
 }
 
 export async function tryCreateEntry(payload: TEntry): Promise<IHTTPResponse> {
-  const { data: axiosData } = await axiosInstance.post(URL_BASE, payload);
+  let data: TEntryAPICreate = {
+    ...payload,
+    person_id: payload.person.id ?? 0,
+    purpose_id: payload.purpose.id ?? 0,
+    bank_account_id: payload.bankAccount.id ?? 0,
+    observation: "",
+  }
+
+  const { data: axiosData } = await axiosInstance.post(URL_BASE, data);
 
   return {
     success: axiosData.statusCode === 200,

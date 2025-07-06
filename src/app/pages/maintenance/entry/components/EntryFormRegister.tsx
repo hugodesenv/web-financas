@@ -13,13 +13,12 @@ import dayjs from 'dayjs';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FaRegSave } from 'react-icons/fa';
 
+const _defaultValue = { ...TEntryDefaultValue, issue_date: dayjs().format("YYYY-MM-DD") }
+
 export default function EntryFormRegister() {
   const [messageApi, contextHolder] = message.useMessage();
   const { handleSubmit, setValue, register, reset } = useForm<TEntry>({
-    defaultValues: {
-      ...TEntryDefaultValue,
-      issue_date: dayjs().format("YYYY-MM-DD")
-    }
+    defaultValues: _defaultValue
   });
 
   /**
@@ -29,6 +28,8 @@ export default function EntryFormRegister() {
    */
   const onSubmit: SubmitHandler<TEntry> = async (data) => {
     let response: IHTTPResponse = { success: false };
+
+    console.log('data', data);
 
     if (data.id > 0) {
       console.log("Incluir o modo de alteração aqui.");
@@ -42,7 +43,11 @@ export default function EntryFormRegister() {
     }
 
     messageApi.open({ content: "Cadastro realizado com sucesso", type: "success" });
-    reset();
+    populateForm(_defaultValue);
+  }
+
+  function populateForm(data: typeof _defaultValue) {
+    reset(data);
   }
 
   return (
@@ -55,7 +60,7 @@ export default function EntryFormRegister() {
               type='person'
               id='person-register-input'
               title='Pessoa'
-              onSelect={(_, { value }) => setValue('person_id', value as number)}
+              onSelect={(_, { value }) => setValue('person.id', value as number)}
             />
           </div>
           <MyInputText {...register('issue_date')} title='Data de emissão' type='date' />
@@ -65,17 +70,19 @@ export default function EntryFormRegister() {
             type='bank_account'
             title='Conta bancária'
             id='purpose-register-input'
-            onSelect={(_, { value }) => setValue('bank_account_id', value as number)}
+            onSelect={(_, { value }) => setValue('bankAccount.id', value as number)}
           />
           <MyCustomSelect
             type='purpose'
             title='Finalidade'
             id='purpose-register-input'
-            onSelect={(_, { value }) => setValue('purpose_id', value as number)}
+            onSelect={(_, { value }) => setValue('purpose.id', value as number)}
           />
         </MyHorizontalStack>
         <MyHorizontalStack>
-          <MySelect title='Modo' onChange={(e) => setValue('mode', e.target.value as EnEntryMode)} >
+          <MySelect title='Modo' onChange={(e) => {
+            setValue('mode', e.target.value as EnEntryMode)
+          }} >
             <option value={EnEntryMode.CONFIRMED}>Confirmado</option>
             <option value={EnEntryMode.FORECAST}>Previsão</option>
           </MySelect>

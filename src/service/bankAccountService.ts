@@ -37,3 +37,15 @@ export async function tryCreateBankAccount(bank: TBankAccount): Promise<IHTTPRes
     }
   }
 }
+
+export async function tryUpdateBankAccount(bank: TBankAccount): Promise<IHTTPResponse> {
+  try {
+    const { data: response } = await axiosInstance.put(URL_BASE, bank);
+    return { success: true, data: response?.data }
+  } catch (e) {
+    return {
+      success: false,
+      message: "Erro na alteração da conta bancária"
+    }
+  }
+}

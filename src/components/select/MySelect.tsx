@@ -8,7 +8,7 @@ function MySelect(props: IProps) {
   return <>
     <div className="wrapper-my-input-text" style={{ flex: 1 }}>
       {props.title && <label>{props.title}</label>}
-      <select className='my-select'>
+      <select {...props} className='my-select'>
         {props.children}
       </select>
     </div >

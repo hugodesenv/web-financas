@@ -1,3 +1,7 @@
+import { TBankAccount, TBankAccountDefaultValues } from "./bankAccountTypes";
+import { TPerson, TPersonDefaultValues } from "./personTypes";
+import { TPurpose, TPurposeDefaultValue } from "./purposeTypes";
+
 export enum EnEntryType {
   PAYABLE = "PAYABLE",
   RECEIVABLE = "RECEIVABLE"
@@ -10,13 +14,12 @@ export enum EnEntryMode {
 
 export interface TEntry {
   id: number;
-  person_id: number;
-  purpose_id: number;
-  total: string;
+  person: TPerson,
+  purpose: TPurpose,
+  bankAccount: TBankAccount,
+  total: number;
   type: EnEntryType;
   mode: EnEntryMode,
-  bank_account_id: number;
-  created_at: string;
   observation?: string;
   issue_date: string;
 }
@@ -24,12 +27,35 @@ export interface TEntry {
 export const TEntryDefaultValue: TEntry = {
   mode: EnEntryMode.CONFIRMED,
   type: EnEntryType.RECEIVABLE,
-  total: "0.00",
+  person: TPersonDefaultValues,
+  purpose: TPurposeDefaultValue,
+  bankAccount: TBankAccountDefaultValues,
+  total: 0,
   id: 0,
-  person_id: 0,
-  purpose_id: 0,
-  bank_account_id: 0,
-  created_at: "",
   issue_date: "",
-  observation: "",
+}
+
+export type TEntryAPIResponse = {
+  id: number;
+  issue_date: string;
+  type: string;
+  person_id: number;
+  person_name: string;
+  purpose_id: number;
+  purpose_description: string;
+  mode: string;
+  bank_account_id: number;
+  bank_account_description: string;
+  total: number;
+};
+
+export type TEntryAPICreate = {
+  type: string;
+  person_id: number;
+  purpose_id: number;
+  bank_account_id: number;
+  issue_date: string;
+  observation: string;
+  mode: string;
+  total: number;
 }

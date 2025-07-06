@@ -1,8 +1,9 @@
 import MyFloattingButton from "@/components/button/myFloattingButton/MyFloattingButton";
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
-import { TBankAccount } from "@/type/bankAccountTypes";
+import { TBankAccount, TBankAccountDefaultValues } from "@/type/bankAccountTypes";
 import { createBankAccountUse } from "@/use/bankAccount/create";
+import { updateBankAccountUse } from "@/use/bankAccount/update";
 import { message } from "antd";
 import { forwardRef, useImperativeHandle } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -19,19 +20,23 @@ const BankAccountRegister = forwardRef((props, ref) => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const onValid = async (data: FieldValues) => {
-    const payload: TBankAccount = {
+    let payload: TBankAccount = {
       description: data.description
     };
 
-    const { success } = await createBankAccountUse(payload);
+    if (!data?.id) {
+      var { success } = await createBankAccountUse(payload);
+    } else {
+      var { success } = await updateBankAccountUse(payload, data.id);
+    }
 
     if (!success) {
-      messageApi.open({ content: "Não foi possível incluir a conta bancária", type: "error" });
+      messageApi.open({ content: "Houve uma falha na operação. Verifique ou tente novamente!", type: "error" });
       return;
     }
 
-    messageApi.open({ content: "Cadastro realizado com sucesso", type: "success" });
-    reset();
+    messageApi.open({ content: "Processo realizado com sucesso", type: "success" });
+    populateForm(TBankAccountDefaultValues)
   }
 
   const populateForm = (bankAccount: TBankAccount) => {
@@ -43,8 +48,8 @@ const BankAccountRegister = forwardRef((props, ref) => {
     <MyForm id="bank-account-register" onSubmit={handleSubmit(onValid)}>
       <MyInputText
         title="Descrição"
-        {...register('description')}
         required
+        {...register('description')}
       />
       <MyFloattingButton
         attributes={{ type: 'submit' }}

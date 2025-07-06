@@ -72,7 +72,6 @@ const PersonSearch = forwardRef((props: TPropsSearchScreen, ref) => {
 
   return (
     <>
-      <h1 style={{ color: "red" }}>Ver o esquema de exclusao</h1>
       <MyTable
         key="tb-person-search"
         columns={[

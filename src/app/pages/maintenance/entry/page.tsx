@@ -16,9 +16,7 @@ const _columnsTitle = [{ caption: 'Consulta' }, { caption: 'Digitação' }];
 export default function Entry() {
   const formSearchRef = useRef(null as any);
   const [openFilter, setOpenFilter] = useState(false);
-  const [filterData, setFilterData] = useState({
-    issueEnd: dayjs('2999-31-12').toDate()
-  } as IEntryFilterData);
+  const [filterData, setFilterData] = useState({ issueEnd: dayjs('2999-31-12').toDate() } as IEntryFilterData);
 
   const FormButton = (
     <MyHorizontalStack>
@@ -51,11 +49,10 @@ export default function Entry() {
 
   return (
     <>
-      <h1 style={{ color: "red" }}>Fazer o esquema de alteração, consulta, exclusão, novo</h1>
       <MyLayout>
         <LayoutTopBar title="Lançamentos" childrenBefore={FormButton}>
           <MyTabView titles={_columnsTitle}>
-            <EntrySearch />
+            <EntrySearch ref={formSearchRef} />
             <EntryFormRegister />
           </MyTabView>
         </LayoutTopBar>
