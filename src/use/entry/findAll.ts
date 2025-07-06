@@ -2,6 +2,8 @@ import { tryFindAllEntry } from "@/service/entryService";
 import { TEntry, TEntryAPIResponse } from "@/type/entryTypes";
 
 export async function findAllEntryUseCase(): Promise<TEntry[]> {
+  console.log('find all entries');
+  
   const apiResponse = await tryFindAllEntry();
 
   const entryResponse: TEntry[] = apiResponse?.data.map((e: TEntryAPIResponse) => {

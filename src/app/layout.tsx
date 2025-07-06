@@ -1,14 +1,15 @@
+import ReactQueryProvider from "@/components/utils/ReactQueryProvider";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import "../components/utils/myGlobalStyle.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Skedol Home",
+  title: "Skedol - Bem vindo",
   description: "Controle suas dívidas",
 };
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -17,7 +18,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
+      </body>
     </html>
   )
 }
