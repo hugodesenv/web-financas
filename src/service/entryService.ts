@@ -1,10 +1,10 @@
 import axiosInstance from "@/config/axiosConfig";
-import { TEntry, TEntryAPICreate } from "@/type/entryTypes";
+import { TEntry, TEntryAPICreate, TEntryFindAllParams } from "@/type/entryTypes";
 import { IHTTPResponse } from "@/type/commomTypes";
 const URL_BASE = 'api/entry';
 
-export async function tryFindAllEntry(): Promise<IHTTPResponse> {
-  const { data: axiosData } = await axiosInstance.get(URL_BASE);
+export async function tryFindAllEntry(params: TEntryFindAllParams): Promise<IHTTPResponse> {
+  const { data: axiosData } = await axiosInstance.get(URL_BASE, { params });
   return { success: true, data: axiosData?.data };
 }
 

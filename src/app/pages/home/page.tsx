@@ -16,11 +16,12 @@ import { HomeChartEntries } from './components/HomeChartEntries';
 import './style.css';
 
 export default function Home() {
-  const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
+  // hooks.
+  const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'))
 
   const { data, isLoading, isError } = useQuery({
-    queryFn: async () => await findAllEntryUseCase(),
-    queryKey: ["entries"],
+    queryKey: ["entries", selectedDate],
+    queryFn: async () => await findAllEntryUseCase({ issue_date: selectedDate }),
   });
 
   const { register, handleSubmit } = useForm({
@@ -29,10 +30,13 @@ export default function Home() {
     },
   });
 
+  // functions.
   const onTopbarSubmit: SubmitHandler<any> = async (data: { selected_date: string }) => {
-    if (dayjs(data.selected_date).isValid()) {
-      setSelectedDate(data.selected_date);
-    }
+    const selectedDate = dayjs(data.selected_date);
+
+    if (!selectedDate.isValid()) return;
+
+    setSelectedDate(data.selected_date);
   };
 
   return (
@@ -40,14 +44,14 @@ export default function Home() {
       <form id="searchHomeForm" onSubmit={handleSubmit(onTopbarSubmit)}>
         <MyTopBar title="Home">
           <MyInputText title="" type="date" {...register('selected_date')} />
-          <MyButton theme="dark" onClick={() => { }} style={{ minWidth: 'min-content' }}>
+          <MyButton isLoading={isLoading} theme="dark" type='submit' style={{ minWidth: 'min-content' }}>
             <MdOutlineSearch />
           </MyButton>
         </MyTopBar>
       </form>
       <div className="page-display-gap page-content-body">
         <MyCard title={{ caption: 'Comparativo entre mêses' }}>
-          <HomeChartEntries entries={data ?? []} />
+          <HomeChartEntries entries={data ?? []} base_date={selectedDate} />
         </MyCard>
         <div className="page-display-gap page-wrapper-balance">
           <div className="page-card-bills-by-type">

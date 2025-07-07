@@ -17,6 +17,11 @@ interface IGetDataSets {
   free: number[]
 }
 
+interface IProps {
+  entries: TEntry[],
+  base_date: string,
+}
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -42,19 +47,25 @@ export const options = {
 };
 
 const _emptyLabelArray = Array.from({ length: 6 });
-const _subtractMonth = (index: number) => dayjs().subtract(index, 'month');
+const _subtractMonth = (index: number, base_date: string) => dayjs(base_date).subtract(index, 'month');
 
-const buildLabels = _emptyLabelArray.reduce((prev: string[], curr, index: number) => {
+const buildLabels = (base_date: string) => _emptyLabelArray.reduce((prev: string[], curr, index: number) => {
   prev.push(
-    _subtractMonth(index).format('MM/YYYY')
+    _subtractMonth(index, base_date).format('MM/YYYY')
   );
 
   return prev;
 }, []);
 
-function buildDatasets(entries: TEntry[]) {
+/**
+ * 
+ * @param entries the main data of cards.
+ * @param base_date it will subtract the base_date less 6 months to represents on card.
+ * @returns 
+ */
+function buildDatasets(entries: TEntry[], base_date: string) {
   const resultData = _emptyLabelArray.reduce<IGetDataSets>((prev, _, index) => {
-    const filter_key = _subtractMonth(index);
+    const filter_key = _subtractMonth(index, base_date);
 
     const dataFiltered = entries.filter(({ issue_date }) => {
       const issueDate = dayjs(issue_date);
@@ -96,14 +107,14 @@ function buildDatasets(entries: TEntry[]) {
   ];
 }
 
-export function HomeChartEntries(props: { entries: TEntry[] }) {
+export function HomeChartEntries(props: IProps) {
   const isMobile = useMediaQuery({ maxWidth: '768px' });
 
   return <Bar
     options={options}
     data={{
-      labels: buildLabels,
-      datasets: buildDatasets(props.entries)
+      labels: buildLabels(props.base_date),
+      datasets: buildDatasets(props.entries, props.base_date)
     }}
     height={isMobile === true ? '600px' : '70vh'}
   />;

@@ -59,3 +59,8 @@ export type TEntryAPICreate = {
   mode: string;
   total: number;
 }
+
+export type TEntryFindAllParams = {
+  initial_issue_date: string;
+  final_issue_date: string;
+}
