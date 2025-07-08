@@ -12,8 +12,16 @@ const tableColumns: IMyTableColumn[] = [
   { label: "Saldo (=)", key: "htbp-total", style: { maxWidth: '40px' } },
 ];
 
+type IBuildEntriesByPurpose = {
+  [purposeID: number]: {
+    description: string;
+    receive: number;
+    pay: number;
+  }
+}
+
 const buildEntriesByPurpose = (entries: TEntry[]) => {
-  return entries.reduce((prev, curr: TEntry) => {
+  const res = entries.reduce<IBuildEntriesByPurpose>((prev, curr: TEntry) => {
     const purposeID = curr.purpose.id ?? 0;
 
     if (!prev[purposeID]) {
@@ -36,7 +44,9 @@ const buildEntriesByPurpose = (entries: TEntry[]) => {
     }
 
     return prev;
-  }, {} as any);
+  }, {});
+
+  return res;
 }
 
 export const HomeTotalByPurpose = ({ entries }: IProps) => {
