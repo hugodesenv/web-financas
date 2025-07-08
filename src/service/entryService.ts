@@ -1,6 +1,7 @@
 import axiosInstance from "@/config/axiosConfig";
-import { TEntry, TEntryAPICreate, TEntryFindAllParams } from "@/type/entryTypes";
 import { IHTTPResponse } from "@/type/commomTypes";
+import { TEntry, TEntryAPICreate, TEntryFindAllParams } from "@/type/entryTypes";
+import dayjs from "dayjs";
 const URL_BASE = 'api/entry';
 
 export async function tryFindAllEntry(params: TEntryFindAllParams): Promise<IHTTPResponse> {
@@ -23,4 +24,12 @@ export async function tryCreateEntry(payload: TEntry): Promise<IHTTPResponse> {
     success: axiosData.statusCode === 200,
     data: axiosData?.data
   };
+}
+
+export const entriesObjectFilteringBySpecificDate = (specificDate: string, entries: TEntry[]) => {
+  const date = dayjs(specificDate);
+  return entries?.filter(({ issue_date }) => {
+    const issueDate = dayjs(issue_date);
+    return issueDate.month() == date.month() && issueDate.year() == date.year();
+  });
 }

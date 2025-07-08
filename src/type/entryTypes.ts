@@ -61,6 +61,6 @@ export type TEntryAPICreate = {
 }
 
 export type TEntryFindAllParams = {
-  initial_issue_date: string;
-  final_issue_date: string;
+  initial_issue_date?: string;
+  final_issue_date?: string;
 }

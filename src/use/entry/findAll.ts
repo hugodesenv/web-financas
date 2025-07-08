@@ -1,21 +1,8 @@
 import { tryFindAllEntry } from "@/service/entryService";
 import { TEntry, TEntryAPIResponse, TEntryFindAllParams } from "@/type/entryTypes";
-import dayjs from "dayjs";
 
-interface IProps {
-  issue_date: string;
-}
-
-export async function findAllEntryUseCase({ issue_date }: IProps): Promise<TEntry[]> {
-  // rule: today less 6 months. If some day it changes, please check this rule at own page.
-  const initial_issue_date = dayjs(issue_date).subtract(6, 'month');
-
-  const paramsAPI: TEntryFindAllParams = {
-    initial_issue_date: initial_issue_date.format('YYYY-MM-DD'),
-    final_issue_date: issue_date
-  }
-
-  const apiResponse = await tryFindAllEntry(paramsAPI);
+export async function findAllEntryUseCase(props: TEntryFindAllParams): Promise<TEntry[]> {
+  const apiResponse = await tryFindAllEntry(props);
 
   const entryResponse: TEntry[] = apiResponse?.data.map((e: TEntryAPIResponse) => {
     return {

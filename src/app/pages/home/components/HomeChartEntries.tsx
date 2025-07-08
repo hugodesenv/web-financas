@@ -1,3 +1,4 @@
+import { entriesObjectFilteringBySpecificDate } from '@/service/entryService';
 import { EnEntryType, TEntry } from '@/type/entryTypes';
 import {
   BarElement,
@@ -67,10 +68,7 @@ function buildDatasets(entries: TEntry[], base_date: string) {
   const resultData = _emptyLabelArray.reduce<IGetDataSets>((prev, _, index) => {
     const filter_key = _subtractMonth(index, base_date);
 
-    const dataFiltered = entries.filter(({ issue_date }) => {
-      const issueDate = dayjs(issue_date);
-      return issueDate.month() == filter_key.month() && issueDate.year() == filter_key.year();
-    });
+    const dataFiltered = entriesObjectFilteringBySpecificDate(filter_key.toISOString(), entries);
 
     const receive = dataFiltered?.filter(({ type }) => type === EnEntryType.RECEIVABLE);
     const pay = dataFiltered?.filter(({ type }) => type === EnEntryType.PAYABLE);

@@ -26,7 +26,7 @@ const EntrySearch = forwardRef((props, ref) => {
   });
 
   async function onSearch() {
-    const entries = await findAllEntryUseCase();
+    const entries = await findAllEntryUseCase({ initial_issue_date: "", final_issue_date: "" });
     setEntries(entries);
   }
 
