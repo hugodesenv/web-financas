@@ -1,7 +1,7 @@
 import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
-import { TBankAccount } from "@/type/bankAccountTypes";
-import { TPropsSearchScreen } from "@/type/commomTypes";
-import { findAllBankAccountUseCase } from "@/use/bankAccount/findAll";
+import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
+import { TPropsSearchScreen } from "@/utils/commomTypes";
+import { findAllBankAccountUseCase } from "@/features/bankAccount/useCase/findAllBankAccountCase";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 const _columns: IMyTableColumn[] = [

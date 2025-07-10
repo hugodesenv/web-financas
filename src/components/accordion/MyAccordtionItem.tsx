@@ -4,15 +4,10 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 interface IProps {
   title: string;
   children: any;
-  defaultOpen?: boolean;
 }
 
 export default function MyAccordionItem(props: IProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    setIsOpen(props?.defaultOpen ?? false);
-  }, []);
 
   const style = {
     content: {

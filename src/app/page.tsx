@@ -4,10 +4,10 @@ import MyAlert from '@/components/alert/MyAlert';
 import { useMyAlert } from '@/components/alert/hook';
 import MyButton from '@/components/button/myButton/MyButton';
 import MyInputText from '@/components/text/MyInputText';
-import { TLoginDTO } from '@/type/accountTypes';
-import { authenticationCase } from '@/use/account/authenticationCase';
+import { TLoginDTO } from '@/features/account/accountTypes';
+import { authenticationCase } from '@/features/account/useCase/authenticationCase';
 import { MESSAGES } from '@/utils/constantsUtils';
-import { EnRoute } from '@/type/commomTypes';
+import { EnRoute } from '@/utils/commomTypes';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -61,10 +61,10 @@ export default function Login() {
             </div>
           </form>
           <div className="login-button-wrapper login-gap">
-            <MyButton type="submit" form="loginform" isLoading={isSubmitting}>
+            <MyButton type="submit" form="loginform" isloading={isSubmitting}>
               Acessar
             </MyButton>
-            <MyButton isLoading={isSubmitting}>Esqueci a senha</MyButton>
+            <MyButton isloading={isSubmitting}>Esqueci a senha</MyButton>
           </div>
         </div>
         <div className="login-information" />

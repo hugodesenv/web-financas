@@ -1,9 +1,9 @@
 import MyFloattingButton from "@/components/button/myFloattingButton/MyFloattingButton";
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
-import { TBankAccount, TBankAccountDefaultValues } from "@/type/bankAccountTypes";
-import { createBankAccountUse } from "@/use/bankAccount/create";
-import { updateBankAccountUse } from "@/use/bankAccount/update";
+import { TBankAccount, TBankAccountDefaultValues } from "@/features/bankAccount/bankAccountTypes";
+import { createBankAccountUse } from "@/features/bankAccount/useCase/createBankAccountCase";
+import { updateBankAccountUse } from "@/features/bankAccount/useCase/updateBankAccountCase";
 import { message } from "antd";
 import { forwardRef, useImperativeHandle } from "react";
 import { FieldValues, useForm } from "react-hook-form";

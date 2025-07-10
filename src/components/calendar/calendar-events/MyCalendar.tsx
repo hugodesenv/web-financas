@@ -3,7 +3,7 @@
 import MyButton from "@/components/button/myButton/MyButton";
 import MySelect from "@/components/select/MySelect";
 import { DateUtils } from "@/utils/dateUtils";
-import { useState } from "react";
+import { useId, useState } from "react";
 import ListDays from "./components/MyCalendarDaysComponent";
 import MyCalendarSelectYears from "./components/MyCalendarSelectYears";
 import { IEventsDay, dayOfWeekTitle, monthsFromYear } from "./myCalendarUtils";
@@ -12,7 +12,7 @@ import "./style.css";
 const moment = DateUtils.momentBR();
 
 function TitleColumns() {
-  const renderTitle = dayOfWeekTitle.map(({ label }) => <th>{label}</th>);
+  const renderTitle = dayOfWeekTitle.map(({ label }) => <th key={useId()}>{label}</th>);
   return <tr>{renderTitle}</tr>;
 }
 

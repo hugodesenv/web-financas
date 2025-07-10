@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useEffect, useId, useImperativeHandle, useState } from "react";
 import "./style.css";
 
 export interface ITitle {
@@ -42,6 +42,7 @@ const MyTabView = forwardRef((props: IProps, ref) => {
         {
           props.titles?.map((title, idx: number) => (
             <li
+              key={useId()}
               className={currentIndex === idx ? "mtv-title-selected" : ""}
               onClick={(e) => onTitleClick(e, idx)}>
               {title.caption}

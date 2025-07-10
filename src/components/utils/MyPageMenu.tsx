@@ -86,7 +86,7 @@ function PageMenu() {
     <>
       <MyMenuSidebar child={menus} />
       <MyDrawer title="Configurações" isOpen={openSettings} onClose={() => setOpenSettings(false)}>
-        <MyTabView titles={[{ caption: 'Teste 1' }, { caption: 'Teste 2' }]} children={[/** pass the components here | Hugo */]} />
+
       </MyDrawer>
     </>
   );

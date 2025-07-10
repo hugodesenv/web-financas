@@ -3,7 +3,7 @@ import MyCircularProgress from "../../progress/my_circular_progress/MyCircularPr
 import "./style.css";
 
 interface IMyButton extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isLoading?: boolean;
+  isloading?: boolean;
   style?: CSSProperties;
   theme?: "light" | "dark";
 }
@@ -23,9 +23,9 @@ export default function MyButton(props: IMyButton) {
       {...props}
       style={{ ...btnStyle.static, ...props?.style }}
       className={btnStyle.className}
-      disabled={props?.isLoading || props?.disabled}
+      disabled={props?.isloading === true || props?.disabled === true}
     >
-      {props.isLoading ? <MyCircularProgress color="blue" /> : props.children}
+      {props?.isloading === true ? <MyCircularProgress color="blue" /> : props?.children}
     </button>
   );
 }

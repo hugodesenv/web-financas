@@ -1,8 +1,8 @@
 /** #HUGO: Continuar. */
 
 import MyTable, { IMyTableColumn, IMyTableWrapper } from '@/components/table/MyTable';
-import { TEntry } from '@/type/entryTypes';
-import { findAllEntryUseCase } from '@/use/entry/findAll';
+import { TEntry } from '@/features/entry/entryTypes';
+import { findAllEntryUseCase } from '@/features/entry/useCase/findAllEntryUseCase';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 const _columns: IMyTableColumn[] = [

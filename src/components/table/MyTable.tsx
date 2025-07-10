@@ -80,8 +80,10 @@ export default function MyTable(props: IProps) {
   const [selectedValue, setSelectedValue] = useState('option-default');
 
   useEffect(() => {
-    handleDataPerPage(1);
-  }, [props.datasource]);
+    if (props.datasource.length) {
+      handleDataPerPage(1);
+    }
+  }, [props?.datasource]);
 
   /**
    * Evento ao trocar a opção da coluna "ação".
@@ -137,8 +139,8 @@ export default function MyTable(props: IProps) {
 
   const TableBody = () => {
     return data.map(({ data }, index: number) => (
-      // Preparing the normal data columns from the grid.
-      <tr key={useId()}>
+      // Preparing the normal data columns from1 grid.
+      <tr>
         {
           data?.map(({ className, checked, style, text }) => {
             return (
@@ -173,7 +175,7 @@ export default function MyTable(props: IProps) {
                 <MySelectOption value='option-default'>...</MySelectOption>
                 {
                   props.columnAction.map(({ title }) => (
-                    <MySelectOption value={title}>
+                    <MySelectOption key={useId()} value={title}>
                       {title}
                     </MySelectOption>
                   ))

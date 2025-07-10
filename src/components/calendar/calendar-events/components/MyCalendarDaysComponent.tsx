@@ -1,7 +1,6 @@
-import { DateUtils } from "@/utils/dateUtils";
+import dayjs from "dayjs";
 import { IElements, IEventsDay, MyCalendarUtils } from "../myCalendarUtils";
 import MyCalendarEventsDay from "./MyCalendarEventsDay";
-const currentDate = DateUtils.momentBR().format("YYYY-MM-DD");
 
 export default function ListDays({
   monthSelected,
@@ -28,7 +27,7 @@ export default function ListDays({
   function handleDayStyle(day: IElements) {
     return {
       classNameOutOfMonth: day.outOfMonth ? "calendar-day-outmonth" : "",
-      classNameCurrentDay: day.date == currentDate ? "calendar-curr-day" : "",
+      classNameCurrentDay: day.date == dayjs().format('YYYY-MM-DD') ? "calendar-curr-day" : "",
       lookupDay: parseInt(day.date.split("-")[2]),
     };
   }
@@ -65,8 +64,8 @@ export default function ListDays({
     });
 
   // Para cada semana rederizada, inputamos em um Tr.
-  const renderWeeks = weeksMonth.map((weeks: IElements[]) => {
-    return <tr>{renderDays(weeks)}</tr>;
+  const renderWeeks = weeksMonth.map((weeks: IElements[], index) => {
+    return <tr key={`my-week-${index}`}>{renderDays(weeks)}</tr>;
   });
 
   return renderWeeks;

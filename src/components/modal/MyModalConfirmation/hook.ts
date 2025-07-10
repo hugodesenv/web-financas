@@ -20,26 +20,11 @@ export function useMyModalConfirmation(props: IProps) {
 
   const [stepIndex, setStepIndex] = useState(-1);
 
-  useEffect(() => {
-    if (step.list.length > 0) {
-      verify(0);
-    }
-  }, [step]);
-
-  function reset() {
-    setIsOpen(false);
-    setStepIndex(-1);
-  }
-
-  const onConfirm = () => verify(stepIndex + 1);
-  const onCancel = () => reset();
-  const onClose = () => reset();
-
   /**
-   * Check if the step are ok!
-   * @param stepIndex 
-   * @returns 
-   */
+     * Check if the step are ok!
+     * @param stepIndex 
+     * @returns 
+     */
   function verify(stepIndex: number) {
     if (stepIndex >= step.list.length) {
       reset();
@@ -59,6 +44,21 @@ export function useMyModalConfirmation(props: IProps) {
     // else, if this current action index is it ok, we try to find another possible step fail:
     verify(stepIndex + 1);
   }
+
+  useEffect(() => {
+    if (step.list.length > 0) {
+      verify(0);
+    }
+  }, [step]);
+
+  function reset() {
+    setIsOpen(false);
+    setStepIndex(-1);
+  }
+
+  const onConfirm = () => verify(stepIndex + 1);
+  const onCancel = () => reset();
+  const onClose = () => reset();
 
   function prepareSteps(step: IModalConfirmStep[], data?: any) {
     setStep({ list: step, data });

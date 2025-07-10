@@ -3,10 +3,10 @@ import { MyForm } from '@/components/form/MyForm';
 import MySelect from '@/components/select/MySelect';
 import { MyCustomSelect } from '@/components/select/custom/MyCustomSelect';
 import MyInputText from '@/components/text/MyInputText';
-import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
-import { EnEntryMode, EnEntryType, TEntryDefaultValue, TEntry } from '@/type/entryTypes';
-import { createEntryCase } from '@/use/entry/create';
-import { IHTTPResponse } from '@/type/commomTypes';
+import MyStack from '@/components/utils/MyHorizontalStack';
+import { EnEntryMode, EnEntryType, TEntryDefaultValue, TEntry } from '@/features/entry/entryTypes';
+import { createEntryCase } from '@/features/entry/useCase/createEntryUseCase';
+import { IHTTPResponse } from '@/utils/commomTypes';
 import { message } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
@@ -54,7 +54,7 @@ export default function EntryFormRegister() {
     <>
       {contextHolder}
       <MyForm id="entry-form-register" onSubmit={handleSubmit(onSubmit)}>
-        <MyHorizontalStack>
+        <MyStack>
           <div style={{ flex: 1 }}>
             <MyCustomSelect
               type='person'
@@ -64,8 +64,8 @@ export default function EntryFormRegister() {
             />
           </div>
           <MyInputText {...register('issue_date')} title='Data de emissão' type='date' />
-        </MyHorizontalStack>
-        <MyHorizontalStack>
+        </MyStack>
+        <MyStack>
           <MyCustomSelect
             type='bank_account'
             title='Conta bancária'
@@ -78,8 +78,8 @@ export default function EntryFormRegister() {
             id='purpose-register-input'
             onSelect={(_, { value }) => setValue('purpose.id', value as number)}
           />
-        </MyHorizontalStack>
-        <MyHorizontalStack>
+        </MyStack>
+        <MyStack>
           <MySelect title='Modo' onChange={(e) => {
             setValue('mode', e.target.value as EnEntryMode)
           }} >
@@ -90,7 +90,7 @@ export default function EntryFormRegister() {
             <option value={EnEntryType.RECEIVABLE}>Receber</option>
             <option value={EnEntryType.PAYABLE}>Pagar</option>
           </MySelect>
-        </MyHorizontalStack>
+        </MyStack>
         <MyInputText
           {...register('total')}
           title='Total'

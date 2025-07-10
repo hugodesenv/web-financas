@@ -37,3 +37,7 @@
 .my-visibility-hidden {
   visibility: hidden;
 }
+
+.my-flex-dir-col {
+  flex-direction: column;
+}

@@ -4,9 +4,9 @@ import { useMyAlert } from '@/components/alert/hook';
 import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalConfirmation';
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableAction, IMyTableWrapper } from '@/components/table/MyTable';
-import { TPurpose } from '@/type/purposeTypes';
-import { deletePurposeByID } from '@/use/purpose/deleteById';
-import { findAllPurposeCase } from '@/use/purpose/findAll';
+import { TPurpose } from '@/features/purpose/purposeTypes';
+import { deletePurposeByID } from '@/features/purpose/useCase/deleteByIdPurposeCase';
+import { findAllPurposeCase } from '@/features/purpose/useCase/findAllPurposeCase';
 import { MESSAGES } from '@/utils/constantsUtils';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 

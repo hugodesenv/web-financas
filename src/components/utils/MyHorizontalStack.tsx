@@ -1,4 +1,4 @@
-import { CSSProperties } from "react"
+import { CSSProperties } from "react";
 
 interface IProps {
   children: any,
@@ -7,12 +7,11 @@ interface IProps {
 
 const style = {
   display: 'flex',
-  flexDirection: 'row',
   gap: '8px',
   flexWrap: 'wrap'
 } as CSSProperties;
 
-export default function MyHorizontalStack(props: IProps) {
+export default function MyStack(props: IProps) {
   return (
     <div style={{ ...style, ...props.style }}>
       {props.children}

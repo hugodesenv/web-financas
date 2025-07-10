@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
   MdExitToApp,
   MdKeyboardArrowDown,
@@ -66,12 +66,12 @@ function MyMenuSidebar(props: { child: IMenuStructure[] }) {
   return (
     <div className="menu-container" onMouseLeave={handleMenuMouseLeave}>
       <div className="menu">
-        {props.child.map(({ key, icon, label, sub_menus, onClick }) => {
+        {props.child.map(({ key, icon, label, sub_menus, onClick }, index) => {
           const hasSubMenus = (sub_menus?.length || 0) > 0;
           const onClickMenu = (e: any) =>
             hasSubMenus ? handleClickMenu(e, key) : onClick?.();
           return (
-            <ul>
+            <ul key={`my-mn-${index}`}>
               <li key={key} onClick={onClickMenu}>
                 <div>{icon}</div>
                 <div className="container-label">

@@ -1,58 +1,58 @@
-import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable"
-import { EnEntryType, TEntry } from "@/type/entryTypes"
+import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
+import { getEntriesByPurpose } from "@/features/entry/entryHelper";
+import { TEntry } from "@/features/entry/entryTypes";
+import { CSSProperties } from "react";
 
 interface IProps {
   entries?: TEntry[]
 }
 
+const commonTotalsStyle: CSSProperties = {
+  maxWidth: '40px',
+  textAlign: 'right'
+}
+
 const tableColumns: IMyTableColumn[] = [
-  { label: "Descrição", key: "htbp-description", style: { maxWidth: '70px' } },
-  { label: "Receita (+)", key: "htbp-receive", style: { maxWidth: '40px' } },
-  { label: "Despesa (-)", key: "htbp-pay", style: { maxWidth: '40px' } },
-  { label: "Saldo (=)", key: "htbp-total", style: { maxWidth: '40px' } },
+  { label: "Descrição", key: "htbp-description", style: { maxWidth: '70px', textAlign: 'justify' } },
+  { label: "Receita (+)", key: "htbp-receive", style: commonTotalsStyle },
+  { label: "Despesa (-)", key: "htbp-pay", style: commonTotalsStyle },
+  { label: "Saldo (=)", key: "htbp-total", style: commonTotalsStyle },
 ];
 
-type IBuildEntriesByPurpose = {
-  [purposeID: number]: {
-    description: string;
-    receive: number;
-    pay: number;
-  }
-}
-
-const buildEntriesByPurpose = (entries: TEntry[]) => {
-  const res = entries.reduce<IBuildEntriesByPurpose>((prev, curr: TEntry) => {
-    const purposeID = curr.purpose.id ?? 0;
-
-    if (!prev[purposeID]) {
-      prev[purposeID] = {
-        description: curr.purpose.description,
-        receive: 0,
-        pay: 0,
-      };
-    }
-
-    switch (curr.type) {
-      case EnEntryType.PAYABLE: {
-        prev[purposeID].pay += curr.total;
-        break;
-      }
-      case EnEntryType.RECEIVABLE: {
-        prev[purposeID].receive += curr.total;
-        break;
-      }
-    }
-
-    return prev;
-  }, {});
-
-  return res;
-}
-
 export const HomeTotalByPurpose = ({ entries }: IProps) => {
-  console.log("Tratar esse resultado #HUGO", buildEntriesByPurpose(entries ?? []))
+
+  const totalsStyle = (value?: number): CSSProperties => {
+    return {
+      color: (value ?? 0) < 0 ? 'red' : 'inherit',
+      textAlign: 'right',
+    }
+  }
+
+  const dataSource = () => {
+    const _entries = getEntriesByPurpose(entries ?? []);
+
+    const res = Object.entries(_entries).reduce<IMyTableWrapper[]>((prev, curr) => {
+      const { balance, description, pay, receive } = curr[1];
+
+      prev.push({
+        data: [
+          { text: description },
+          { text: receive, style: totalsStyle() },
+          { text: pay, style: totalsStyle() },
+          { text: balance, style: totalsStyle(balance) },
+        ]
+      });
+
+      return prev;
+    }, []);
+
+    return res;
+  }
 
   return (
-    <MyTable columns={tableColumns} datasource={[]} />
+    <MyTable
+      columns={tableColumns}
+      datasource={dataSource()}
+    />
   )
 } 

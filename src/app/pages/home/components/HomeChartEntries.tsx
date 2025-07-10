@@ -1,5 +1,5 @@
-import { entriesObjectFilteringBySpecificDate } from '@/service/entryService';
-import { EnEntryType, TEntry } from '@/type/entryTypes';
+import { getEntriesByIssueDate } from '@/features/entry/entryHelper';
+import { EnEntryType, TEntry } from '@/features/entry/entryTypes';
 import {
   BarElement,
   CategoryScale,
@@ -67,8 +67,10 @@ const buildLabels = (base_date: string) => _emptyLabelArray.reduce((prev: string
 function buildDatasets(entries: TEntry[], base_date: string) {
   const resultData = _emptyLabelArray.reduce<IGetDataSets>((prev, _, index) => {
     const filter_key = _subtractMonth(index, base_date);
-
-    const dataFiltered = entriesObjectFilteringBySpecificDate(filter_key.toISOString(), entries);
+    const dataFiltered = getEntriesByIssueDate(entries, {
+      month: filter_key.month() + 1,
+      year: filter_key.year(),
+    });
 
     const receive = dataFiltered?.filter(({ type }) => type === EnEntryType.RECEIVABLE);
     const pay = dataFiltered?.filter(({ type }) => type === EnEntryType.PAYABLE);
@@ -108,12 +110,14 @@ function buildDatasets(entries: TEntry[], base_date: string) {
 export function HomeChartEntries(props: IProps) {
   const isMobile = useMediaQuery({ maxWidth: '768px' });
 
-  return <Bar
-    options={options}
-    data={{
-      labels: buildLabels(props.base_date),
-      datasets: buildDatasets(props.entries, props.base_date)
-    }}
-    height={isMobile === true ? '600px' : '70vh'}
-  />;
+  return (
+    <Bar
+      options={options}
+      data={{
+        labels: buildLabels(props.base_date),
+        datasets: buildDatasets(props.entries, props.base_date)
+      }}
+      height={isMobile === true ? '600px' : '70vh'}
+    />
+  )
 }

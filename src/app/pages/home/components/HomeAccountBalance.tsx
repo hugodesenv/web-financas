@@ -4,7 +4,7 @@ import MyAccordionItem from '@/components/accordion/MyAccordtionItem';
 import MyCardBox from '@/components/card/my-card/MyCardBox';
 import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
 import dayjs from 'dayjs';
-import { CSSProperties, useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useId, useState } from 'react';
 
 interface IProps {
   initial_date: string;
@@ -49,7 +49,7 @@ export default function HomeAccountBalance(props: IProps) {
         options: {
           caption: 'Saldo em conta',
           children: [
-            <MyAccordion>
+            <MyAccordion key={useId()}>
               <MyAccordionItem title="Parâmetros">
                 <MyAccordionPanel key="testehugo1">Teste Hugo</MyAccordionPanel>
                 <MyAccordionPanel key="testehugo2">Teste Hugo</MyAccordionPanel>

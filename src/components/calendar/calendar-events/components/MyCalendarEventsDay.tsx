@@ -1,4 +1,4 @@
-import { LiHTMLAttributes } from "react";
+import { LiHTMLAttributes, useId } from "react";
 import { IEventsDay } from "../myCalendarUtils";
 
 /**
@@ -30,6 +30,7 @@ export default function MyCalendarEventsDay(props: IProps) {
     return (
       <li
         {...rest}
+        key={useId()}
         id={eventDay.id}
         onClick={onItemClick}
         style={{ background: eventDay.backgroundColor ?? "blue" }}

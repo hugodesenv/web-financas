@@ -3,10 +3,10 @@
 import MyModalConfirmation from '@/components/modal/MyModalConfirmation/MyModalConfirmation';
 import { IModalConfirmStep, useMyModalConfirmation } from '@/components/modal/MyModalConfirmation/hook';
 import MyTable, { IMyTableWrapper } from '@/components/table/MyTable';
-import { TPropsSearchScreen } from '@/type/commomTypes';
-import { TPerson } from '@/type/personTypes';
-import { deletePersonCase } from '@/use/person/delete';
-import { findAllPersonCase } from '@/use/person/findAll';
+import { TPropsSearchScreen } from '@/utils/commomTypes';
+import { TPerson } from '@/features/person/personTypes';
+import { deletePersonCase } from '@/features/person/useCase/deletePersonCase';
+import { findAllPersonCase } from '@/features/person/useCase/findAllPersonCase';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 
 const PersonSearch = forwardRef((props: TPropsSearchScreen, ref) => {

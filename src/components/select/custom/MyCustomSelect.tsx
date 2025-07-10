@@ -1,13 +1,13 @@
-import { TPerson } from "@/type/personTypes";
-import { findAllPersonCase } from "@/use/person/findAll";
+import { TPerson } from "@/features/person/personTypes";
+import { findAllPersonCase } from "@/features/person/useCase/findAllPersonCase";
 import { Select, SelectProps } from "antd";
 import { useState } from "react";
 import '../../text/style.css';
-import { findAllPurposeCase } from "@/use/purpose/findAll";
-import { TPurpose } from "@/type/purposeTypes";
+import { findAllPurposeCase } from "@/features/purpose/useCase/findAllPurposeCase";
+import { TPurpose } from "@/features/purpose/purposeTypes";
 import { debounce } from "lodash";
-import { findAllBankAccountUseCase } from "@/use/bankAccount/findAll";
-import { TBankAccount } from "@/type/bankAccountTypes";
+import { findAllBankAccountUseCase } from "@/features/bankAccount/useCase/findAllBankAccountCase";
+import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
 
 type IProps = SelectProps & {
   type: "person" | "purpose" | "bank_account"

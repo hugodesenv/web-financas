@@ -4,9 +4,9 @@ import MyIconButton, { EnIconButtonType } from "@/components/button/myIconButton
 import MyLayout from "@/components/layout/MyLayout";
 import LayoutTopBar from "@/components/layout/layout_topbar";
 import MyTabView, { ITitle } from "@/components/table/tabview/MyTabView";
-import MyHorizontalStack from "@/components/utils/MyHorizontalStack";
-import { TBankAccount, TBankAccountDefaultValues } from "@/type/bankAccountTypes";
-import { findByIDBankAccountUse } from "@/use/bankAccount/findByID";
+import MyStack from "@/components/utils/MyHorizontalStack";
+import { TBankAccount, TBankAccountDefaultValues } from "@/features/bankAccount/bankAccountTypes";
+import { findByIDBankAccountUse } from "@/features/bankAccount/useCase/findByIDBankAccountCase";
 import { useRef } from "react";
 import BankAccountRegister from "./components/BankAccountRegister";
 import BankAccountSearch from "./components/BankAccountSearch";
@@ -24,7 +24,7 @@ export default function BankAccount() {
 
   // main buttons from form
   const buttons = (
-    <MyHorizontalStack>
+    <MyStack>
       <MyIconButton
         text="Novo"
         iconType={EnIconButtonType.NEW}
@@ -35,7 +35,7 @@ export default function BankAccount() {
         iconType={EnIconButtonType.SEARCH}
         onClick={() => formSearchRef.current.onSearch()}
       />
-    </MyHorizontalStack>
+    </MyStack>
   );
 
   // loading single bank account

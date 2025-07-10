@@ -5,12 +5,12 @@ import MyDrawer from '@/components/drawer/MyDrawer';
 import MyLayout from '@/components/layout/MyLayout';
 import LayoutRegister from '@/components/layout/layout_topbar';
 import MyTabView from '@/components/table/tabview/MyTabView';
-import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
-import { findByIDPersonCase } from '@/use/person/findByID';
+import MyStack from '@/components/utils/MyHorizontalStack';
+import { findByIDPersonCase } from '@/features/person/useCase/findByIDPersonCase';
 import { useRef, useState } from 'react';
 import PersonFormRegister from './components/PersonFormRegister';
 import PersonSearch from './components/PersonSearch';
-import { TPerson, TPersonDefaultValues } from '@/type/personTypes';
+import { TPerson, TPersonDefaultValues } from '@/features/person/personTypes';
 
 export default function Person() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -20,11 +20,11 @@ export default function Person() {
   const formSearchRef = useRef(null as any); // para manipulação dos botoes principais da tela
 
   const FormButton = (
-    <MyHorizontalStack>
+    <MyStack>
       <MyIconButton iconType={EnIconButtonType.NEW} onClick={() => formRef.current.populateForm(TPersonDefaultValues)} text="Novo" />
       <MyIconButton iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} text="Consultar" />
       <MyIconButton iconType={EnIconButtonType.FILTER} onClick={() => setOpenFilter(true)} text="Filtrar" />
-    </MyHorizontalStack>
+    </MyStack>
   );
 
   async function loadPerson(personID: number) {

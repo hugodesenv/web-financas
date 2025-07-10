@@ -4,7 +4,7 @@ import MyIconButton, { EnIconButtonType } from '@/components/button/myIconButton
 import MyLayout from '@/components/layout/MyLayout';
 import LayoutTopBar from '@/components/layout/layout_topbar';
 import MyTabView from '@/components/table/tabview/MyTabView';
-import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
+import MyStack from '@/components/utils/MyHorizontalStack';
 import dayjs from 'dayjs';
 import { useRef, useState } from 'react';
 import EntryFilterDrawer, { IEntryFilterData, TTypeFieldEntryFilter } from './components/EntryFilterDrawer';
@@ -19,7 +19,7 @@ export default function Entry() {
   const [filterData, setFilterData] = useState({ issueEnd: dayjs('2999-31-12').toDate() } as IEntryFilterData);
 
   const FormButton = (
-    <MyHorizontalStack>
+    <MyStack>
       <MyIconButton
         text="Novo"
         iconType={EnIconButtonType.NEW}
@@ -35,7 +35,7 @@ export default function Entry() {
         iconType={EnIconButtonType.FILTER}
         onClick={() => setOpenFilter((curr) => !curr)}
       />
-    </MyHorizontalStack>
+    </MyStack>
   );
 
   function _handleChangeFilter(newValue: string, name: TTypeFieldEntryFilter) {

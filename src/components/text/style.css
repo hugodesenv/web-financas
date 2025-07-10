@@ -1,11 +1,11 @@
 .wrapper-my-input-text {
   color: black;
   display: flex;
-  flex-direction: column;
 }
 
 .wrapper-my-input-text label {
   margin-bottom: 4px;
+  width: 100%;
 }
 
 .container-my-input-text {

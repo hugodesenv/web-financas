@@ -4,12 +4,12 @@ import MyIconButton, { EnIconButtonType } from '@/components/button/myIconButton
 import MyLayout from '@/components/layout/MyLayout';
 import LayoutTopBar from '@/components/layout/layout_topbar';
 import MyTabView from '@/components/table/tabview/MyTabView';
-import MyHorizontalStack from '@/components/utils/MyHorizontalStack';
+import MyStack from '@/components/utils/MyHorizontalStack';
 import { useRef } from 'react';
 import PurposeSearch from './components/PurposeSearch';
 import { PurposeFormRegister } from './components/PurposeFormRegister';
-import { TPurpose, TPurposeDefaultValue } from '@/type/purposeTypes';
-import { findByIDPurposeUseCase } from '@/use/purpose/findByID';
+import { TPurpose, TPurposeDefaultValue } from '@/features/purpose/purposeTypes';
+import { findByIDPurposeUseCase } from '@/features/purpose/useCase/findByIDPurposeCase';
 
 export default function Purpose() {
   const formRef = useRef(null as any);
@@ -18,10 +18,10 @@ export default function Purpose() {
 
   // Componente dos botoes principais do formulario
   const FormButton = (
-    <MyHorizontalStack>
+    <MyStack>
       <MyIconButton text="Novo" iconType={EnIconButtonType.NEW} onClick={(e) => _onNew()} />
       <MyIconButton text="Consultar" iconType={EnIconButtonType.SEARCH} onClick={() => formSearchRef.current.onSearch()} />
-    </MyHorizontalStack>
+    </MyStack>
   );
 
   const _loadPurpose = async ({ id }: TPurpose) => {
