@@ -67,6 +67,7 @@ export type TEntryFindAllParams = {
 
 export type IBuildEntriesByPurpose = {
   [purposeID: number]: {
+    id: number;
     description: string;
     receive: number;
     pay: number;

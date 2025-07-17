@@ -47,6 +47,10 @@
   font-size: 12px;
 }
 
+.mydrawer-header label {
+  font-weight: 600;
+}
+
 .mydrawer-header button:hover {
   color: rgb(56, 134, 236);
   transition: 0.2s;

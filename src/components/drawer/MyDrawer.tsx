@@ -55,7 +55,7 @@ export default function MyDrawer(props: IPropsMyDrawer) {
       <div {...attributes.wrapper}>
         <div {...attributes.wrapperContent}>
           <div {...attributes.drawerHeader}>
-            <h3>{props.title}</h3>
+            <label>{props.title}</label>
             <button {...attributes.closeStyle}>Fechar</button>
           </div>
           <div {...attributes.childStyle}>{props.children}</div>

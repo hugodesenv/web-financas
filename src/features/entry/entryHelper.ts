@@ -32,12 +32,13 @@ export function getEntriesByIssueDate(
   return data;
 }
 
-export function getEntriesByPurpose(entries: TEntry[]): IBuildEntriesByPurpose {
+export function sumEntriesByPurpose(entries: TEntry[]): IBuildEntriesByPurpose {
   return entries.reduce<IBuildEntriesByPurpose>((prev, curr: TEntry) => {
     const purposeID = curr.purpose.id ?? 0;
 
     if (!prev[purposeID]) {
       prev[purposeID] = {
+        id: purposeID,
         description: curr.purpose.description,
         receive: 0,
         pay: 0,

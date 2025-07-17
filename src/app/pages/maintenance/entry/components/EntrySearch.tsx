@@ -1,20 +1,9 @@
 /** #HUGO: Continuar. */
 
-import MyTable, { IMyTableColumn, IMyTableWrapper } from '@/components/table/MyTable';
 import { TEntry } from '@/features/entry/entryTypes';
 import { findAllEntryUseCase } from '@/features/entry/useCase/findAllEntryUseCase';
 import { forwardRef, useImperativeHandle, useState } from 'react';
-
-const _columns: IMyTableColumn[] = [
-  { key: 'es-id', label: 'Cód.' },
-  { key: 'es-issue-date', label: 'Dt. emissão' },
-  { key: 'es-type', label: 'Tipo' },
-  { key: 'es-person-name', label: 'Nome' },
-  { key: 'es-purpose-name', label: 'Finalidade' },
-  { key: 'es-mode', label: 'Modo' },
-  { key: 'es-bank-account-description', label: 'Conta bancária' },
-  { key: 'es-total', label: 'Total' },
-];
+import EntrySearchTable from './EntrySearchTable';
 
 const EntrySearch = forwardRef((props, ref) => {
   const [entries, setEntries] = useState([] as TEntry[]);
@@ -30,30 +19,7 @@ const EntrySearch = forwardRef((props, ref) => {
     setEntries(entries);
   }
 
-  const dataSource: IMyTableWrapper[] = entries?.map((entry) => {
-    return {
-      data: [
-        { text: entry.id },
-        { text: entry.issue_date },
-        { text: entry.type },
-        { text: entry.person.name },
-        { text: entry.purpose.description },
-        { text: entry.mode },
-        { text: entry.bankAccount.description },
-        { text: entry.total },
-      ]
-    } as IMyTableWrapper
-  }) ?? [];
-
-  return (
-    <>
-      <MyTable
-        key='tb-entry-search'
-        columns={_columns}
-        datasource={dataSource}
-      />
-    </>
-  );
+  return <EntrySearchTable entries={entries} />;
 });
 
 export default EntrySearch;

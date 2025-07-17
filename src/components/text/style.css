@@ -1,6 +1,7 @@
 .wrapper-my-input-text {
   color: black;
   display: flex;
+  flex-direction: column;
 }
 
 .wrapper-my-input-text label {

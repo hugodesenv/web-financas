@@ -16,7 +16,8 @@ export interface IMyTableDataSource {
 }
 
 export interface IMyTableWrapper {
-  data: IMyTableDataSource[]
+  data: IMyTableDataSource[],
+  primaryKey?: Record<string, any>
 }
 
 export interface IMyTableAction {
@@ -41,7 +42,7 @@ interface IProps {
   // when click on checkbox master of grid column
   onCheckAll?: (isChecked: boolean) => void;
   // when click on the line from the grid
-  onSelectedRow?: (rowIndex: number) => void;
+  onSelectedRow?: (rowIndex: number, data?: any) => void;
 };
 
 let customStyle = {
@@ -100,7 +101,7 @@ export default function MyTable(props: IProps) {
 
   // Event when the user click on the line from grid.
   function onRowClick(index: number) {
-    props?.onSelectedRow && props.onSelectedRow(index);
+    props?.onSelectedRow && props.onSelectedRow(index, data[index]);
   }
 
   // Event when click on checkbox from grid column
