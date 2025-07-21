@@ -7,11 +7,20 @@ export enum EnEntryType {
   RECEIVABLE = "RECEIVABLE"
 }
 
+export const EntryTypeToDescription = {
+  'PAYABLE': 'Pagar',
+  'RECEIVABLE': 'Receber'
+}
+
 export enum EnEntryMode {
   FORECAST = "FORECAST",
   CONFIRMED = "CONFIRMED"
 }
 
+export const EntryModeToDescription = {
+  'FORECAST': 'Previsão',
+  'CONFIRMED': 'Confirmado'
+}
 export interface TEntry {
   id: number;
   person: TPerson,

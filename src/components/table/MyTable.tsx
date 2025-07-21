@@ -13,11 +13,12 @@ export interface IMyTableDataSource {
   checked?: boolean;
   style?: CSSProperties,
   className?: any;
+  onGetText?: (value: string) => string;
 }
 
 export interface IMyTableWrapper {
   data: IMyTableDataSource[],
-  primaryKey?: Record<string, any>
+  primaryKey?: Record<string, any>,
 }
 
 export interface IMyTableAction {
@@ -143,7 +144,8 @@ export default function MyTable(props: IProps) {
       // Preparing the normal data columns from1 grid.
       <tr>
         {
-          data?.map(({ className, checked, style, text }) => {
+          data?.map(({ className, checked, style, text, onGetText }) => {
+            const textValue = onGetText ? onGetText(text) : text;
             return (
               checked
                 ? (
@@ -162,7 +164,7 @@ export default function MyTable(props: IProps) {
                     className={className}
                     style={style}
                     onClick={() => onRowClick(index)}>
-                    {text}
+                    {textValue}
                   </td>
                 )
             )
@@ -173,7 +175,9 @@ export default function MyTable(props: IProps) {
           props.columnAction && (
             <td>
               <MySelect style={customStyle.actionSelect} value={selectedValue} onChange={(e) => onActionChange(e, index)}>
-                <MySelectOption value='option-default'>...</MySelectOption>
+                <MySelectOption value='option-default'>
+                  :
+                </MySelectOption>
                 {
                   props.columnAction.map(({ title }) => (
                     <MySelectOption key={useId()} value={title}>
