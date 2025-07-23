@@ -12,6 +12,7 @@
     "@faker-js/faker": "^9.9.0",
     "@prisma/client": "^5.22.0",
     "@react-pdf/renderer": "^3.4.4",
+    "@tailwindcss/postcss": "^4.1.11",
     "@tanstack/react-query": "^5.81.5",
     "antd": "^5.26.2",
     "axios": "^1.6.8",
@@ -43,9 +44,10 @@
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
-    "postcss": "^8",
+    "postcss": "^8.5.6",
     "prisma": "^5.22.0",
-    "tailwindcss": "^3.3.0",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^4.1.11",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
   }
