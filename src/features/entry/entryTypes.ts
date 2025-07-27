@@ -8,8 +8,8 @@ export enum EnEntryType {
 }
 
 export const EntryTypeToDescription = {
-  'PAYABLE': 'Pagar',
-  'RECEIVABLE': 'Receber'
+  'PAYABLE': 'Saída',
+  'RECEIVABLE': 'Entrada'
 }
 
 export enum EnEntryMode {

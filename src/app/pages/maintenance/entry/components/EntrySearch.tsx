@@ -1,10 +1,7 @@
-/** #HUGO: Continuar. */
-
 import { TEntry } from '@/features/entry/entryTypes';
 import { findAllEntryUseCase } from '@/features/entry/useCase/findAllEntryUseCase';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import EntrySearchTable from './EntrySearchTable';
-import { MyModalConfirm } from '@/components/modal/v2/MyModalConfirm';
 
 const EntrySearch = forwardRef((props, ref) => {
   const [entries, setEntries] = useState([] as TEntry[]);
@@ -20,10 +17,7 @@ const EntrySearch = forwardRef((props, ref) => {
     setEntries(entries);
   }
 
-  return <>
-    <EntrySearchTable entries={entries} />
-    <MyModalConfirm />
-  </>
+  return <EntrySearchTable entries={entries} />
 });
 
 export default EntrySearch;

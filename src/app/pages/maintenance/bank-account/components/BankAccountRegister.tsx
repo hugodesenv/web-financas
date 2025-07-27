@@ -2,8 +2,7 @@ import MyFloattingButton from "@/components/button/myFloattingButton/MyFloatting
 import { MyForm } from "@/components/form/MyForm";
 import MyInputText from "@/components/text/MyInputText";
 import { TBankAccount, TBankAccountDefaultValues } from "@/features/bankAccount/bankAccountTypes";
-import { createBankAccountUse } from "@/features/bankAccount/useCase/createBankAccountCase";
-import { updateBankAccountUse } from "@/features/bankAccount/useCase/updateBankAccountCase";
+import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
 import { message } from "antd";
 import { forwardRef, useImperativeHandle } from "react";
 import { FieldValues, useForm } from "react-hook-form";
@@ -16,8 +15,9 @@ const BankAccountRegister = forwardRef((props, ref) => {
     };
   });
 
-  const { handleSubmit, register, reset } = useForm();
   const [messageApi, contextHolder] = message.useMessage();
+  const { handleSubmit, register, reset } = useForm();
+  const { createAccount, updateAccount } = useBankAccount();
 
   const onValid = async (data: FieldValues) => {
     let payload: TBankAccount = {
@@ -25,9 +25,9 @@ const BankAccountRegister = forwardRef((props, ref) => {
     };
 
     if (!data?.id) {
-      var { success } = await createBankAccountUse(payload);
+      var { success } = await createAccount(payload);
     } else {
-      var { success } = await updateBankAccountUse(payload, data.id);
+      var { success } = await updateAccount(payload, data.id);
     }
 
     if (!success) {

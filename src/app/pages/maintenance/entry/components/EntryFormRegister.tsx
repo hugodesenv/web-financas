@@ -87,8 +87,8 @@ export default function EntryFormRegister() {
             <option value={EnEntryMode.FORECAST}>Previsão</option>
           </MySelect>
           <MySelect title='Tipo' onChange={(e) => setValue('type', e.target.value as EnEntryType)} >
-            <option value={EnEntryType.RECEIVABLE}>Receber</option>
-            <option value={EnEntryType.PAYABLE}>Pagar</option>
+            <option value={EnEntryType.RECEIVABLE}>Entrada</option>
+            <option value={EnEntryType.PAYABLE}>Saída</option>
           </MySelect>
         </MyStack>
         <MyInputText

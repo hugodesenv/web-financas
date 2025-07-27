@@ -1,13 +1,13 @@
+import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
+import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
 import { TPerson } from "@/features/person/personTypes";
 import { findAllPersonCase } from "@/features/person/useCase/findAllPersonCase";
+import { TPurpose } from "@/features/purpose/purposeTypes";
+import { findAllPurposeCase } from "@/features/purpose/useCase/findAllPurposeCase";
 import { Select, SelectProps } from "antd";
+import { debounce } from "lodash";
 import { useState } from "react";
 import '../../text/style.css';
-import { findAllPurposeCase } from "@/features/purpose/useCase/findAllPurposeCase";
-import { TPurpose } from "@/features/purpose/purposeTypes";
-import { debounce } from "lodash";
-import { findAllBankAccountUseCase } from "@/features/bankAccount/useCase/findAllBankAccountCase";
-import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
 
 type IProps = SelectProps & {
   type: "person" | "purpose" | "bank_account"
@@ -22,7 +22,8 @@ const config = {
   "bank_account": {
     placeHolder: "Selecione a conta bancária",
     onSearch: async (filter: Record<string, any>) => {
-      const { data } = await findAllBankAccountUseCase();
+      const { findAll } = useBankAccount();
+      const { data } = await findAll();
       return data?.map((bank: TBankAccount) => {
         return {
           value: bank.id,

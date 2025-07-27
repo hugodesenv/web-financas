@@ -1,7 +1,7 @@
 import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
 import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
+import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
 import { TPropsSearchScreen } from "@/utils/commomTypes";
-import { findAllBankAccountUseCase } from "@/features/bankAccount/useCase/findAllBankAccountCase";
 import { forwardRef, useImperativeHandle, useState } from "react";
 
 const _columns: IMyTableColumn[] = [
@@ -12,6 +12,7 @@ const _columns: IMyTableColumn[] = [
 const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
   // states
   const [bankAccount, setBankAccount] = useState([] as TBankAccount[]);
+  const { findAll } = useBankAccount();
 
   useImperativeHandle(ref, function () {
     return {
@@ -21,7 +22,7 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
 
   // event to search all bank accounts in database
   async function onSearch() {
-    const { data } = await findAllBankAccountUseCase();
+    const { data } = await findAll();
     setBankAccount(data);
   }
 

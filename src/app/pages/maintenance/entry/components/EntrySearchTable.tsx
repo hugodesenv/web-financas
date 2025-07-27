@@ -1,3 +1,4 @@
+import { useMyAsyncModal } from "@/components/modal/useMyAsyncModal";
 import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
 import { EntryModeToDescription, EntryTypeToDescription, TEntry } from "@/features/entry/entryTypes";
 import dayjs from "dayjs";
@@ -18,6 +19,8 @@ const _columns: IMyTableColumn[] = [
 ];
 
 const EntrySearchTable = (props: IProps) => {
+  const { showModal, MyAsyncModal } = useMyAsyncModal();
+
   const dataSource: IMyTableWrapper[] = props.entries?.map((entry) => {
     return {
       data: [
@@ -34,15 +37,24 @@ const EntrySearchTable = (props: IProps) => {
     } as IMyTableWrapper
   }) ?? [];
 
+  async function onDelete(index: number) {
+    const confirmed = await showModal('Confirmação', `Deseja realmente excluir o lançamento ${props.entries[index].id}?`);
+    console.log('pos confirm', confirmed);
+    if (confirmed) {
+
+    }
+  }
+
   return <>
     <MyTable
       key='tb-entry-search'
       columns={_columns}
       datasource={dataSource}
       columnAction={[
-        { title: "Excluir", onClick: (i) => console.log(i) }
+        { title: "Excluir", onClick: onDelete }
       ]}
     />
+    <MyAsyncModal />
   </>
 }
 

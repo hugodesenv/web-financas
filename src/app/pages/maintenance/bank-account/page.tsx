@@ -6,10 +6,10 @@ import LayoutTopBar from "@/components/layout/layout_topbar";
 import MyTabView, { ITitle } from "@/components/table/tabview/MyTabView";
 import MyStack from "@/components/utils/MyHorizontalStack";
 import { TBankAccount, TBankAccountDefaultValues } from "@/features/bankAccount/bankAccountTypes";
-import { findByIDBankAccountUse } from "@/features/bankAccount/useCase/findByIDBankAccountCase";
 import { useRef } from "react";
 import BankAccountRegister from "./components/BankAccountRegister";
 import BankAccountSearch from "./components/BankAccountSearch";
+import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
 
 const titleTab = [
   { caption: 'Consulta' },
@@ -17,6 +17,8 @@ const titleTab = [
 ] as ITitle[];
 
 export default function BankAccount() {
+  const { findByID } = useBankAccount();
+
   // ref to control the components
   const formSearchRef = useRef(null as any);
   const formRef = useRef(null as any);
@@ -40,7 +42,7 @@ export default function BankAccount() {
 
   // loading single bank account
   async function loadbyID(id: number) {
-    const { data } = await findByIDBankAccountUse(id); 
+    const { data } = await findByID(id);
     formRef.current.populateForm(data);
     formTab.current.setCurrentIndex(1);
   }
