@@ -1,70 +1,18 @@
-import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
-import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
-import { TPerson } from "@/features/person/personTypes";
-import { findAllPersonCase } from "@/features/person/useCase/findAllPersonCase";
-import { TPurpose } from "@/features/purpose/purposeTypes";
-import { findAllPurposeCase } from "@/features/purpose/useCase/findAllPurposeCase";
 import { Select, SelectProps } from "antd";
 import { debounce } from "lodash";
 import { useState } from "react";
 import '../../text/style.css';
+import { useSelectConfig } from "./useSelectConfig";
 
 type IProps = SelectProps & {
   type: "person" | "purpose" | "bank_account"
 }
 
-interface IConfig {
-  onSearch: (filter: Record<string, any>) => Promise<any[]>;
-  placeHolder: string;
-}
-
-const config = {
-  "bank_account": {
-    placeHolder: "Selecione a conta bancária",
-    onSearch: async (filter: Record<string, any>) => {
-      const { findAll } = useBankAccount();
-      const { data } = await findAll();
-      return data?.map((bank: TBankAccount) => {
-        return {
-          value: bank.id,
-          label: bank.description,
-          title: bank.description
-        }
-      });
-    }
-  } as IConfig,
-  "person": {
-    placeHolder: "Selecione uma pessoa",
-    onSearch: async (filter: Record<string, any>) => {
-      const { data } = await findAllPersonCase({ name: filter.name });
-
-      return data?.map((person: TPerson) => {
-        return {
-          value: person.id,
-          label: person.name,
-          title: person.nickname
-        }
-      });
-    }
-  } as IConfig,
-  "purpose": {
-    placeHolder: "Selecione a finalidade",
-    onSearch: async (_) => {
-      const { data } = await findAllPurposeCase();
-      return data?.map((purpose: TPurpose) => {
-        return {
-          value: purpose.id,
-          label: purpose.description,
-          title: purpose.description
-        }
-      })
-    }
-  } as IConfig
-}
-
+// final component
 export const MyCustomSelect = (props: IProps) => {
-  const { onSearch, placeHolder } = config[props.type];
   const [options, setOptions] = useState([] as any[]);
+  const { config } = useSelectConfig();
+  const { onSearch, placeHolder } = config[props.type];
 
   /**
    * Gettting results and converting to component type.
@@ -73,7 +21,6 @@ export const MyCustomSelect = (props: IProps) => {
    */
   const handleSearch = debounce(async (value) => {
     const options = await onSearch(value);
-    console.log('here')
     setOptions(options);
   }, 700); // 700ms debounce
 

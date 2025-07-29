@@ -1,11 +1,10 @@
-to do:
-==>
-no cadastro da conta bancária, ter uma opção pra reajustar o saldo da conta
-com isso eu vou ter a data de reajustes + valores + observacao
-considerar isso nos relatorios futuros.
+-> Fazer alteraçao de dados
 
-==> criar a exclusao + alteraçao da conta bancária
+-> Trabalhar muito bem com o enable dos campos
 
-==> fazer cadastrar os lançamentos
+-> Criar campo no cadastro da conta bancaria para salvar o saldo inicial. Tambem temos que gravar a data de movimentos.
 
-==> criar listagem de lançamentos
+-> Apos isso, montar select para buscar o saldo da conta bancaria e preencher na tela inicial.
+
+-> Criar esquema para fechamento de mes/reabertura.
+

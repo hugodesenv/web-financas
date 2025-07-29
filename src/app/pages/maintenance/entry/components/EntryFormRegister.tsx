@@ -4,8 +4,8 @@ import MySelect from '@/components/select/MySelect';
 import { MyCustomSelect } from '@/components/select/custom/MyCustomSelect';
 import MyInputText from '@/components/text/MyInputText';
 import MyStack from '@/components/utils/MyHorizontalStack';
-import { EnEntryMode, EnEntryType, TEntryDefaultValue, TEntry } from '@/features/entry/entryTypes';
-import { createEntryCase } from '@/features/entry/useCase/createEntryUseCase';
+import { EnEntryMode, EnEntryType, TEntry, TEntryDefaultValue } from '@/features/entry/entryTypes';
+import { useCaseEntry } from '@/features/entry/useCaseEntry';
 import { IHTTPResponse } from '@/utils/commomTypes';
 import { message } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
@@ -16,6 +16,7 @@ import { FaRegSave } from 'react-icons/fa';
 const _defaultValue = { ...TEntryDefaultValue, issue_date: dayjs().format("YYYY-MM-DD") }
 
 export default function EntryFormRegister() {
+  const { createEntry } = useCaseEntry();
   const [messageApi, contextHolder] = message.useMessage();
   const { handleSubmit, setValue, register, reset } = useForm<TEntry>({
     defaultValues: _defaultValue
@@ -29,12 +30,10 @@ export default function EntryFormRegister() {
   const onSubmit: SubmitHandler<TEntry> = async (data) => {
     let response: IHTTPResponse = { success: false };
 
-    console.log('data', data);
-
     if (data.id > 0) {
       console.log("Incluir o modo de alteração aqui.");
     } else {
-      response.success = await createEntryCase(data);
+      response = await createEntry(data);
     }
 
     if (!response.success) {

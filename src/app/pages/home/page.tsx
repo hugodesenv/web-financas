@@ -5,9 +5,10 @@ import MyCard from '@/components/card/my-card/MyCardBox';
 import MyLayout from '@/components/layout/MyLayout';
 import MyTopBar from '@/components/menu/topBar/MyTopBar';
 import MyInputText from '@/components/text/MyInputText';
+import MyStack from '@/components/utils/MyHorizontalStack';
 import { getEntriesByIssueDate } from '@/features/entry/entryHelper';
 import { TEntry } from '@/features/entry/entryTypes';
-import { findAllEntryUseCase } from '@/features/entry/useCase/findAllEntryUseCase';
+import { useCaseEntry } from '@/features/entry/useCaseEntry';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -16,13 +17,13 @@ import { MdOutlineSearch } from 'react-icons/md';
 import HomeAccountBalance from './components/HomeAccountBalance';
 import { HomeChartEntries } from './components/HomeChartEntries';
 import { HomeTotalByPurpose } from './components/HomeTotalByPurpose';
-import './style.css';
-import MyStack from '@/components/utils/MyHorizontalStack';
 import HomeTotalByPurposeFilter from './components/HomeTotalByPurposeFilter';
+import './style.css';
 
 export default function Home() {
   // hooks.
-  const [selectedDate, setSelectedDate] = useState(dayjs())
+  const [selectedDate, setSelectedDate] = useState(dayjs());
+  const { findAllEntries } = useCaseEntry();
 
   const { data, isLoading } = useQuery({
     queryKey: ["entries", selectedDate],
@@ -43,7 +44,7 @@ export default function Home() {
       final_issue_date: selectedDate.format('YYYY-MM-DD')
     }
 
-    return await findAllEntryUseCase(filter) ?? [];
+    return await findAllEntries(filter) ?? [];
   }
 
   const onTopbarSubmit: SubmitHandler<any> = async (data: { selected_date: string }) => {

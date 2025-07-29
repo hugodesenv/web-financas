@@ -1,10 +1,12 @@
 import { useMyAsyncModal } from "@/components/modal/useMyAsyncModal";
 import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
 import { EntryModeToDescription, EntryTypeToDescription, TEntry } from "@/features/entry/entryTypes";
+import { useCaseEntry } from "@/features/entry/useCaseEntry";
 import dayjs from "dayjs";
 
 interface IProps {
-  entries: TEntry[]
+  entries: TEntry[],
+  entryRemoved: (id: number) => void;
 }
 
 const _columns: IMyTableColumn[] = [
@@ -20,6 +22,7 @@ const _columns: IMyTableColumn[] = [
 
 const EntrySearchTable = (props: IProps) => {
   const { showModal, MyAsyncModal } = useMyAsyncModal();
+  const { deleteEntry } = useCaseEntry();
 
   const dataSource: IMyTableWrapper[] = props.entries?.map((entry) => {
     return {
@@ -38,11 +41,15 @@ const EntrySearchTable = (props: IProps) => {
   }) ?? [];
 
   async function onDelete(index: number) {
-    const confirmed = await showModal('Confirmação', `Deseja realmente excluir o lançamento ${props.entries[index].id}?`);
-    console.log('pos confirm', confirmed);
-    if (confirmed) {
+    const id = props.entries[index]?.id ?? 0;
+    const confirmed = await showModal('Confirmação', `Deseja realmente excluir o lançamento ${id}?`);
 
+    if (!confirmed) {
+      return;
     }
+
+    const { success } = await deleteEntry(id);
+    success && props.entryRemoved(id);
   }
 
   return <>
