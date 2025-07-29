@@ -6,6 +6,15 @@ import { TBankAccount, URL_BASE_BANK_ACCOUNT } from "./bankAccountTypes";
 export function useBankAccount() {
   const [loading, setLoading] = useState(false);
 
+  async function deleteAccount(id: number): Promise<IHTTPResponse> {
+    try {
+      const { data: response } = await axiosInstance.delete(`${URL_BASE_BANK_ACCOUNT}/${id}`);
+      return { success: response.statusCode === 200 };
+    } catch (e) {
+      return { success: false }
+    }
+  }
+
   async function createAccount(bank: TBankAccount): Promise<IHTTPResponse> {
     try {
       setLoading(true);
@@ -58,5 +67,5 @@ export function useBankAccount() {
     }
   }
 
-  return { createAccount, updateAccount, findAll, findByID, loading }
+  return { createAccount, updateAccount, findAll, findByID, deleteAccount, loading }
 }

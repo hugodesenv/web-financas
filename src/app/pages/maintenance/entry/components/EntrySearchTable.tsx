@@ -37,7 +37,7 @@ const EntrySearchTable = (props: IProps) => {
         { text: entry.total, onGetText: (p: number) => p.toFixed(2) },
       ],
       primaryKey: { id: entry.id }
-    } as IMyTableWrapper
+    } as IMyTableWrapper;
   }) ?? [];
 
   async function onDelete(index: number) {

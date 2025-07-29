@@ -209,7 +209,11 @@ export default function MyTable(props: IProps) {
           <TableColumns />
         </thead>
         <tbody className="mytable-tbody">
-          <TableBody />
+          {
+            props.datasource.length > 0
+              ? <TableBody />
+              : <></>
+          }
         </tbody>
       </table>
       {/* totalizador */}

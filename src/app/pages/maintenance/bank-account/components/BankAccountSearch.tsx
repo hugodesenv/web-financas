@@ -1,3 +1,6 @@
+import MyAlert from "@/components/alert/MyAlert";
+import { useMyAlert } from "@/components/alert/hook";
+import { useMyAsyncModal } from "@/components/modal/useMyAsyncModal";
 import MyTable, { IMyTableColumn, IMyTableWrapper } from "@/components/table/MyTable";
 import { TBankAccount } from "@/features/bankAccount/bankAccountTypes";
 import { useBankAccount } from "@/features/bankAccount/useCaseBankAccount";
@@ -10,9 +13,12 @@ const _columns: IMyTableColumn[] = [
 ];
 
 const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
-  // states
+  const { alertState, setAlertState } = useMyAlert();
+  const { MyAsyncModal, showModal } = useMyAsyncModal();
+  const { findAll, deleteAccount } = useBankAccount();
+
+
   const [bankAccount, setBankAccount] = useState([] as TBankAccount[]);
-  const { findAll } = useBankAccount();
 
   useImperativeHandle(ref, function () {
     return {
@@ -20,21 +26,31 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
     }
   });
 
-  // event to search all bank accounts in database
   async function onSearch() {
     const { data } = await findAll();
     setBankAccount(data);
   }
 
-  // event when clicked on grid row
   function onSelect(row: number) {
     const bank = bankAccount[row];
     props.onSelect(bank);
   }
 
-  // event when click on row table to delete register
   async function onDelete(index: number) {
-    console.log("Tratar a exclusao. Item selecionado: ", bankAccount[index]);
+    const id = bankAccount[index].id ?? 0;
+
+    const confirmed = await showModal('Excluir conta bancária', `Deseja realmente excluir a conta bancária ${id}?`);
+    if (!confirmed) return;
+
+    const res = await deleteAccount(id);
+
+    if (!res.success) {
+      setAlertState({ message: "Não foi possível excluir a conta bancária", color: 'red' })
+      return;
+    }
+
+    setBankAccount((value) => value.filter(p => p.id !== id) ?? []);
+    setAlertState({ message: `Conta bancária ${id} excluída com sucesso!`, color: 'blue', key: Date.now() });
   }
 
   // transforming results in datasource
@@ -45,7 +61,7 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
         { text: description }
       ]
     } as IMyTableWrapper
-  });
+  }) ?? [];
 
   return (
     <>
@@ -54,8 +70,10 @@ const BankAccountSearch = forwardRef((props: TPropsSearchScreen, ref) => {
         columns={_columns}
         datasource={_dataSource}
         onSelectedRow={onSelect}
-        columnAction={[{ title: 'Excluir', onClick: (r) => onDelete(r) }]}
+        columnAction={[{ title: 'Excluir', onClick: onDelete }]}
       />
+      <MyAsyncModal />
+      <MyAlert {...alertState} />
     </>
   );
 });
