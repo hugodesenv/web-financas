@@ -67,6 +67,11 @@ function PageMenu() {
           label: 'Digitação',
           onClick: () => router.push('/pages/maintenance/entry'),
         },
+        {
+          key: 'mn-entry-transaction',
+          label: "Baixa",
+          onClick: () => router.push('/pages/maintenance/entry-transaction'),
+        }
       ],
     },
     {
